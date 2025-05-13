@@ -29,7 +29,7 @@ public class WordageddonGruppo4 extends Application {
                 System.out.println("Hello World!");
             }
         });
-        
+        System.out.println("ciao");
         StackPane root = new StackPane();
         root.getChildren().add(btn);
         
