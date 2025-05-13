@@ -39,6 +39,7 @@ public class WordageddonGruppo4 extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         System.out.println("Prova commit michele");
+        System.out.println("Prova commit pasquale");
     }
 
     /**
