@@ -1,22 +1,23 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
  */
-package wordageddongruppo4;
-
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
+import dao.connection.dbConnection;
+import java.sql.Connection;
 /**
  *
  * @author simonegrimaldi
  */
-public class WordageddonGruppo4 extends Application {
+public class Main extends Application {
     
     @Override
     public void start(Stage primaryStage) {
@@ -29,7 +30,6 @@ public class WordageddonGruppo4 extends Application {
                 System.out.println("Hello World!");
             }
         });
-        System.out.println("ciao");
         StackPane root = new StackPane();
         root.getChildren().add(btn);
         
@@ -38,14 +38,23 @@ public class WordageddonGruppo4 extends Application {
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
-        System.out.println("Prova commit michele");
-        System.out.println("Prova commit pasquale");
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        try {
+            Connection conn = dbConnection.getConnection();
+            if (conn != null && !conn.isClosed()) {
+                System.out.println("✅ Connessione al database riuscita!");
+            } else {
+                System.out.println("❌ Connessione fallita.");
+            }
+        } catch (Exception e) {
+            System.out.println("❌ Errore durante la connessione al database:");
+            e.printStackTrace();
+        }
         launch(args);
     }
     
