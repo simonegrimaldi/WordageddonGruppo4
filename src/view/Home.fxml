@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeController">
+            
+    <children>
+    
+        <!-- 🔹 Bottone Logout flottante in alto a destra -->
+        <Button fx:id="logoutButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#logoutButtonClick" styleClass="logoutButton" text="Logout" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0" />
+
+        <VBox layoutX="350.0" layoutY="200.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="10.0">
+              
+            <children>
+
+                <!-- Titolo -->
+                <Label fx:id="title" alignment="CENTER" prefHeight="44.0" prefWidth="698.0" styleClass="title" text="Hello User !" textAlignment="CENTER">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </Label>
+
+                <!-- Pulsanti principali -->
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="700.0" styleClass="buttonContainer">
+                    <children>
+                        <Button fx:id="profileButton" mnemonicParsing="false" onAction="#profileButtonClick" styleClass="profileButton" text="Profile" />
+                        <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonClick" styleClass="playButton" text="Play" />
+                    </children>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </HBox>
+
+                <!-- Contenitore Play (nascosto di default) -->
+                <VBox fx:id="playContainer" alignment="TOP_CENTER" managed="false" prefHeight="350.0" prefWidth="700.0" snapToPixel="false" visible="false">
+                    <children>
+                        <HBox alignment="CENTER" prefHeight="132.0" prefWidth="698.0" styleClass="buttonContainer">
+                            <children>
+                                <SplitMenuButton fx:id="difficutChooser" mnemonicParsing="false" onAction="#difficutChooserClick" styleClass="difficutChooser" text="Difficulty">
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                                    </items>
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </SplitMenuButton>
+                                <Button fx:id="startGame" mnemonicParsing="false" onAction="#startGameClick" styleClass="startGame" text="Start Game" />
+                            </children>
+                        </HBox>
+                        <Label fx:id="labelRules" alignment="TOP_LEFT" prefHeight="205.0" prefWidth="514.0" styleClass="labelRules" text="Game Rules : " />
+                    </children>
+                </VBox>
+
+                <!-- Contenitore profilo (nascosto di default) -->
+                <StackPane fx:id="profileContainer" managed="false" prefHeight="356.0" prefWidth="700.0" visible="false">
+
+                    <!-- Bottone di chiusura "X" -->
+                    <Button fx:id="closeButton" alignment="CENTER" contentDisplay="CENTER" onAction="#handleCloseClick" prefHeight="15.0" prefWidth="18.0" styleClass="closeButton" text="✕" StackPane.alignment="TOP_RIGHT">
+                        <StackPane.margin>
+                            <Insets right="10.0" top="10.0" />
+                        </StackPane.margin>
+                        <font>
+                            <Font size="8.0" />
+                        </font>
+                    </Button>
+
+                    <!-- Simulazione di TextArea come Label -->
+                    <Label fx:id="textArea" alignment="TOP_LEFT" prefHeight="326.0" prefWidth="616.0" styleClass="textAreaClass" text="Your Stats : " />
+                </StackPane>
+
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

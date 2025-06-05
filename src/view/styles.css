@@ -1,0 +1,250 @@
+/* Sfondo generale */
+.root {
+    -fx-background-color: white;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* Contenitore centrale */
+.container {
+    -fx-alignment: center;
+    -fx-padding: 30px;
+}
+
+/* Titolo principale */
+.title {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000;
+}
+
+/* Sottotitolo "Sign-in" */
+.subtitle {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222;
+}
+
+/* Contenitore del form */
+.formContainer {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 6px;
+    -fx-padding: 30px;
+    -fx-spacing: 10;
+    -fx-alignment: CENTER;
+}
+
+/* Etichette "Username", "Password" */
+.labelText {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+/* Campi di input */
+.inputField {
+    -fx-pref-width: 500px;
+    -fx-background-color: #dddddd;
+    -fx-border-color: transparent;
+    -fx-background-radius: 4px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+}
+
+/* Pulsanti */
+.buttonClass {
+    -fx-background-color: #4285f4;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 12px 16px;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 3, 0.5, 0, 1);
+}
+
+.buttonClass:hover {
+    -fx-background-color: #3367d6;
+}
+
+/* Contenitore dei pulsanti */
+.buttonContainer {
+    -fx-spacing: 200px;
+    -fx-alignment: center;
+    -fx-padding: 15px 0;
+}
+
+/* Logout button */
+.logoutButton {
+    -fx-background-color: #e53935;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 6px 14px;
+    -fx-background-radius: 4px;
+}
+
+.logoutButton:hover {
+    -fx-background-color: #c62828;
+}
+
+/* Etichette */
+.labelClass {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+/* TextArea */
+.textAreaClass {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 4px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+}
+
+/* Pulsanti file + azione */
+.buttonChooser,
+.undoButton,
+.confirmButton {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4px;
+    -fx-font-size: 13px;
+    -fx-padding: 6px 10px;
+}
+
+.buttonChooser {
+    -fx-text-fill: black;
+
+}
+
+.undoButton {
+    -fx-background-color: #e53935;
+}
+
+.confirmButton {
+    -fx-background-color: #006600;
+
+}
+
+.buttonChooser:hover,
+.undoButton:hover,
+.confirmButton:hover {
+    -fx-background-color: #3367d6;
+}
+
+/* Spaziatura orizzontale */
+.fileChooserHbox,
+.buttonHbox {
+    -fx-spacing: 20px;
+    -fx-alignment: center;
+}
+
+/* Pulsanti principali: Profile, Play, Start Game */
+.profileButton,
+.playButton,
+.startGame {
+    -fx-background-color: #4285f4;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4px;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 3, 0.5, 0, 1);
+}
+
+.profileButton:hover,
+.playButton:hover,
+.startGame:hover {
+    -fx-background-color: #3367d6;
+}
+
+/* SplitMenuButton - stile coerente */
+.difficutChooser {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 4px;
+    -fx-font-size: 14px;
+}
+
+
+/* Etichetta delle regole */
+.labelRules {
+    -fx-font-size: 14px;
+    -fx-text-fill: #444;
+    -fx-wrap-text: true;
+    -fx-alignment: top-left;
+    -fx-padding: 10px;
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 6px;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 6px;
+}
+
+#playContainer {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 8px;
+}
+
+#closeButton {
+    -fx-background-color: #e53935;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+#closeButton:hover {
+    -fx-background-color: #c62828;
+}
+
+/* Timer grande e bold */
+.timerLabel {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #222;
+}
+
+/* ProgressBar rossa */
+.progressBar .bar {
+    -fx-background-color: #e53935;
+}
+
+.progressBar {
+    -fx-background-radius: 5;
+    -fx-accent: #e53935;
+}
+
+/* Pulsante Close - rosso bold */
+.closeButton {
+    -fx-background-color: #e53935;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-font-size: 14px;
+    -fx-padding: 8 16;
+}
+
+.closeButton:hover {
+    -fx-background-color: #c62828;
+}
+
+/* Pulsante Confirm - verde bold */
+.ButtonClass {
+    -fx-background-color: #43a047;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-font-size: 14px;
+    -fx-padding: 8 16;
+}
+
+.ButtonClass:hover {
+    -fx-background-color: #388e3c;
+}
+
+/* ScrollPane contenente il testo */
+.textArea {
+    -fx-padding: 10;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
