@@ -9,7 +9,7 @@ package model;
  *
  * @author corry
  */
-public class Question {
+public class QuestionGenerator {
     private Analysis analysis;
     private String question;
     private int answer;
@@ -18,6 +18,7 @@ public class Question {
         this.analysis = analysis;
     }
     public String createQuestion(int type){
-        
+        return "ciao";
+    }
     
 }
