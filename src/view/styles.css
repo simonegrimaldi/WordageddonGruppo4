@@ -248,3 +248,35 @@
     -fx-border-radius: 5;
     -fx-background-radius: 5;
 }
+
+/* Contenitore delle domande */
+.questionContainer {
+    -fx-spacing: 15px;
+    -fx-padding: 20px;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8px;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 8px;
+}
+
+/* Checkbox stile risposta */
+.checkBox, .checkBoxA {
+    -fx-font-size: 14px;
+    -fx-text-fill: #444;
+    -fx-padding: 10px;
+    -fx-background-color: #f1f1f1;
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+    -fx-border-color: #ddd;
+    -fx-cursor: hand;
+}
+
+.checkBox:hover, .checkBoxA:hover {
+    -fx-background-color: #e0e0e0;
+}
+
+.questionLabel {
+    -fx-font-style: italic;
+    -fx-font-size: 16px;
+    -fx-text-fill: #444;
+}
