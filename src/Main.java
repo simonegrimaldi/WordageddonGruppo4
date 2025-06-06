@@ -1,3 +1,4 @@
+import controller.HomeController;
 import dao.connection.dbConnection;
 import java.io.IOException;
 import javafx.application.Application;
@@ -22,8 +23,13 @@ public class Main extends Application {
         
     }
 
-    private static Parent loadFXML(String fxml) throws IOException {
+    private static Parent loadFXML(String fxml/*Object data*/) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"));
+        
+        /*if (fxml.equals("Home")) {
+            fxmlLoader.setController(new HomeController((User) data));  // Casting il tipo corretto
+        }*/ 
+        
         return fxmlLoader.load();
     }
 
