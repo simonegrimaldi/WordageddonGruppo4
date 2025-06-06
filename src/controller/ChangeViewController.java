@@ -8,6 +8,6 @@ package controller;
  *
  * @author simonegrimaldi
  */
-public class ChangeViewController {
+public class ChangeViewController implements ChangeView{
     
 }

@@ -5,7 +5,7 @@
  */
 package model;
 
-import Interfaces.IOFile;
+import IOInterface.IOFile;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
