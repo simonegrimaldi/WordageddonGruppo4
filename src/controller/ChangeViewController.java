@@ -85,11 +85,11 @@ public class ChangeViewController implements ChangeView {
             loginController.setChangeViewController(this);  // Passa il controller ChangeView alla schermata di login
             break;
 
-        case "SignUp":
+        /*case "SignUp":
             SignUpController signUpController = loader.getController();
             signUpController.setChangeViewController(this);  // Passa il controller ChangeView alla schermata di registrazione
             break;
-
+            */
         case "AdminPanel":
             AdminPanelController adminPanelController = loader.getController();
             adminPanelController.setChangeViewController(this);  // Passa il controller ChangeView alla schermata di admin

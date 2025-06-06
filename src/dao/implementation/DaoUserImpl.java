@@ -27,14 +27,18 @@ public class DaoUserImpl implements DaoUser{
     @Override
     public String authentication(String username, String password) {
         String password_ricevuta = null;
+        String tipo=null;
         String sql ="select password from utente where username=?";
-        String tipo="select tipo from utente where username=?";
         try ( Connection conn = getConnection();
                PreparedStatement ps=conn.prepareStatement(sql);
                 ){
         ps.setString(1,username);
         
           ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                password_ricevuta = rs.getString("password");
+                tipo = rs.getString("tipo");  // Ottieni il tipo dell'utente (admin o user)
+            }
             password_ricevuta=rs.getString("password");
          } catch (SQLException ex) {
             Logger.getLogger(DaoUserImpl.class.getName()).log(Level.SEVERE, null, ex);
