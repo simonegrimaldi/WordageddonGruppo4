@@ -31,6 +31,13 @@ public class LogInController implements Initializable {
     private Button LoginInButton;
     
     AlertManager alertManager=new AlertManager();
+    ChangeView controller;
+       public void setChangeViewController(ChangeView controller) {
+        this.controller = controller;
+    }
+
+   
+    
 
     /**
      * Initializes the controller class.
@@ -53,7 +60,15 @@ public class LogInController implements Initializable {
             alertManager.showAlert("ERRORE", "entrambi i campi Username e Password devono essere compilati");
             return;
         }
-        
-        
+
+    if (checkCredentials(username, password)) {
+        controller.goHome(username);
+    } else {
+        // Mostra errore se credenziali errate
+        showAlert("Errore", "Username o password errati.");
     }
+}    
+public boolean checkCredentials(String username, String password){
+
 }
+    }
