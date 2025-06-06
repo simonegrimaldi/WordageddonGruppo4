@@ -24,9 +24,9 @@ public class LogInController implements Initializable {
     @FXML
     private TextField passwordField;
     @FXML
-    private Button SignInButton;
+    private Button SignUpButton;
     @FXML
-    private Button LogInButton;
+    private Button LoginInButton;
 
     /**
      * Initializes the controller class.
@@ -37,11 +37,11 @@ public class LogInController implements Initializable {
     }    
 
     @FXML
-    private void SignInButtonClick(ActionEvent event) {
+    private void SignUpButtonClick(ActionEvent event) {
     }
 
     @FXML
-    private void LogInButtonClick(ActionEvent event) {
+    private void LoginInButtonClick(ActionEvent event) {
     }
     
 }

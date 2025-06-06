@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignInController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LogInController">
    <children>
       <VBox alignment="CENTER" layoutX="50.0" layoutY="50.0" spacing="20" styleClass="container" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
          <children>
@@ -34,8 +34,8 @@
                   </VBox>
                   <HBox alignment="CENTER" spacing="20" styleClass="buttonContainer">
                      <children>
-                        <Button fx:id="SignInButton" onAction="#SignInButtonClick" styleClass="buttonClass" text="Sign-Up" />
-                        <Button fx:id="LogInButton" onAction="#LogInButtonClick" styleClass="buttonClass" text="Log-In" />
+                        <Button fx:id="SignUpButton" onAction="#SignUpButtonClick" styleClass="buttonClass" text="Sign-Up" />
+                        <Button fx:id="LoginInButton" onAction="#LoginInButtonClick" styleClass="buttonClass" text="Log-In" />
                      </children>
                      <VBox.margin>
                         <Insets />

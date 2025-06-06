@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
  *
  * @author simonegrimaldi
  */
-public class SignInController implements Initializable {
+public class SignUpController implements Initializable {
 
     @FXML
     private TextField usernameField;
@@ -26,7 +26,7 @@ public class SignInController implements Initializable {
     @FXML
     private Button backButton;
     @FXML
-    private Button SignInButton;
+    private Button SignUpButton;
 
     /**
      * Initializes the controller class.
@@ -41,7 +41,7 @@ public class SignInController implements Initializable {
     }
 
     @FXML
-    private void SignInButtonClick(ActionEvent event) {
+    private void SignUpButtonClick(ActionEvent event) {
     }
     
 }
