@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
@@ -27,6 +29,8 @@ public class LogInController implements Initializable {
     private Button SignUpButton;
     @FXML
     private Button LoginInButton;
+    
+    AlertManager alertManager=new AlertManager();
 
     /**
      * Initializes the controller class.
@@ -42,6 +46,14 @@ public class LogInController implements Initializable {
 
     @FXML
     private void LoginInButtonClick(ActionEvent event) {
+        String username=usernameField.getText();
+        String password=passwordField.getText();
+        
+        if(username.isEmpty() || password.isEmpty()){
+            alertManager.showAlert("ERRORE", "entrambi i campi Username e Password devono essere compilati");
+            return;
+        }
+        
+        
     }
-    
 }
