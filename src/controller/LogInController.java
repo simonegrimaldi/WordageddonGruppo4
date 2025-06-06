@@ -90,8 +90,9 @@ public class LogInController implements Initializable {
     if (userType!=null) {
         if(userType.equals((String)"Admin")){
             controller.goAdminPanel(username);
-        }
+        }else{
         controller.goHome(username);
+        }
     } else {
         // Mostra errore userType==null
         //questo implica che le credenziali di accesso controllate nel metodo

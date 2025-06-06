@@ -28,18 +28,17 @@ public class DaoUserImpl implements DaoUser{
     public String authentication(String username, String password) {
         String password_ricevuta = null;
         String tipo=null;
-        String sql ="select password from utente where username=?";
+        String sql ="select password, tipo from utente where username=?";
         try ( Connection conn = getConnection();
                PreparedStatement ps=conn.prepareStatement(sql);
                 ){
-        ps.setString(1,username);
-        
+                ps.setString(1,username);
           ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 password_ricevuta = rs.getString("password");
                 tipo = rs.getString("tipo");  // Ottieni il tipo dell'utente (admin o user)
+                password_ricevuta=rs.getString("password");
             }
-            password_ricevuta=rs.getString("password");
          } catch (SQLException ex) {
             Logger.getLogger(DaoUserImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -56,17 +55,20 @@ public class DaoUserImpl implements DaoUser{
     public boolean registration(String username, String password) {
         String password_criptata=hashPassword(password);
         boolean esecuzione=false;
-        String sql_username="";
+        String sql_username="select username from utente where username=?";
         String Username_ricevuto=null;
         try(Connection conn = getConnection();
                PreparedStatement ps=conn.prepareStatement(sql_username);
-                ){
-            ResultSet rs=ps.executeQuery();
-           Username_ricevuto=rs.getString("username").toLowerCase();
-        } catch (SQLException ex) {
+            ){
+                ps.setString(1, username);
+                ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                Username_ricevuto=rs.getString("username").toLowerCase();
+            }
+            } catch (SQLException ex) {
             Logger.getLogger(DaoUserImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(username.toLowerCase().equals(Username_ricevuto)){
+            }
+         if(username.toLowerCase().equals(Username_ricevuto)){
              esecuzione=false;
          }else{
              esecuzione=true;
@@ -74,10 +76,10 @@ public class DaoUserImpl implements DaoUser{
          try ( Connection conn = getConnection();
                PreparedStatement ps=conn.prepareStatement(sql_insert);
                 ){
-             ps.setString(1,username);
-             ps.setString(2,password_criptata);
-             ps.setString(3,"User");
-             ps.executeUpdate();
+                ps.setString(1,username);
+                ps.setString(2,password_criptata);
+                ps.setString(3,"User");
+                ps.executeUpdate();
     }   catch (SQLException ex) {
             Logger.getLogger(DaoUserImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
