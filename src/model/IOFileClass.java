@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interfaces;
+package model;
 
+import Interfaces.IOFile;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
