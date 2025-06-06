@@ -33,6 +33,12 @@ public class AdminPanelController implements Initializable {
     @FXML
     private Button confirmButton;
 
+    
+    ChangeView controller;
+    
+    public void setChangeViewController(ChangeView controller) {
+        this.controller = controller;
+    }
     /**
      * Initializes the controller class.
      */

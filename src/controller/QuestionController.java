@@ -35,6 +35,12 @@ public class QuestionController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+    ChangeView controller;
+    
+    public void setChangeViewController(ChangeView controller) {
+        this.controller = controller;
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

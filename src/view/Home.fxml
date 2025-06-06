@@ -14,9 +14,6 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeController">
             
     <children>
-    
-        <!-- 🔹 Bottone Logout flottante in alto a destra -->
-        <Button fx:id="logoutButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#logoutButtonClick" styleClass="logoutButton" text="Logout" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0" />
 
         <VBox layoutX="350.0" layoutY="200.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="10.0">
               
@@ -80,5 +77,8 @@
 
             </children>
         </VBox>
+    
+        <!-- 🔹 Bottone Logout flottante in alto a destra -->
+        <Button fx:id="logoutButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#logoutButtonClick" styleClass="logoutButton" text="Logout" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0" />
     </children>
 </AnchorPane>

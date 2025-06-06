@@ -10,5 +10,9 @@ package controller;
  */
 public interface ChangeView {
     public void goHome(String username);
+    public void goAdminPanel(String superUsername);
     public void goSignUp();
+    public void goLogIn();
+    public void goReading(String username);
+    public void goQuestion(String username);
 }
