@@ -1,5 +1,5 @@
 import controller.HomeController;
-import dao.connection.dbConnection;
+import dao.connection.DbConnection;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +35,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         try {
-            Connection conn = dbConnection.getConnection();
+            Connection conn = DbConnection.getConnection();
             if (conn != null && !conn.isClosed()) {
                 System.out.println("✅ Connessione al database riuscita!");
             } else {

@@ -1,13 +1,15 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package dao.interfaces;
 
 /**
  *
- * @author simonegrimaldi
+ * @author pasquy
  */
-public class DaoUser {
-    
+public interface DaoUser {
+    public boolean authentication(String username, String password);
+    public boolean registration(String username,String password);
 }

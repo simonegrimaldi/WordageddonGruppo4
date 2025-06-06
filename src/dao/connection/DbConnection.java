@@ -10,7 +10,7 @@ import java.sql.*;
  *
  * @author simonegrimaldi
  */
-public class dbConnection {
+public class DbConnection {
 
     private static final String URL = "jdbc:postgresql://dpg-d10ml63ipnbc73904k90-a.oregon-postgres.render.com:5432/wordageddon_db?sslmode=require";
     private static final String USER = "wordageddon_db_user";

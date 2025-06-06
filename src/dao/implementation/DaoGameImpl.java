@@ -4,7 +4,7 @@
  */
 package dao.implementation;
 
-import dao.connection.dbConnection;
+import dao.connection.DbConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +25,7 @@ public class DaoGameImpl implements DaoGame {
         String sql = "INSERT INTO public.partita(\n"
                 + "id, difficolta, punteggio, utente)\n"
                 + "	VALUES (?, ?, ?, ?);";
-        try (Connection c = dbConnection.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+        try (Connection c = DbConnection.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setObject(1, m.getId());
             ps.setObject(2, m.getDifficulty());
             ps.setInt(3, m.getPoints());
@@ -40,7 +40,7 @@ public class DaoGameImpl implements DaoGame {
                 + "where id = '%s';",id);
         String points = null;
         
-         try (Connection c = dbConnection.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+         try (Connection c = DbConnection.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             points = rs.getString("punteggio");
          } catch (SQLException ex) {
