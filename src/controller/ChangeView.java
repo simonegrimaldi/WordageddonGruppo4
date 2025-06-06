@@ -9,5 +9,6 @@ package controller;
  * @author simonegrimaldi
  */
 public interface ChangeView {
-    
+    public void goHome(String username);
+    public void goSignUp();
 }

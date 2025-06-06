@@ -45,6 +45,7 @@ public class HomeController implements Initializable {
     @FXML
     private Label textArea;
 
+    private String username;
     /**
      * Initializes the controller class.
      */
@@ -77,4 +78,7 @@ public class HomeController implements Initializable {
     private void handleCloseClick(ActionEvent event) {
     }
     
+    public void setUsername(String username) {
+        
+    }
 }
