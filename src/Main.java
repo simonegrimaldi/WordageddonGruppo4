@@ -1,4 +1,5 @@
 import dao.connection.dbConnection;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,18 +9,22 @@ import java.sql.Connection;
 
 public class Main extends Application {
     
-    @Override
-    public void start(Stage primaryStage) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("view/LoginIn.fxml")); // o "/view/Home.fxml" se è in una sottocartella
-            Scene scene = new Scene(root);
-            primaryStage.setTitle("Wordageddon");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (Exception e) {
-            System.out.println("❌ Errore nel caricamento della view:");
-            e.printStackTrace();
-        }
+    private static Scene scene;
+      @Override
+    public void start(Stage stage) throws IOException {
+        scene = new Scene(loadFXML("view/LogIn"), 800, 600);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void setRoot(String fxml) throws IOException {
+        scene.setRoot(loadFXML(fxml));
+        
+    }
+
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
     }
 
     public static void main(String[] args) {
