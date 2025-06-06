@@ -28,7 +28,7 @@ public class DaoUserImpl implements DaoUser{
     public String authentication(String username, String password) {
         String password_ricevuta = null;
         String sql ="select password from utente where username=?";
-        String user="select user from utente where username=?";
+        String tipo="select tipo from utente where username=?";
         try ( Connection conn = getConnection();
                PreparedStatement ps=conn.prepareStatement(sql);
                 ){
@@ -43,7 +43,7 @@ public class DaoUserImpl implements DaoUser{
         //se la password è corretta ritorna il tipo di utente in modo da favorire
         //i cambi di view, altrimenti verrà ritornato null
         if(checkPassword(password,password_ricevuta))
-            return user;
+            return tipo;
         else
             return null;
     }
