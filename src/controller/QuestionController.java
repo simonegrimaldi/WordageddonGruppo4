@@ -27,6 +27,10 @@ public class QuestionController implements Initializable {
     private CheckBox checkBoxC;
     @FXML
     private Button confirmButton;
+    @FXML
+    private CheckBox checkBoxD;
+    @FXML
+    private Button cancelButton;
 
     /**
      * Initializes the controller class.
@@ -38,6 +42,10 @@ public class QuestionController implements Initializable {
 
     @FXML
     private void confirmButtonClick(ActionEvent event) {
+    }
+
+    @FXML
+    private void cancelButtonClick(ActionEvent event) {
     }
     
 }

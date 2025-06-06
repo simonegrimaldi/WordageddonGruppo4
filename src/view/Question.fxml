@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QuestionController">
@@ -33,11 +34,12 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </ScrollPane>
-            <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#confirmButtonClick" prefHeight="35.0" prefWidth="79.0" styleClass="confirmButton" text="Confirm">
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Button>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="buttonContainer">
+               <children>
+                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButtonClick" prefHeight="35.0" prefWidth="79.0" styleClass="undoButton" text="Cancel" />
+                  <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#confirmButtonClick" prefHeight="35.0" prefWidth="79.0" styleClass="confirmButton" text="Confirm" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>
