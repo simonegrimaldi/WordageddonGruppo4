@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
+
 package controller;
 
+import dao.implementation.DaoUserImpl;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -15,9 +13,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 /**
- * FXML Controller class
- *
- * @author simonegrimaldi
+ * Controller per la schermata di login.
+ * Questa classe permette di gestire l'interfaccia di login dell'utente,
+ * utilizzando un controllo delle credenziali che sfrutta la classe `DaoUserImpl`
+ * e gestisce la navigazione tra le schermate (Home, SignUp, etc.).
+ * 
  */
 public class LogInController implements Initializable {
 
@@ -31,6 +31,7 @@ public class LogInController implements Initializable {
     private Button LoginInButton;
     
     AlertManager alertManager=new AlertManager();
+    DaoUserImpl daoUser=new DaoUserImpl();
     ChangeView controller;
        public void setChangeViewController(ChangeView controller) {
         this.controller = controller;
@@ -41,16 +42,38 @@ public class LogInController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * For now no other inizialization are needed
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
-
+    
+    /**
+     * Metodo che gestisce il click sul button di signUp.
+     * In qualsiasi momento il bottone viene premuto la vista cambia
+     * e si passa alla schermata di registrazione
+     * @param event 
+     */
     @FXML
     private void SignUpButtonClick(ActionEvent event) {
+        controller.goSignUp();
     }
 
+    /**
+     * Metodo che gestisce il click sul button di Login.
+     * 
+     * Nel momento in cui sono stati inseriti username e password, verrà effettuato
+     * un controllo per verificare l'effettiva corrispondenza con i dati presenti
+     * nel database, in caso di esito positivo, l'User verrà reindirizzato alla 
+     * schermata Home; mentre per quanto riguarda l'Admin quest'ultimo verrà 
+     * reindirizzato all' AdminPanel. 
+     * 
+     * Quando uno dei campi username o password viene lasciato vuoto, allora comparirà
+     * a video un messaggio di errore.
+     * 
+     * @param event 
+     */
     @FXML
     private void LoginInButtonClick(ActionEvent event) {
         String username=usernameField.getText();
@@ -60,15 +83,20 @@ public class LogInController implements Initializable {
             alertManager.showAlert("ERRORE", "entrambi i campi Username e Password devono essere compilati");
             return;
         }
-
-    if (checkCredentials(username, password)) {
+    
+    //gestione del cambio di view nel caso in cui ad effettuare l'accesso
+    //sia un utente semplice o un Admin
+    String userType=daoUser.authentication(username, password);
+    if (userType!=null) {
+        if(userType.equals((String)"Admin")){
+            controller.goAdminPanel(username);
+        }
         controller.goHome(username);
     } else {
-        // Mostra errore se credenziali errate
-        showAlert("Errore", "Username o password errati.");
+        // Mostra errore userType==null
+        //questo implica che le credenziali di accesso controllate nel metodo
+        //authentication sono errate
+        alertManager.showAlert("Errore", "Username o password errati.");
     }
 }    
-public boolean checkCredentials(String username, String password){
-
-}
     }

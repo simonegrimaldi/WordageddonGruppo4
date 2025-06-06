@@ -10,6 +10,6 @@ package dao.interfaces;
  * @author pasquy
  */
 public interface DaoUser {
-    public boolean authentication(String username, String password);
+    public String authentication(String username, String password);
     public boolean registration(String username,String password);
 }
