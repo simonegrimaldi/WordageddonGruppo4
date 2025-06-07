@@ -42,7 +42,7 @@ public class ReadingController implements Initializable {
     
     private ChangeView controller;
     private Timeline timeline;
-    private int timer;
+    private int timer=0;
     private IOFile file;
     private String difficulty;
     
@@ -54,10 +54,10 @@ public class ReadingController implements Initializable {
         this.controller = controller;
         this.username_read = username_read;
         this.difficulty=difficulty;
+        startTimer();
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        startTimer();
     }
 
     @FXML
@@ -71,30 +71,43 @@ public class ReadingController implements Initializable {
         if (timeline != null) timeline.stop();
         controller.goQuestion();
     }
+    
+    private String formatTime(int totalSeconds) {
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds % 60;
+        return String.format("%02d:%02d", minutes, seconds);
+    }
+    
 
-    private void startTimer() {
+    public void startTimer() {
     if (timeline != null) timeline.stop();
 
     int totalSeconds;
 
     switch (difficulty.toLowerCase()) {
         case "facile":
-            totalSeconds = 600; // 10 minuti
+            totalSeconds = 600;
             break;
-        case "medio":
-            totalSeconds = 420; // 7 minuti
+        case "media":
+            totalSeconds = 420;
             break;
         case "difficile":
-            totalSeconds = 240; // 4 minuti
+            totalSeconds = 240;
             break;
         default:
-            totalSeconds = 600; // default: facile
+            totalSeconds = 600;
     }
 
     timer = totalSeconds;
     progressBar.setProgress(0);
     timerLabel.setText(formatTime(timer));
     timerLabel.setStyle("-fx-text-fill: black;");
+
+    // Imposta stile iniziale
+    progressBar.getStyleClass().removeAll("warning");
+    if (!progressBar.getStyleClass().contains("normal")) {
+        progressBar.getStyleClass().add("normal");
+    }
 
     timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
         if (timer >= 0) {
@@ -103,14 +116,20 @@ public class ReadingController implements Initializable {
             double progress = (double) (totalSeconds - timer) / totalSeconds;
             progressBar.setProgress(Math.min(progress, 1.0));
 
-            if (timer <= 30) { // ultimi 30 secondi in rosso
+            // Quando mancano 30 secondi, cambia lo stile
+            if (timer == 30) {
                 timerLabel.setStyle("-fx-text-fill: red;");
+
+                progressBar.getStyleClass().removeAll("normal");
+                if (!progressBar.getStyleClass().contains("warning")) {
+                    progressBar.getStyleClass().add("warning");
+                }
             }
 
             timer--;
         } else {
             timeline.stop();
-            confirmButton.fire(); // Simula click su conferma
+            confirmButton.fire();
         }
     }));
 
@@ -118,10 +137,6 @@ public class ReadingController implements Initializable {
     timeline.play();
 }
 
-private String formatTime(int totalSeconds) {
-    int minutes = totalSeconds / 60;
-    int seconds = totalSeconds % 60;
-    return String.format("%02d:%02d", minutes, seconds);
-}
+
 
 }

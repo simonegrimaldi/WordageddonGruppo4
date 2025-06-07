@@ -205,9 +205,14 @@
 
 /* ProgressBar rossa */
 .progressBar .bar {
-    -fx-background-color: #e53935;
+    -fx-background-color: black; /* oppure green, blue, ecc. */
 }
 
+
+/* Colore rosso per ultimi 30 secondi */
+.progress-bar.warning .bar {
+    -fx-background-color: red;
+}
 .progressBar {
     -fx-background-radius: 5;
     -fx-accent: #e53935;
