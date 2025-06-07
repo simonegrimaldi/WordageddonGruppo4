@@ -4,6 +4,7 @@
  */
 package controller;
 
+import util.AlertManager;
 import dao.implementation.DaoUserImpl;
 import java.net.URL;
 import java.util.ResourceBundle;

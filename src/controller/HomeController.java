@@ -46,6 +46,13 @@ public class HomeController implements Initializable {
     private Label textArea;
 
     private String username;
+    ChangeView controller;
+    
+    public void setChangeViewController(ChangeView controller) {
+        this.controller = controller;
+    }
+    
+    
     /**
      * Initializes the controller class.
      */
@@ -57,6 +64,7 @@ public class HomeController implements Initializable {
 
     @FXML
     private void logoutButtonClick(ActionEvent event) {
+        controller.goLogIn();
     }
 
     @FXML

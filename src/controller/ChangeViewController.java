@@ -6,14 +6,81 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+/**
+ * Il ChangeViewController è responsabile del cambio di view all'interno dell'
+ * applicazione JavaFX. Implementa l'interfaccia {@code ChangeView} e fornisce i
+ * metodi per navigare tra le diverse schermate.
+ */
 public class ChangeViewController implements ChangeView {
 
     private Stage primaryStage;
 
+    /**
+     * Costruttore del {@code ChangeViewController}.
+     *
+     * @pre {@code primaryStage} non è null
+     * @post il controller è pronto a gestire il cambio viste
+     * @param primaryStage Lo stage principale su cui impostare le scene.
+     */
     public ChangeViewController(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
+    /**
+     * Carica e mostra la schermata signUp
+     *
+     * @pre -
+     * @post visualizzazione della schermata signUp
+     * @param username
+     */
+    @Override
+    public void goSignUp() {
+        try {
+            show("SignUp", null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Carica e mostra la schermata LogIn
+     *
+     * @pre -
+     * @post visualizzazione della schermata LogIn
+     * @param username
+     */
+    @Override
+    public void goLogIn() {
+        try {
+            show("LogIn", null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Carica e mostra la schermata AdminPanel
+     *
+     * @pre l'utente possiede effettua l'accesso con credenziali admin
+     * @post visualizzazione della schermata AdminPanel
+     * @param username
+     */
+    @Override
+    public void goAdminPanel(String superUsername) {
+        try {
+            show("AdminPanel", superUsername);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Carica e mostra la schermata home
+     *
+     * @pre l'utente è autenticato
+     * @post visualizzazione della schermata home
+     * @param username
+     */
     @Override
     public void goHome(String username) {
 
@@ -24,96 +91,97 @@ public class ChangeViewController implements ChangeView {
         }
     }
 
-    @Override
-    public void goSignUp() {
-        try {
-            show("SignUp", null);  // Torna alla schermata di login
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void goLogIn() {
-        try {
-            show("LogIn", null);  // Torna alla schermata di login
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void goAdminPanel(String superUsername) {
-        try {
-            show("AdminPanel", superUsername);  // Torna alla schermata di login
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Carica e mostra la schermata per la lettura dei testi
+     *
+     * @pre l'utente è autenticato
+     * @pre l'utente avvia una partita
+     * @post visualizzazione della schermata home
+     * @param username
+     */
     @Override
     public void goReading(String username) {
         try {
-            show("Reading", username);  // Torna alla schermata di login
+            show("Reading", username);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Carica e mostra la schermata per la risposta alle domande
+     *
+     * @pre l'utente è autenticato
+     * @pre l'utente avvia una partita
+     * @post visualizzazione della schermata home
+     * @param username
+     */
     @Override
     public void goQuestion(String username) {
         try {
-            show("Question", username);  // Torna alla schermata di login
+            show("Question", username);
         } catch (IOException e) {
             e.printStackTrace();
-        }   
+        }
     }
 
-    public void show(String fxml, String username) throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/" + fxml + ".fxml"));
-    Parent root = loader.load();
+    /**
+     * Carica una vista FXML dal nome specificato, imposta il controller e
+     * aggiorna la scena.
+     *
+     * @pre {@code fxml} è uno tra : {Home, LogIn, SignUp, AdminPanel, Reading,
+     * Question}
+     * @post la scena corrente è aggiornata con la nuova vista e il relativo
+     * controller inizializzato.
+     *
+     * @param fxml Il nome del file FXML da caricare (senza estensione).
+     * @param username l’username da passare al controller, se necessario.
+     * @throws IOException Se il file FXML non può essere caricato.
+     */
+    private void show(String fxml, String username) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/" + fxml + ".fxml"));
+        Parent root = loader.load();
 
-    // Imposta il controller per la vista in base alla schermata
-    switch (fxml) {
-        case "Home":
-            HomeController homeController = loader.getController();
-            homeController.setUsername(username);
-            break;
+        switch (fxml) {
+            case "Home":
+                HomeController homeController = loader.getController();
+                homeController.setChangeViewController(this);
+                homeController.setUsername(username);
+                break;
 
-        case "LogIn":
-            LogInController loginController = loader.getController();
-            loginController.setChangeViewController(this);  // Passa il controller ChangeView alla schermata di login
-            break;
+            case "LogIn":
+                LogInController loginController = loader.getController();
+                loginController.setChangeViewController(this);
+                break;
 
-        case "SignUp":
-            SignUpController signUpController = loader.getController();
-            signUpController.setChangeViewController(this);  // Passa il controller ChangeView alla schermata di registrazione
-            break;
-           
-        case "AdminPanel":
-            AdminPanelController adminPanelController = loader.getController();
-            adminPanelController.setChangeViewController(this);  // Passa il controller ChangeView alla schermata di admin
-            break;
+            case "SignUp":
+                SignUpController signUpController = loader.getController();
+                signUpController.setChangeViewController(this);
+                break;
 
-        case "Reading":
-            ReadingController readingController = loader.getController();
-            readingController.setChangeViewController(this);  // Passa il controller ChangeView alla schermata di lettura
-            break;
+            case "AdminPanel":
+                AdminPanelController adminPanelController = loader.getController();
+                adminPanelController.setChangeViewController(this);
+                break;
 
-        case "Question":
-            QuestionController questionController = loader.getController();
-            questionController.setChangeViewController(this);  // Passa il controller ChangeView alla schermata delle domande
-            break;
+            case "Reading":
+                ReadingController readingController = loader.getController();
+                readingController.setChangeViewController(this);
+                break;
 
-        default:
-            // Caso di default se la schermata non è riconosciuta
-            System.out.println("Unknown FXML: " + fxml);
-            break;
+            case "Question":
+                QuestionController questionController = loader.getController();
+                questionController.setChangeViewController(this);
+                break;
+
+            default:
+                System.out.println("Unknown FXML: " + fxml);
+                break;
+        }
+
+        // Crea e imposta la scena
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
-
-    // Crea e imposta la scena
-    Scene scene = new Scene(root);
-    primaryStage.setScene(scene);
-    primaryStage.show();
-}
 }

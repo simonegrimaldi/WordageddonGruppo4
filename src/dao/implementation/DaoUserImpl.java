@@ -5,10 +5,9 @@
  */
 package dao.implementation;
 
-import dao.connection.DbConnection;
 import static dao.connection.DbConnection.getConnection;
-import static dao.implementation.PasswordHash.checkPassword;
-import static dao.implementation.PasswordHash.hashPassword;
+import static util.PasswordHash.checkPassword;
+import static util.PasswordHash.hashPassword;
 import dao.interfaces.DaoUser;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
