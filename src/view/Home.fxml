@@ -71,9 +71,9 @@
                                                 <TableColumn fx:id="usernameColumn" editable="false" prefWidth="75.0" sortable="false" text="Username" />
                                                 <TableColumn fx:id="pointsColumn" editable="false" prefWidth="75.0" sortable="false" text="Points" />
                                             </columns>
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
+                                            <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                            </columnResizePolicy>
                                         </TableView>
                                     </children>
                                 </VBox>
@@ -84,13 +84,9 @@
                                 </Label>
                             </children>
                         </HBox>
-                        <Label fx:id="statisticsLabel" styleClass="statisticsClass" text="Your statistics :">
-                            <padding>
-                                <Insets bottom="220.0" left="100.0" right="100.0" />
-                            </padding>
-                            <VBox.margin>
-                                <Insets top="20.0" />
-                            </VBox.margin>
+                        <Label fx:id="statisticsLabel" graphicTextGap="5.0" styleClass="statisticsClass" text="Your statistics :">
+                            
+                            
                         </Label>
                     </children>
                 </VBox>

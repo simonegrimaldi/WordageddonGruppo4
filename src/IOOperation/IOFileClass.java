@@ -7,11 +7,12 @@ package IOOperation;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.HashSet;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
+
 /**
  * Carica il contenuto di un file di testo.
  *
@@ -26,64 +27,52 @@ import java.util.Set;
  * specificato.
  */
 public class IOFileClass implements IOFile {
+
     @Override
     public String loadFile(String difficulty) {
-        Random random = new Random();
         String basePath = "../../" + difficulty;
-        int numFiles = countFilesInFolder(basePath);
-        int numTesti;
+        File folder = new File(basePath);
+        File[] files = folder.listFiles((dir, name) -> name.endsWith(".txt")); // solo .txt
 
-        // Determina quanti testi servono
+        if (files == null || files.length == 0) {
+            System.err.println("Nessun file trovato nella cartella: " + basePath);
+            return null;
+        }
+
+        int numTesti;
         switch (difficulty.toLowerCase()) {
-            case "Facile":
+            case "facile":
                 numTesti = 1;
                 break;
-            case "Media":
+            case "media":
                 numTesti = 2;
                 break;
-            case "Difficile":
+            case "difficile":
                 numTesti = 3;
                 break;
             default:
                 return null;
         }
 
-        // Genera indici unici casuali
-        Set<Integer> chosenIndices = new HashSet<>();
-        while (chosenIndices.size() < numTesti && numFiles > 0) {
-            chosenIndices.add(random.nextInt(numFiles));
-        }
+        // Mischia i file e prendi i primi `numTesti`
+        List<File> fileList = new ArrayList<>(Arrays.asList(files));
+        Collections.shuffle(fileList);
 
-        // Carica i file selezionati
         StringBuilder contenutoComplessivo = new StringBuilder();
-        for (int index : chosenIndices) {
-            String filePath = basePath + "/Testo" + index + ".txt";
-            try (Scanner scanner = new Scanner(new FileReader(filePath))) {
-                contenutoComplessivo.append("Testo n." + index + "\n");
+        for (int i = 0; i < Math.min(numTesti, fileList.size()); i++) {
+            File file = fileList.get(i);
+            try (Scanner scanner = new Scanner(file)) {
+                contenutoComplessivo.append("Testo: ").append(file.getName()).append("\n");
                 while (scanner.hasNextLine()) {
                     contenutoComplessivo.append(scanner.nextLine()).append("\n");
                 }
-                contenutoComplessivo.append("\n"); // separatore tra testi
+                contenutoComplessivo.append("\n");
             } catch (FileNotFoundException e) {
-                System.err.println("File non trovato: " + filePath);
+                System.err.println("File non trovato: " + file.getAbsolutePath());
             }
         }
 
         return contenutoComplessivo.toString();
-    }
-
-    private int countFilesInFolder(String folderPath) {
-        File folder = new File(folderPath);
-        File[] files = folder.listFiles();
-        int fileCount = 0;
-        if (files != null) {
-            for (File file : files) {
-                if (file.isFile()) {
-                    fileCount++;
-                }
-            }
-        }
-        return fileCount;
     }
 
     @Override

@@ -176,8 +176,10 @@ public class HomeController implements Initializable {
         int pointsLastGame = daoGame.getLastMatch(username);
         double averageGame = daoGame.getAverageMatch(username);
         
+        System.out.println("Last Game Points: " + pointsLastGame);
+        
         statisticsLabel.textProperty().setValue("Your Score \n Game Played : " + numGame + "\n"
                 + "Average Points : " + averageGame + "%" + "\n" 
-                + "Last Game Played : " + pointsLastGame + "\100");
+                + "Last Game Played : " + pointsLastGame + "/100");
     }
 }
