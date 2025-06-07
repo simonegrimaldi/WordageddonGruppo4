@@ -7,11 +7,13 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 import javafx.event.ActionEvent;
@@ -54,19 +56,22 @@ public class AdminPanelController implements Initializable {
     public void setChangeViewController(ChangeView controller, String superUsername) {
         this.controller = controller;
         this.superUsername = superUsername;
+
+        if (this.superUsername != null) {
+            titleLabel.setText("Hello " + this.superUsername + " :)");
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        titleLabel.setText("Hello admin :)");
     }
 
     @FXML
     private void logoutButtonClick(ActionEvent event) {
         if (controller != null) {
             controller.goLogIn();
-        }
-        else {
+        } else {
             System.out.println("⚠️ controller è null");
         }
     }
@@ -126,24 +131,51 @@ public class AdminPanelController implements Initializable {
             }
         }
 
-        String difficulty=null; //funzione per il calcolo difficoltà?? simone non fa capire niente
-
+        //Lettura del contenuto del file selezionato
+        List<String> lines;
         try {
-            File destDir = new File(difficulty);
-            if (!destDir.exists()) {
-                destDir.mkdirs();
-            }
-
-            Path sourcePath = selectedFile.toPath();
-            Path destinationPath = Paths.get(destDir.getAbsolutePath(), selectedFile.getName());
-
-            Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
-
-            alertManager.showAlert("Successo", "File inserito nella cartella \"" + difficulty + "\" con " + stopwords.size() + " stopwords.");
-
+            lines = Files.readAllLines(this.selectedFile.toPath(), StandardCharsets.UTF_8);
         } catch (IOException ex) {
-            ex.printStackTrace();
-            System.err.println("ERRORE in ConfirmButtonClick dell AdminPanelController");
+            alertManager.showAlert("ERRORE LETTURA FILE", "Impossibile leggere il file selezionato");
+            return;
+        }
+
+        //Una volta raccolte tutte le righe del testo, conto le parole contenute nelle linee
+        int wordCounter = 0;
+        for (String line : lines) {
+            String[] words = line.split("\\W+");
+            for (String word : words) {
+                if (!word.isEmpty() && !stopwords.contains(word.toLowerCase())) {
+                    wordCounter++;
+                }
+            }
+        }
+
+        //Classificazione della difficoltà del testo in base al numero di parole
+        //senza stopwords
+        String difficulty = null;
+        if (wordCounter <= 250) {
+            difficulty = "facile";
+        } else if (wordCounter > 250 && wordCounter <= 750) {
+            difficulty = "medio";
+        } else {
+            difficulty = "difficile";
+        }
+
+        // Percorso di destinazione
+        File destDir = new File("testi/" + difficulty);
+        if (!destDir.exists()) {
+            destDir.mkdirs(); 
+        }
+
+        File destFile = new File(destDir, selectedFile.getName());
+        try {
+            Files.copy(selectedFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("Percorso file salvato: " + destFile.getAbsolutePath());
+            alertManager.showAlert("File caricato con successo","Il file \"" + selectedFile.getName() + "\" è stato salvato nella cartella: \"" + difficulty + "\".\n\nParole significative trovate: " + wordCounter);
+        } catch (IOException e) {
+            alertManager.showAlert("Errore salvataggio", "Impossibile copiare il file nella cartella " + difficulty);
+            return;
         }
 
         //ultima istruzione che viene eseguita, per resettare l'adminPanel
