@@ -16,7 +16,7 @@ public class ChangeViewController implements ChangeView {
 
     private Stage primaryStage;
     private String username;
-    private String diffculty;
+    private String difficulty;
     
     /**
      * Costruttore del {@code ChangeViewController}.
@@ -105,7 +105,7 @@ public class ChangeViewController implements ChangeView {
      */
     @Override
     public void goReading(String difficulty) {
-        this.diffculty = difficulty;
+        this.difficulty = difficulty;
         try {
             show("Reading");
         } catch (IOException e) {

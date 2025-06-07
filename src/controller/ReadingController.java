@@ -40,18 +40,20 @@ public class ReadingController implements Initializable {
      * Initializes the controller class.
      */
     
-    ChangeView controller;
+    private ChangeView controller;
     private Timeline timeline;
     private int timer;
-    IOFile file;
+    private IOFile file;
+    private String difficulty;
     
     public void setIOFile(IOFile file){
         this.file=file;
     }
     
-    public void setChangeViewController(ChangeView controller,String username_read) {
+    public void setChangeViewController(ChangeView controller,String username_read,String difficulty) {
         this.controller = controller;
         this.username_read = username_read;
+        this.difficulty=difficulty;
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {

@@ -104,7 +104,7 @@ public class HomeController implements Initializable {
     @FXML
     private void startGameClick(ActionEvent event) {
         String difficulty = difficultyChooser.textProperty().getValue();
-        controller.goReading();
+        controller.goReading(difficulty);
     }
 
     @FXML
