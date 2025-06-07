@@ -59,6 +59,7 @@ public class IOFileClass implements IOFile {
         for (int index : chosenIndices) {
             String filePath = basePath + "/Testo" + index + ".txt";
             try (Scanner scanner = new Scanner(new FileReader(filePath))) {
+                contenutoComplessivo.append("Testo n." + index + "\n");
                 while (scanner.hasNextLine()) {
                     contenutoComplessivo.append(scanner.nextLine()).append("\n");
                 }
