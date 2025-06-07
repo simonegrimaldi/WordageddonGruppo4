@@ -73,31 +73,55 @@ public class ReadingController implements Initializable {
     }
 
     private void startTimer() {
-        timer = 10; // durata in secondi
-        progressBar.setProgress(0);
-        timerLabel.setText("00:10");
-        timerLabel.setStyle("-fx-text-fill: black;");
+    if (timeline != null) timeline.stop();
 
-        if (timeline != null) timeline.stop();
+    int totalSeconds;
 
-        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-            if (timer >= 0) {
-                timerLabel.setText(String.format("00:%02d", timer));
-                double progress = (10 - timer) / 10.0;
-                progressBar.setProgress(Math.min(progress, 1.0));
-
-                if (timer < 4) {
-                    timerLabel.setStyle("-fx-text-fill: red;");
-                }
-
-                timer--;
-            } else {
-                timeline.stop();
-                confirmButton.fire(); 
-            }
-        }));
-
-        timeline.setCycleCount(11);
-        timeline.play();
+    switch (difficulty.toLowerCase()) {
+        case "facile":
+            totalSeconds = 600; // 10 minuti
+            break;
+        case "medio":
+            totalSeconds = 420; // 7 minuti
+            break;
+        case "difficile":
+            totalSeconds = 240; // 4 minuti
+            break;
+        default:
+            totalSeconds = 600; // default: facile
     }
+
+    timer = totalSeconds;
+    progressBar.setProgress(0);
+    timerLabel.setText(formatTime(timer));
+    timerLabel.setStyle("-fx-text-fill: black;");
+
+    timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+        if (timer >= 0) {
+            timerLabel.setText(formatTime(timer));
+
+            double progress = (double) (totalSeconds - timer) / totalSeconds;
+            progressBar.setProgress(Math.min(progress, 1.0));
+
+            if (timer <= 30) { // ultimi 30 secondi in rosso
+                timerLabel.setStyle("-fx-text-fill: red;");
+            }
+
+            timer--;
+        } else {
+            timeline.stop();
+            confirmButton.fire(); // Simula click su conferma
+        }
+    }));
+
+    timeline.setCycleCount(totalSeconds + 1);
+    timeline.play();
+}
+
+private String formatTime(int totalSeconds) {
+    int minutes = totalSeconds / 60;
+    int seconds = totalSeconds % 60;
+    return String.format("%02d:%02d", minutes, seconds);
+}
+
 }
