@@ -161,7 +161,7 @@ public class ChangeViewController implements ChangeView {
 
             case "AdminPanel":
                 AdminPanelController adminPanelController = loader.getController();
-                adminPanelController.setChangeViewController(this);
+                adminPanelController.setChangeViewController(this, username);
                 break;
 
             case "Reading":
