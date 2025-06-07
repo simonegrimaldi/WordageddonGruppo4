@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -21,15 +22,15 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <VBox alignment="CENTER" prefWidth="400.0" spacing="10" styleClass="formContainer">
+            <VBox alignment="CENTER" fillWidth="false" prefWidth="400.0" spacing="10" styleClass="formContainer">
                <children>
                   <Label styleClass="subtitle" text="Log-in" />
                   <VBox spacing="8">
                      <children>
                         <Label styleClass="labelText" text="Username" />
-                        <TextField fx:id="usernameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="448.0" promptText="insert username" styleClass="inputField" />
+                        <TextField fx:id="usernameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="448.0" promptText="Insert username" styleClass="inputField" />
                         <Label styleClass="labelText" text="Password" />
-                        <TextField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="insert password" styleClass="inputField" />
+                        <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="500.0" promptText="Insert Password" styleClass="inputField" />
                      </children>
                   </VBox>
                   <HBox alignment="CENTER" spacing="20" styleClass="buttonContainer">

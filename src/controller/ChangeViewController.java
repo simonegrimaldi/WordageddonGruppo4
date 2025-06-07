@@ -1,5 +1,6 @@
 package controller;
 
+import IOOperation.IOFileClass;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
@@ -167,6 +168,8 @@ public class ChangeViewController implements ChangeView {
             case "Reading":
                 ReadingController readingController = loader.getController();
                 readingController.setChangeViewController(this);
+                readingController.setUsername(username);
+                readingController.setIOFile(new IOFileClass());
                 break;
 
             case "Question":
