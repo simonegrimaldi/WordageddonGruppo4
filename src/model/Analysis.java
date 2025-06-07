@@ -64,4 +64,15 @@ public class Analysis implements Serializable {
 
         return keys.stream().skip(randomIndex).findFirst().orElse(null);
     }
+    public void mergeWith(Analysis other) {
+        for (String word : other.analysis.keySet()) {
+        int totalFreq = this.frequency(word) + other.frequency(word);
+        this.put(word, totalFreq);
+        }
+    }
+
+    int size() {
+        return analysis.size();
+    }
+    
 }

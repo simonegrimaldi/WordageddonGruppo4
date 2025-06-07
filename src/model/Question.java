@@ -7,50 +7,32 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  *
  * @author corry
  */
-public class Question {
-    
+public abstract class Question<T>  {
     private String question;
-    private List<Integer> options;
-    private int answer;
-    
-    public Question(Analysis analysis){
-        String p = analysis.getRandom();
-        this.question = "Quante volte compare la parola " + p + "?";
-        this.answer = analysis.frequency(p);
-        this.options = generateOptions(answer); 
+    private List<T> options;
+    private T answer;
+
+    public String getQuestionText() {
+        return question;
     }
-     private List<Integer> generateOptions(int correctAnswer) {
-        
-        List<Integer> options = new ArrayList<>();
-        Random rand = new Random();
-        
-        
-        options.add(correctAnswer);
-        
-        
-        for (int i = 0; i < 3; i++) {
-            int wrongAnswer;
-            do {
-                wrongAnswer = correctAnswer + rand.nextInt(11) - 5; // range: answer ±5
-            } while (wrongAnswer < 0 || options.contains(wrongAnswer));
-            
-            options.add(wrongAnswer);
-        }
-        
-        
-        Collections.shuffle(options);
-        
+
+    public List<T> getOptions() {
         return options;
     }
 
-       
+    public T getAnswer() {
+        return answer;
     }
+}
     
 
