@@ -17,5 +17,7 @@ public interface IOFile {
      * @return Il contenuto del file selezionato in formato String
      */
     public String loadFile(String filename);
+    
+    public boolean saveFile(String difficulty);
 
 }

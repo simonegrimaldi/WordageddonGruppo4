@@ -5,11 +5,13 @@
  */
 package IOOperation;
 
-import IOOperation.IOFile;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.HashSet;
+import java.util.Random;
 import java.util.Scanner;
-
+import java.util.Set;
 /**
  * Carica il contenuto di un file di testo.
  *
@@ -24,20 +26,67 @@ import java.util.Scanner;
  * specificato.
  */
 public class IOFileClass implements IOFile {
+    @Override
+    public String loadFile(String difficulty) {
+        Random random = new Random();
+        String basePath = "../../" + difficulty;
+        int numFiles = countFilesInFolder(basePath);
+        int numTesti;
+
+        // Determina quanti testi servono
+        switch (difficulty.toLowerCase()) {
+            case "Facile":
+                numTesti = 1;
+                break;
+            case "Media":
+                numTesti = 2;
+                break;
+            case "Difficile":
+                numTesti = 3;
+                break;
+            default:
+                return null;
+        }
+
+        // Genera indici unici casuali
+        Set<Integer> chosenIndices = new HashSet<>();
+        while (chosenIndices.size() < numTesti && numFiles > 0) {
+            chosenIndices.add(random.nextInt(numFiles));
+        }
+
+        // Carica i file selezionati
+        StringBuilder contenutoComplessivo = new StringBuilder();
+        for (int index : chosenIndices) {
+            String filePath = basePath + "/Testo" + index + ".txt";
+            try (Scanner scanner = new Scanner(new FileReader(filePath))) {
+                while (scanner.hasNextLine()) {
+                    contenutoComplessivo.append(scanner.nextLine()).append("\n");
+                }
+                contenutoComplessivo.append("\n"); // separatore tra testi
+            } catch (FileNotFoundException e) {
+                System.err.println("File non trovato: " + filePath);
+            }
+        }
+
+        return contenutoComplessivo.toString();
+    }
+
+    private int countFilesInFolder(String folderPath) {
+        File folder = new File(folderPath);
+        File[] files = folder.listFiles();
+        int fileCount = 0;
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile()) {
+                    fileCount++;
+                }
+            }
+        }
+        return fileCount;
+    }
 
     @Override
-    public String loadFile(String filename) {
-        String contenutoFile = null;
-        try (Scanner scanner = new Scanner(new FileReader(filename + ".txt"))) {
-            StringBuilder sb = new StringBuilder();
-            while (scanner.hasNextLine()) {
-                sb.append(scanner.nextLine()).append("\n");
-            }
-            contenutoFile = sb.toString();
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-            System.err.println("ERRORE IN LOADFILE");
-        }
-        return contenutoFile;
+    public boolean saveFile(String difficulty) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
