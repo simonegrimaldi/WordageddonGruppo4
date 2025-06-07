@@ -6,8 +6,13 @@ package controller;
 
 import IOOperation.IOFile;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javafx.util.Duration;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -17,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 
 /**
  * FXML Controller class
@@ -45,15 +51,17 @@ public class ReadingController implements Initializable {
     private int timer=0;
     private IOFile file;
     private String difficulty;
-    
+   /* 
     public void setIOFile(IOFile file){
         this.file=file;
-    }
+    }*/
     
-    public void setChangeViewController(ChangeView controller,String username_read,String difficulty) {
+    public void setChangeViewController(ChangeView controller,String username_read,String difficulty,IOFile file) {
         this.controller = controller;
         this.username_read = username_read;
         this.difficulty=difficulty;
+        this.file=file;
+        caricaTesti();
         startTimer();
     }
     @Override
@@ -136,7 +144,19 @@ public class ReadingController implements Initializable {
     timeline.setCycleCount(totalSeconds + 1);
     timeline.play();
 }
+public  void caricaTesti() {
+    String content = file.loadFile(difficulty); // ✅ Prende il contenuto generato casualmente
 
+     TextArea text = new TextArea();
+    text.setWrapText(true);
+    text.setEditable(false);
+    text.setText(content);
+    text.setStyle("-fx-font-size: 14px;");
+
+    textArea.setContent(text); 
+
+   
+}
 
 
 }

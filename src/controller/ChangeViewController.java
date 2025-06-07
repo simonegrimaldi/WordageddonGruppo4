@@ -180,8 +180,8 @@ public class ChangeViewController implements ChangeView {
 
             case "Reading":
                 ReadingController readingController = loader.getController();
-                readingController.setChangeViewController(this,username,difficulty);
-                readingController.setIOFile(new IOFileClass());
+                readingController.setChangeViewController(this,username,difficulty,new IOFileClass());
+                //readingController.setIOFile(new IOFileClass());
                 break;
 
             case "Question":
