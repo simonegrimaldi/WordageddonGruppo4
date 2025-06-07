@@ -5,20 +5,26 @@
 package controller;
 
 /**
- * L'interfaccia {@code ChangeView} definisce le operazioni di navigazione tra le varie
- * view dell'applicazione JavaFX.
+ * L'interfaccia {@code ChangeView} definisce le operazioni di navigazione tra
+ * le varie view dell'applicazione JavaFX.
  * <p>
- * È utilizzata per applicare il principio di Inversione delle Dipendenze (Dependency Inversion Principle)
- * permettendo ai controller delle viste di richiedere un'interfaccia anziché una concreta implementazione
- * del controller di navigazione ({@link ChangeViewController}).
+ * È utilizzata per applicare il principio di Inversione delle Dipendenze
+ * (Dependency Inversion Principle) permettendo ai controller delle viste di
+ * richiedere un'interfaccia anziché una concreta implementazione del controller
+ * di navigazione ({@link ChangeViewController}).
  * </p>
  */
-
 public interface ChangeView {
-    public void goHome(String username);
-    public void goAdminPanel(String superUsername);
+
     public void goSignUp();
+
     public void goLogIn();
+
+    public void goHome(String username);
+
+    public void goAdminPanel(String superUsername);
+
     public void goReading(String username);
+
     public void goQuestion(String username);
 }

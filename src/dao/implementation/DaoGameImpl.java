@@ -13,23 +13,25 @@ import model.Game;
 import dao.interfaces.DaoGame;
 
 /**
- * La classe {@code DaoGameImpl} implementa l'interfaccia {@link dao.interfaces.DaoGame}
- * ed è responsabile dell'interazione con la tabella {@code partita} nel database.
- * Segue il pattern DAO per incapsulare l'accesso ai dati relativi alle partite.
+ * La classe {@code DaoGameImpl} implementa l'interfaccia
+ * {@link dao.interfaces.DaoGame} ed è responsabile dell'interazione con la
+ * tabella {@code partita} nel database. Segue il pattern DAO per incapsulare
+ * l'accesso ai dati relativi alle partite.
  */
-
 public class DaoGameImpl implements DaoGame {
 
     Connection c = null;
-    
+
     /**
-     * Inserisce un oggetto game nel database. 
+     * Inserisce un oggetto game nel database.
+     *
      * @param g è l'oggetto da inserire
-     * @throws Exception se si verifica un errore durante l'inserimento nel database
+     * @throws Exception se si verifica un errore durante l'inserimento nel
+     * database
      * @pre g != null
-     * @post il match è correttamente inserito nel database nella tabella associata
+     * @post il match è correttamente inserito nel database nella tabella
+     * associata
      */
-    
     @Override
     public void inserisci(Game g) throws Exception {
         String sql = "INSERT INTO public.partita(\n"
@@ -45,22 +47,24 @@ public class DaoGameImpl implements DaoGame {
     }
 
     /**
-     * Ottiene i punti relativi ad una determinata partita 
+     * Ottiene i punti relativi ad una determinata partita
+     *
      * @param id l'id della partita a cui si fa riferimento
-     * @throws Exception se si verifica un errore durante l'inserimento nel database
+     * @throws Exception se si verifica un errore durante l'inserimento nel
+     * database
      * @pre id != null || id non esistente nella tabella
      * @post Il metodo restituisce il punteggio associato all'ID se esistente
      */
     @Override
     public String getPoints(int id) throws Exception {
-        String sql = String.format("SELECT punteggio FROM public.partita\n" 
-                + "where id = '%s';",id);
+        String sql = String.format("SELECT punteggio FROM public.partita\n"
+                + "where id = '%s';", id);
         String points = null;
-        
-         try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+
+        try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             points = rs.getString("punteggio");
-         } catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return points;
