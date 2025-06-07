@@ -11,7 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -44,55 +46,59 @@ public class AdminPanelController implements Initializable {
     private Label choseFile;
 
     private File selectedFile; //ci salvo il riferimento al file caricato
-    private AlertManager alertManager=new AlertManager();
+    private AlertManager alertManager = new AlertManager();
     private String superUsername;
-    
+
     private ChangeView controller;
-    
+
     public void setChangeViewController(ChangeView controller, String superUsername) {
         this.controller = controller;
-        this.superUsername=superUsername;
+        this.superUsername = superUsername;
     }
 
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void logoutButtonClick(ActionEvent event) {
-        controller.goLogIn();
+        if (controller != null) {
+            controller.goLogIn();
+        }
+        else {
+            System.out.println("⚠️ controller è null");
+        }
     }
 
     @FXML
     private void openFileChooserClick(ActionEvent event) {
-        FileChooser fileChooser=new FileChooser();
+        FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleziona una file .txt");
-        
-        FileChooser.ExtensionFilter extFilter=new  FileChooser.ExtensionFilter("Text files (*.txt)","*.txt");
+
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().add(extFilter);
-        
-        File selected=fileChooser.showOpenDialog(openFileChooser.getScene().getWindow());
-        
-        if(selected!=null){
-            if(!selected.getName().toLowerCase().endsWith(".txt")){
+
+        File selected = fileChooser.showOpenDialog(openFileChooser.getScene().getWindow());
+
+        if (selected != null) {
+            if (!selected.getName().toLowerCase().endsWith(".txt")) {
                 alertManager.showAlert("FORMATO NON VALIDO", "Puoi selezionare solo file con estensione '.txt' ");
                 return;
             }
-            
+
             //salvo il riferimento al file selezionato se è .txt
-            this.selectedFile=selected;
-            
+            this.selectedFile = selected;
+
             //Aggiorno il label
-            choseFile.setText("File selezionato: "+selected.getName());
+            choseFile.setText("File selezionato: " + selected.getName());
             openFileChooser.setVisible(false);
         }
     }
 
     @FXML
     private void undoButtonClick(ActionEvent event) {
-        this.selectedFile=null; //elimino il riferimento al file selezionato
+        this.selectedFile = null; //elimino il riferimento al file selezionato
         textArea.clear(); //pulisco la lista di stopwords
         choseFile.setText("Click here to select a file:"); //resetto il labelnell
         openFileChooser.setVisible(true);
@@ -101,13 +107,47 @@ public class AdminPanelController implements Initializable {
     @FXML
     private void confirmButtonClick(ActionEvent event) {
         //il confirButton può essere premuto solo dopo aver selezionato un file
-        if(this.selectedFile==null){
+        if (this.selectedFile == null) {
             alertManager.showAlert("ERRORE", "Prima di confermare devi selezionare un file");
             return;
         }
-        
-       //ultima istruzione che viene eseguita, per resettare l'adminPanel
-       controller.goAdminPanel(this.superUsername);
+
+        //lista che conterrà le stopwords
+        Set<String> stopwords = new HashSet<>();
+        String text = textArea.getText().trim();
+
+        if (!text.isEmpty()) {
+            String[] components = text.split(",");
+            for (String parola : components) {
+                String cleanedWord = parola.trim();
+                if (!cleanedWord.isEmpty()) {
+                    stopwords.add(cleanedWord.toLowerCase());
+                }
+            }
+        }
+
+        String difficulty=null; //funzione per il calcolo difficoltà?? simone non fa capire niente
+
+        try {
+            File destDir = new File(difficulty);
+            if (!destDir.exists()) {
+                destDir.mkdirs();
+            }
+
+            Path sourcePath = selectedFile.toPath();
+            Path destinationPath = Paths.get(destDir.getAbsolutePath(), selectedFile.getName());
+
+            Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
+
+            alertManager.showAlert("Successo", "File inserito nella cartella \"" + difficulty + "\" con " + stopwords.size() + " stopwords.");
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            System.err.println("ERRORE in ConfirmButtonClick dell AdminPanelController");
+        }
+
+        //ultima istruzione che viene eseguita, per resettare l'adminPanel
+        controller.goAdminPanel(this.superUsername);
     }
-    
+
 }
