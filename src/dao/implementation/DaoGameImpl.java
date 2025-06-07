@@ -20,8 +20,6 @@ import dao.interfaces.DaoGame;
  */
 public class DaoGameImpl implements DaoGame {
 
-    Connection c = null;
-
     /**
      * Inserisce un oggetto game nel database.
      *
@@ -37,7 +35,7 @@ public class DaoGameImpl implements DaoGame {
         String sql = "INSERT INTO public.partita(\n"
                 + "id, difficolta, punteggio, utente)\n"
                 + "	VALUES (?, ?, ?, ?);";
-        try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+        try (Connection c = getConnection();PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setObject(1, g.getId());
             ps.setObject(2, g.getDifficulty());
             ps.setInt(3, g.getPoints());
@@ -62,8 +60,12 @@ public class DaoGameImpl implements DaoGame {
         String points = null;
 
         try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
-            ResultSet rs = ps.executeQuery();
-            points = rs.getString("punteggio");
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    points = rs.getString("punteggio");
+                }
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
