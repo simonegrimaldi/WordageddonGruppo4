@@ -24,7 +24,7 @@ public interface ChangeView {
 
     public void goAdminPanel(String superUsername);
 
-    public void goReading();
+    public void goReading(String difficulty);
 
     public void goQuestion();
 }

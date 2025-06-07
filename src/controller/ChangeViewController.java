@@ -16,6 +16,8 @@ public class ChangeViewController implements ChangeView {
 
     private Stage primaryStage;
     private String username;
+    private String diffculty;
+    
     /**
      * Costruttore del {@code ChangeViewController}.
      *
@@ -37,7 +39,7 @@ public class ChangeViewController implements ChangeView {
     @Override
     public void goSignUp() {
         try {
-            show("SignUp", null);
+            show("SignUp");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,7 +55,7 @@ public class ChangeViewController implements ChangeView {
     @Override
     public void goLogIn() {
         try {
-            show("LogIn", null);
+            show("LogIn");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,8 +70,9 @@ public class ChangeViewController implements ChangeView {
      */
     @Override
     public void goAdminPanel(String superUsername) {
+        this.username = superUsername;
         try {
-            show("AdminPanel", superUsername);
+            show("AdminPanel");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -86,7 +89,7 @@ public class ChangeViewController implements ChangeView {
     public void goHome(String username) {
         this.username = username;
         try {
-            show("Home", username);
+            show("Home");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -101,9 +104,10 @@ public class ChangeViewController implements ChangeView {
      * @param username
      */
     @Override
-    public void goReading() {
+    public void goReading(String difficulty) {
+        this.diffculty = difficulty;
         try {
-            show("Reading", username);
+            show("Reading");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -120,7 +124,7 @@ public class ChangeViewController implements ChangeView {
     @Override
     public void goQuestion() {
         try {
-            show("Question", username);
+            show("Question");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -139,7 +143,7 @@ public class ChangeViewController implements ChangeView {
      * @param username l’username da passare al controller, se necessario.
      * @throws IOException Se il file FXML non può essere caricato.
      */
-    private void show(String fxml, String username) throws IOException {
+    private void show(String fxml) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/" + fxml + ".fxml"));
         Parent root = loader.load();
 
@@ -166,7 +170,7 @@ public class ChangeViewController implements ChangeView {
 
             case "Reading":
                 ReadingController readingController = loader.getController();
-                readingController.setChangeViewController(this,username);
+                readingController.setChangeViewController(this,username,difficulty);
                 readingController.setIOFile(new IOFileClass());
                 break;
 

@@ -42,7 +42,7 @@
                     <children>
                         <HBox alignment="CENTER" prefHeight="132.0" prefWidth="698.0" styleClass="buttonContainer">
                             <children>
-                                <SplitMenuButton fx:id="difficultyChooser" mnemonicParsing="false" onAction="#difficultyChooser"> styleClass="difficutChooser" text="Difficulty">
+                                <SplitMenuButton fx:id="difficultyChooser" mnemonicParsing="false" onAction="#difficultyChooser" styleClass="difficutChooser" text="Difficulty">
                                     <items>
                                         <MenuItem mnemonicParsing="false" text="Action 1" />
                                         <MenuItem mnemonicParsing="false" text="Action 2" />
