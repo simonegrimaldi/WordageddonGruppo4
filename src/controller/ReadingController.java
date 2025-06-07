@@ -49,8 +49,9 @@ public class ReadingController implements Initializable {
         this.file=file;
     }
     
-    public void setChangeViewController(ChangeView controller) {
+    public void setChangeViewController(ChangeView controller,String username_read) {
         this.controller = controller;
+        this.username_read = username_read;
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -66,12 +67,9 @@ public class ReadingController implements Initializable {
     @FXML
     private void confirmButtonClick(ActionEvent event) {
         if (timeline != null) timeline.stop();
-        controller.goQuestion(username_read);
+        controller.goQuestion();
     }
 
-    public void setUsername(String username) {
-        username_read = username;
-    }
     private void startTimer() {
         timer = 10; // durata in secondi
         progressBar.setProgress(0);

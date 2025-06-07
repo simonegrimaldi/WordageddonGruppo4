@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -33,25 +34,29 @@ public class HomeController implements Initializable {
     @FXML
     private VBox playContainer;
     @FXML
-    private SplitMenuButton difficutChooser;
+    private SplitMenuButton difficultyChooser;
     @FXML
     private Button startGame;
     @FXML
     private Label labelRules;
     @FXML
-    private StackPane profileContainer;
-    @FXML
-    private Button closeButton;
+    private VBox profileContainer;
     @FXML
     private Label textArea;
+    @FXML
+    private Label ranking;
+    @FXML
+    private Label ScoreLabel;
 
     private String username;
     private ChangeView controller;
     private boolean isVisibleProfile = false;
     private boolean isVisiblePlay = false;
 
-    public void setChangeViewController(ChangeView controller) {
+    public void setChangeViewController(ChangeView controller, String username) {
         this.controller = controller;
+        this.username = username;
+        title.textProperty().setValue("Hello " + username + " !");
     }
 
     /**
@@ -61,6 +66,14 @@ public class HomeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         profileContainer.managedProperty().bind(profileContainer.visibleProperty());
         playContainer.managedProperty().bind(playContainer.visibleProperty());
+        
+        MenuItem easy = new MenuItem("Facile");
+        MenuItem medium = new MenuItem("Media");
+        MenuItem hard = new MenuItem("Difficile");
+        easy.setOnAction(e -> difficultyChooser.setText("Facile"));
+        medium.setOnAction(e -> difficultyChooser.setText("Media"));
+        hard.setOnAction(e -> difficultyChooser.setText("Difficile"));
+        difficultyChooser.getItems().addAll(easy, medium, hard);
     }
 
     @FXML
@@ -89,18 +102,12 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    private void difficutChooserClick(ActionEvent event) {
-    }
-
-    @FXML
     private void startGameClick(ActionEvent event) {
     }
 
     @FXML
-    private void handleCloseClick(ActionEvent event) {
-    }
-
-    public void setUsername(String username) {
+    private void difficultyChooser(ActionEvent event) {
 
     }
+
 }

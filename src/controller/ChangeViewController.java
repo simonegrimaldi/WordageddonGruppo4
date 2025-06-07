@@ -15,7 +15,7 @@ import java.io.IOException;
 public class ChangeViewController implements ChangeView {
 
     private Stage primaryStage;
-
+    private String username;
     /**
      * Costruttore del {@code ChangeViewController}.
      *
@@ -84,7 +84,7 @@ public class ChangeViewController implements ChangeView {
      */
     @Override
     public void goHome(String username) {
-
+        this.username = username;
         try {
             show("Home", username);
         } catch (IOException e) {
@@ -101,7 +101,7 @@ public class ChangeViewController implements ChangeView {
      * @param username
      */
     @Override
-    public void goReading(String username) {
+    public void goReading() {
         try {
             show("Reading", username);
         } catch (IOException e) {
@@ -118,7 +118,7 @@ public class ChangeViewController implements ChangeView {
      * @param username
      */
     @Override
-    public void goQuestion(String username) {
+    public void goQuestion() {
         try {
             show("Question", username);
         } catch (IOException e) {
@@ -146,8 +146,7 @@ public class ChangeViewController implements ChangeView {
         switch (fxml) {
             case "Home":
                 HomeController homeController = loader.getController();
-                homeController.setChangeViewController(this);
-                homeController.setUsername(username);
+                homeController.setChangeViewController(this,username);
                 break;
 
             case "LogIn":
@@ -167,8 +166,7 @@ public class ChangeViewController implements ChangeView {
 
             case "Reading":
                 ReadingController readingController = loader.getController();
-                readingController.setChangeViewController(this);
-                readingController.setUsername(username);
+                readingController.setChangeViewController(this,username);
                 readingController.setIOFile(new IOFileClass());
                 break;
 
