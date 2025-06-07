@@ -46,21 +46,22 @@ public class HomeController implements Initializable {
     private Label textArea;
 
     private String username;
-    ChangeView controller;
-    
+    private ChangeView controller;
+    private boolean isVisibleProfile = false;
+    private boolean isVisiblePlay = false;
+
     public void setChangeViewController(ChangeView controller) {
         this.controller = controller;
     }
-    
-    
+
     /**
      * Initializes the controller class.
      */
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        profileContainer.managedProperty().bind(profileContainer.visibleProperty());
+        playContainer.managedProperty().bind(playContainer.visibleProperty());
+    }
 
     @FXML
     private void logoutButtonClick(ActionEvent event) {
@@ -69,10 +70,22 @@ public class HomeController implements Initializable {
 
     @FXML
     private void profileButtonClick(ActionEvent event) {
+        if (!profileContainer.isVisible()) {
+            profileContainer.setVisible(true);
+            playContainer.setVisible(false);
+        } else {
+            profileContainer.setVisible(false);
+        }
     }
 
     @FXML
     private void playButtonClick(ActionEvent event) {
+        if (!playContainer.isVisible()) {
+            playContainer.setVisible(true);
+            profileContainer.setVisible(false);
+        } else {
+            playContainer.setVisible(false);
+        }
     }
 
     @FXML
@@ -86,8 +99,8 @@ public class HomeController implements Initializable {
     @FXML
     private void handleCloseClick(ActionEvent event) {
     }
-    
+
     public void setUsername(String username) {
-        
+
     }
 }
