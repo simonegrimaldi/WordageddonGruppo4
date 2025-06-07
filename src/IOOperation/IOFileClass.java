@@ -5,7 +5,7 @@
  */
 package IOOperation;
 
-import IOoperation.IOFile;
+import IOOperation.IOFile;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;

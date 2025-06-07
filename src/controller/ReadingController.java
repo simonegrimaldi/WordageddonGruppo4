@@ -4,7 +4,7 @@
  */
 package controller;
 
-import IOoperation.IOFile;
+import IOOperation.IOFile;
 import java.net.URL;
 import javafx.util.Duration;
 import java.util.ResourceBundle;

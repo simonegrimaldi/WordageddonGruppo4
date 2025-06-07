@@ -1,4 +1,4 @@
-package IOoperation;
+package IOOperation;
 
 /**
  * @interface IOFile
