@@ -138,62 +138,58 @@
     -fx-alignment: center;
 }
 
-/* Pulsanti principali: Profile, Play, Start Game */
-.profileButton,
-.playButton,
-.startGame {
-    -fx-background-color: #4285f4;
+/* ===== SplitMenuButton (difficulty chooser) ===== */
+.difficutChooser {
+    -fx-background-color: #4CAF50;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-background-radius: 4px;
-    -fx-font-size: 14px;
-    -fx-padding: 8px 16px;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 3, 0.5, 0, 1);
+    -fx-background-radius: 6px;
+    -fx-padding: 8 16;
 }
 
-.profileButton:hover,
-.playButton:hover,
+.difficutChooser:hover {
+    -fx-background-color: #388E3C;
+}
+
+/* ===== Start Game button ===== */
+.startGame {
+    -fx-background-color: #ff9800;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-padding: 8 16;
+}
+
 .startGame:hover {
-    -fx-background-color: #3367d6;
+    -fx-background-color: #fb8c00;
 }
 
-/* SplitMenuButton - stile coerente */
-.difficutChooser {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #ccc;
-    -fx-border-radius: 4px;
-    -fx-font-size: 14px;
+/* ===== Etichette e testi ===== */
+.labelRules, .labelClass, .rankingClass, .ScoreLabel {
+    -fx-font-size: 16px;
+    -fx-text-fill: #333;
 }
 
-
-/* Etichetta delle regole */
-.labelRules {
+.textAreaClass {
     -fx-font-size: 14px;
     -fx-text-fill: #444;
-    -fx-wrap-text: true;
-    -fx-alignment: top-left;
-    -fx-padding: 10px;
-    -fx-background-color: #f0f0f0;
-    -fx-background-radius: 6px;
+    -fx-background-color: #ffffff;
     -fx-border-color: #ccc;
     -fx-border-radius: 6px;
+    -fx-padding: 10;
 }
 
-#playContainer {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #ddd;
-    -fx-border-radius: 8px;
-}
-
-#closeButton {
-    -fx-background-color: #e53935;
+/* ===== Profile section ===== */
+.profileButton, .playButton {
+    -fx-background-color: #607D8B;
     -fx-text-fill: white;
     -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-padding: 8 20;
 }
 
-#closeButton:hover {
-    -fx-background-color: #c62828;
+.profileButton:hover, .playButton:hover {
+    -fx-background-color: #455A64;
 }
 
 /* Timer grande e bold */

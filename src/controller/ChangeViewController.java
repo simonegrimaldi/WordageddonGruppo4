@@ -1,11 +1,14 @@
 package controller;
 
 import IOOperation.IOFileClass;
+import dao.implementation.DaoGameImpl;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Il ChangeViewController è responsabile del cambio di view all'interno dell'
@@ -150,8 +153,15 @@ public class ChangeViewController implements ChangeView {
         switch (fxml) {
             case "Home":
                 HomeController homeController = loader.getController();
-                homeController.setChangeViewController(this,username);
+            {
+                try {
+                    homeController.setChangeViewController(this,username,new DaoGameImpl());
+                } catch (Exception ex) {
+                    Logger.getLogger(ChangeViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
                 break;
+
 
             case "LogIn":
                 LogInController loginController = loader.getController();
