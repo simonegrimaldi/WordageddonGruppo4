@@ -72,7 +72,7 @@ public class AdminPanelController implements Initializable {
         if (controller != null) {
             controller.goLogIn();
         } else {
-            System.out.println("⚠️ controller è null");
+            System.out.println("⚠ controller è null");
         }
     }
 
@@ -81,7 +81,7 @@ public class AdminPanelController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleziona una file .txt");
 
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Text files (.txt)", ".txt");
         fileChooser.getExtensionFilters().add(extFilter);
 
         File selected = fileChooser.showOpenDialog(openFileChooser.getScene().getWindow());
@@ -117,8 +117,32 @@ public class AdminPanelController implements Initializable {
             return;
         }
 
-        //lista che conterrà le stopwords
         Set<String> stopwords = new HashSet<>();
+        stopwords=createStopWordsSet(stopwords);
+        
+        String difficulty=difficultyChooser(stopwords);
+        if(difficulty==null)
+            return;
+        
+        File destDir=new File("testi/"+difficulty);
+        if(!destDir.exists())
+            destDir.mkdirs();
+        
+        File destFile = new File(destDir, selectedFile.getName());
+        try {
+            Files.copy(selectedFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("Percorso file salvato: " + destFile.getAbsolutePath());
+        } catch (IOException e) {
+            alertManager.showAlert("Errore salvataggio", "Impossibile copiare il file nella cartella " + difficulty);
+            return;
+        }
+
+        //ultima istruzione che viene eseguita, per resettare l'adminPanel
+        controller.goAdminPanel(this.superUsername);
+    }
+
+    public Set<String> createStopWordsSet(Set<String> stopwords) {
+        //lista che conterrà le stopwords
         String text = textArea.getText().trim();
 
         if (!text.isEmpty()) {
@@ -130,14 +154,17 @@ public class AdminPanelController implements Initializable {
                 }
             }
         }
-
+        return stopwords;
+    }
+    
+    public String difficultyChooser(Set<String> stopwords){
         //Lettura del contenuto del file selezionato
         List<String> lines;
         try {
             lines = Files.readAllLines(this.selectedFile.toPath(), StandardCharsets.UTF_8);
         } catch (IOException ex) {
             alertManager.showAlert("ERRORE LETTURA FILE", "Impossibile leggere il file selezionato");
-            return;
+            return null;
         }
 
         //Una volta raccolte tutte le righe del testo, conto le parole contenute nelle linee
@@ -161,25 +188,6 @@ public class AdminPanelController implements Initializable {
         } else {
             difficulty = "difficile";
         }
-
-        // Percorso di destinazione
-        File destDir = new File("testi/" + difficulty);
-        if (!destDir.exists()) {
-            destDir.mkdirs(); 
-        }
-
-        File destFile = new File(destDir, selectedFile.getName());
-        try {
-            Files.copy(selectedFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            System.out.println("Percorso file salvato: " + destFile.getAbsolutePath());
-            alertManager.showAlert("File caricato con successo","Il file \"" + selectedFile.getName() + "\" è stato salvato nella cartella: \"" + difficulty + "\".\n\nParole significative trovate: " + wordCounter);
-        } catch (IOException e) {
-            alertManager.showAlert("Errore salvataggio", "Impossibile copiare il file nella cartella " + difficulty);
-            return;
-        }
-
-        //ultima istruzione che viene eseguita, per resettare l'adminPanel
-        controller.goAdminPanel(this.superUsername);
+        return difficulty;
     }
-
 }
