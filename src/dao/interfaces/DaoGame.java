@@ -4,7 +4,7 @@
  */
 package dao.interfaces;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import model.Game;
 
 /**
@@ -20,7 +20,7 @@ public interface DaoGame {
 
     public Integer getBestPointsPoints(String username) throws Exception;
     
-    public HashMap<String,Integer> getTopThree() throws Exception;
+    public LinkedHashMap<String, Integer> getTopThree() throws Exception;
     
     public Integer getNumberGame(String username) throws Exception;
     

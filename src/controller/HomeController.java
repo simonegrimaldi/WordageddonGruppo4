@@ -7,6 +7,7 @@ package controller;
 import dao.interfaces.DaoGame;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
@@ -156,7 +157,7 @@ public class HomeController implements Initializable {
     }
     
     private void setRankingTable() throws Exception {
-        HashMap<String, Integer> topThree = daoGame.getTopThree();
+         LinkedHashMap<String, Integer> topThree = daoGame.getTopThree();
         int position = 1;
         for (Map.Entry<String, Integer> entry : topThree.entrySet()) {
             String usr = entry.getKey();

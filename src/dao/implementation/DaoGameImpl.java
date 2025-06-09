@@ -11,8 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Game;
 import dao.interfaces.DaoGame;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 /**
  * La classe {@code DaoGameImpl} implementa l'interfaccia
@@ -77,22 +76,22 @@ public class DaoGameImpl implements DaoGame {
     }
 
     @Override
-    public HashMap<String, Integer> getTopThree() throws Exception {
-        HashMap<String, Integer> topThree = new HashMap<>();
-        String sql = "SELECT utente, MAX(punteggio) AS max_punteggio\n"
-                + "FROM public.partita\n"
-                + "GROUP BY utente\n"
-                + "ORDER BY max_punteggio DESC\n"
+    public LinkedHashMap<String, Integer> getTopThree() throws Exception {
+        LinkedHashMap<String, Integer> topThree = new LinkedHashMap<>();
+        String sql = "SELECT utente, MAX(punteggio) AS max_punteggio "
+                + "FROM public.partita "
+                + "GROUP BY utente "
+                + "ORDER BY max_punteggio DESC "
                 + "LIMIT 20;";
+
         int row = 0;
 
         try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
             try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next() && row < 3) {
-                    if (rs.wasNull()) {
-                        topThree.put(" ", -1);
-                    }
-                    topThree.put(rs.getString("utente"), rs.getInt("max_punteggio"));
+                while (rs.next() && row < 20) {
+                    String utente = rs.getString("utente");
+                    int punteggio = rs.getInt("max_punteggio");
+                    topThree.put(utente, punteggio);
                     row++;
                 }
             }
