@@ -9,9 +9,7 @@ import java.util.Random;
  * @brief Domanda: "Quante volte compare una certa parola in un documento?"
  */
 public class FrequencyQuestion extends Question<Integer> {
-    String question;
-    Integer answer;
-    List<Integer> options;
+    
 
     /**
      * Costruisce una domanda di frequenza basata su un'analisi.

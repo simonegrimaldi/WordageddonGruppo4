@@ -16,9 +16,7 @@ import java.util.Set;
  * @author corry
  */
 public class RelativeFrequencyQuestion extends Question<String> {
-    String question;
-    String answer;
-    List<String> options;
+    
 
     /**
      * Crea una domanda del tipo:
@@ -46,7 +44,7 @@ public class RelativeFrequencyQuestion extends Question<String> {
         }
 
         this.options = new ArrayList<>(selectedWords);
-
+        
         // Trova quella con frequenza massima
         this.answer = this.options.stream()
             .max(Comparator.comparingInt(total::frequency))
@@ -54,4 +52,5 @@ public class RelativeFrequencyQuestion extends Question<String> {
 
         
     }
+    
 }

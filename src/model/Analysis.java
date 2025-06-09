@@ -7,6 +7,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -49,11 +50,22 @@ public class Analysis implements Serializable {
     public Integer frequency(String k) {
         return analysis.getOrDefault(k, 0);
     }
+    /**
+ * @brief Restituisce la parola con la frequenza più alta.
+ * @return La parola più frequente, oppure null se la mappa è vuota.
+ */
+public String mostFrequent() {
+    return analysis.entrySet().stream()
+            .max(java.util.Map.Entry.comparingByValue())
+            .map(java.util.Map.Entry::getKey)
+            .orElse(null);
+}
 
     /**
      * @brief Restituisce una parola scelta casualmente dalla mappa.
      * @return Una parola casuale, oppure null se la mappa è vuota.
      */
+    
     public String getRandom() {
         if (analysis.isEmpty()) {
             return null;
@@ -70,9 +82,41 @@ public class Analysis implements Serializable {
         this.put(word, totalFreq);
         }
     }
+    /**
+ * @brief Restituisce l'insieme delle parole analizzate.
+ * @return Un Set contenente tutte le parole presenti nell'analisi.
+ */
+public Set<String> keySet() {
+    return analysis.keySet();
+}
 
-    int size() {
+
+    public int size() {
         return analysis.size();
     }
+    
+    /**
+ * @brief Analizza un testo e popola la mappa con la frequenza delle parole, escludendo le stopwords.
+ * 
+ * @param text Il testo da analizzare.
+ * @param stopwords Lista di parole da ignorare durante l'analisi (es. articoli, congiunzioni, punteggiatura).
+ */
+    
+
+public void analyzeText(String text, Set<String> stopwords) {
+    if (text == null || text.isEmpty()) {
+        return;
+    }
+
+    String[] words = text.toLowerCase().split("\\W+"); // Divide il testo usando caratteri non alfanumerici
+
+    for (String word : words) {
+        if (!word.isEmpty() && !stopwords.contains(word)) {
+            analysis.merge(word, 1, Integer::sum);
+        }
+    }
+}
+
+
     
 }

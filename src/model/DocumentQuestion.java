@@ -5,8 +5,13 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 /**
  *
@@ -15,13 +20,34 @@ import java.util.Random;
 public class DocumentQuestion extends Question<String>{
     /*Quale parola compare più spesso nel
 n-esimo documento?*/
-    String question;
-    String answer;
-    List<String> options;
     
-    public DocumentQuestion(List<Analysis> analyses){
-            int numero = new Random().nextInt(4);
-            this.question = "Qual è la parola più frequente nel documento numero " + (numero + 1);
-
+    
+    public DocumentQuestion(List<Analysis> analyses) {
+    if (analyses == null || analyses.size() < 1) {
+        throw new IllegalArgumentException("La lista di analisi è vuota.");
     }
+
+    int numero = new Random().nextInt(analyses.size());  // documento scelto casualmente
+    Analysis selected = analyses.get(numero);            // analisi del documento selezionato
+
+    this.question = "Qual è la parola più frequente nel documento numero " + (numero + 1);
+
+    // Trova la parola più frequente
+    this.answer = selected.mostFrequent();
+
+    // Genera le opzioni
+    Set<String> selectedWords = new LinkedHashSet<>();
+    selectedWords.add(this.answer);
+    while (selectedWords.size() < 4) {
+            selectedWords.add(selected.getRandom()); // PER IMPEDIRE DUPLICATI
+        }
+
+       this.options = new ArrayList<>(selectedWords);
+       Collections.shuffle(this.options);  // mischiamo le opzioni
+
+
+    
+}
+
+    
 }
