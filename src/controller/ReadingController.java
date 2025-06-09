@@ -23,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Region;
 
 /**
  * FXML Controller class
@@ -41,6 +42,9 @@ public class ReadingController implements Initializable {
     private Button closeButton;
     @FXML
     private Button confirmButton;
+    @FXML
+    private TextArea stampaTesti;
+    
     private String username_read;
     /**
      * Initializes the controller class.
@@ -144,19 +148,17 @@ public class ReadingController implements Initializable {
     timeline.setCycleCount(totalSeconds + 1);
     timeline.play();
 }
-public  void caricaTesti() {
-    String content = file.loadFile(difficulty); // ✅ Prende il contenuto generato casualmente
+public void caricaTesti() {
+    String content = file.loadFile(difficulty);
 
-     TextArea text = new TextArea();
-    text.setWrapText(true);
-    text.setEditable(false);
-    text.setText(content);
-    text.setStyle("-fx-font-size: 14px;");
+    if (content == null || content.isEmpty()) {
+        System.out.println("Nessun contenuto trovato!");
+        return;
+    }
 
-    textArea.setContent(text); 
-
-   
+    
+    stampaTesti.setWrapText(true);
+    stampaTesti.setText(content);
+    textArea.setContent(stampaTesti);
 }
-
-
 }

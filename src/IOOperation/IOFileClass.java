@@ -7,6 +7,7 @@ package IOOperation;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,53 +28,58 @@ import java.util.Scanner;
  * specificato.
  */
 public class IOFileClass implements IOFile {
-
     @Override
-    public String loadFile(String difficulty) {
-        String basePath = "../../" + difficulty;
-        File folder = new File(basePath);
-        File[] files = folder.listFiles((dir, name) -> name.endsWith(".txt")); // solo .txt
+public String loadFile(String difficulty) {
+    
+    String basePath = Paths.get(System.getProperty("user.dir"), "testi", difficulty.toLowerCase()).toString();
 
-        if (files == null || files.length == 0) {
-            System.err.println("Nessun file trovato nella cartella: " + basePath);
-            return null;
-        }
+    File folder = new File(basePath);
+    System.out.println("📁 Cerco nella cartella: " + folder.getAbsolutePath());
 
-        int numTesti;
-        switch (difficulty.toLowerCase()) {
-            case "facile":
-                numTesti = 1;
-                break;
-            case "media":
-                numTesti = 2;
-                break;
-            case "difficile":
-                numTesti = 3;
-                break;
-            default:
-                return null;
-        }
+    File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".txt"));
 
-        // Mischia i file e prendi i primi `numTesti`
-        List<File> fileList = new ArrayList<>(Arrays.asList(files));
-        Collections.shuffle(fileList);
-
-        StringBuilder contenutoComplessivo = new StringBuilder();
-        for (int i = 0; i < Math.min(numTesti, fileList.size()); i++) {
-            File file = fileList.get(i);
-            try (Scanner scanner = new Scanner(file)) {
-                contenutoComplessivo.append("Testo: ").append(file.getName()).append("\n");
-                while (scanner.hasNextLine()) {
-                    contenutoComplessivo.append(scanner.nextLine()).append("\n");
-                }
-                contenutoComplessivo.append("\n");
-            } catch (FileNotFoundException e) {
-                System.err.println("File non trovato: " + file.getAbsolutePath());
-            }
-        }
-
-        return contenutoComplessivo.toString();
+    if (files == null || files.length == 0) {
+        System.err.println("❌ Nessun file trovato nella cartella: " + basePath);
+        return "Nessun contenuto trovato!";
     }
+
+ 
+    int numTesti;
+    switch (difficulty.toLowerCase()) {
+        case "facile":
+            numTesti = 1;
+            break;
+        case "media":
+            numTesti = 2;
+            break;
+        case "difficile":
+            numTesti = 3;
+            break;
+        default:
+            System.err.println("Difficoltà non riconosciuta: " + difficulty);
+            return "Errore: difficoltà non valida.";
+    }
+
+    // Mischia e seleziona
+    List<File> fileList = new ArrayList<>(Arrays.asList(files));
+    Collections.shuffle(fileList);
+
+    StringBuilder contenutoComplessivo = new StringBuilder();
+    for (int i = 0; i < Math.min(numTesti, fileList.size()); i++) {
+        File file = fileList.get(i);
+        try (Scanner scanner = new Scanner(file)) {
+            contenutoComplessivo.append("Testo ").append(i+1).append("\n");
+            while (scanner.hasNextLine()) {
+                contenutoComplessivo.append(scanner.nextLine()).append("\n");
+            }
+            contenutoComplessivo.append("\n").append("\n");
+        } catch (FileNotFoundException e) {
+            System.err.println(" File non trovato: " + file.getAbsolutePath());
+        }
+    }
+
+    return contenutoComplessivo.toString();
+}
 
     @Override
     public boolean saveFile(String difficulty) {

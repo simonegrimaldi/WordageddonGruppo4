@@ -66,9 +66,6 @@ public class DaoGameImpl implements DaoGame {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     points = rs.getInt("max_p");
-                    if (rs.wasNull()) {
-                        points = -1;
-                    }
                 }
             }
         } catch (SQLException ex) {
@@ -86,7 +83,7 @@ public class DaoGameImpl implements DaoGame {
                 + "FROM public.partita\n"
                 + "GROUP BY utente\n"
                 + "ORDER BY max_punteggio DESC\n"
-                + "LIMIT 3;";
+                + "LIMIT 20;";
         int row = 0;
 
         try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {

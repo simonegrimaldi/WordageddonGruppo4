@@ -50,10 +50,6 @@ public class HomeController implements Initializable {
     @FXML
     private VBox profileContainer;
     @FXML
-    private Label ranking;
-    @FXML
-    private Label scoreLabel;
-    @FXML
     private TableView<String[]> rankingTable;
     @FXML
     private TableColumn<String[], String> positionColumn;
@@ -66,8 +62,6 @@ public class HomeController implements Initializable {
 
     private String username;
     private ChangeView controller;
-    private boolean isVisibleProfile = false;
-    private boolean isVisiblePlay = false;
     private DaoGame daoGame;
     private AlertManager alertManager = new AlertManager();
     private ObservableList<String[]> rankingObs = FXCollections.observableArrayList();
@@ -77,13 +71,6 @@ public class HomeController implements Initializable {
         this.daoGame = daoGame;
         this.username = username;
         title.textProperty().setValue("Hello " + username + " !");
-        Integer bestScore = daoGame.getBestPointsPoints(username);
-        if (bestScore == -1) {
-            scoreLabel.setText("Non hai mai giocato! Cosa aspetti ?");
-        }
-        else {
-            scoreLabel.setText("Your best score : " + bestScore);
-        }
         setRankingTable();
         setStatistics();
     }
@@ -157,7 +144,7 @@ public class HomeController implements Initializable {
         for (Map.Entry<String, Integer> entry : topThree.entrySet()) {
             String usr = entry.getKey();
             Integer pt = entry.getValue();
-            if (!usr.equals("") && pt != -1) {
+            if (!usr.equals("") && pt != 0) {
                 rankingObs.add(new String[]{String.valueOf(position), usr, String.valueOf(pt)});
             }
             position++;
@@ -170,16 +157,34 @@ public class HomeController implements Initializable {
 
         rankingTable.setItems(rankingObs);
     }
-    
+
     public void setStatistics() throws Exception {
-        int numGame= daoGame.getNumberGame(username);
+        int numGame = daoGame.getNumberGame(username);
         int pointsLastGame = daoGame.getLastMatch(username);
         double averageGame = daoGame.getAverageMatch(username);
+        Integer bestScore = daoGame.getBestPointsPoints(username);
         
-        System.out.println("Last Game Points: " + pointsLastGame);
         
-        statisticsLabel.textProperty().setValue("Your Score \n Game Played : " + numGame + "\n"
-                + "Average Points : " + averageGame + "%" + "\n" 
-                + "Last Game Played : " + pointsLastGame + "/100");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Your Score\n");
+        sb.append("Game Played : ").append(numGame).append("\n");
+        if (bestScore == -1) {
+            sb.append("Non hai mai giocato! Cosa aspetti ?");
+        } else {
+            sb.append(String.format("Your best score : " + bestScore + "\n"));
+        }
+        if (averageGame == -1.0) {
+            sb.append("Average Points : -\n");
+        } else {
+            sb.append(String.format("Average Points : %.2f%%\n", averageGame));
+        }
+
+        if (pointsLastGame == -1) {
+            sb.append("Last Game Played : -\n");
+        } else {
+            sb.append("Last Game Played : ").append(pointsLastGame).append("/100\n");
+        }
+
+        statisticsLabel.setText(sb.toString());
     }
 }
