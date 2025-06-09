@@ -5,13 +5,8 @@
  */
 package model;
 
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -35,10 +30,8 @@ public class AnalysisImpl implements Serializable {
      * @brief Mappa che associa parole (chiavi) a frequenze (valori).
      */
     HashMap<String, Integer> analysis;
-        
-    
-    private AlertManager alertManager = new AlertManager();
 
+    private AlertManager alertManager = new AlertManager();
 
     /**
      * @brief Costruttore di default.
@@ -135,28 +128,11 @@ public class AnalysisImpl implements Serializable {
      */
     public boolean analyzeText(File file, Set<String> stopwords) {
 
-        /*String word = null;
-
-        try (Scanner s = new Scanner(new BufferedReader(new FileReader(filename)))) {
-            s.useDelimiter("[ \\n]+");
-            s.useLocale(Locale.US);
-            while (s.hasNext()) {
-                word = s.next();
-                if (!stopwords.contains(word.toLowerCase())) {
-                    analysis.merge(word.toLowerCase(), 1, Integer::sum);
-                }
-            }
-
-        } catch (IOException ex) {
-            System.out.println("Errore nell'analisi del file");
-        }*/
-        
-        
         List<String> lines = null;
         try {
             lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
         } catch (IOException ex) {
-            //alertManager.showAlert("ERRORE LETTURA FILE", "Impossibile leggere il file selezionato");
+            alertManager.showAlert("ERRORE LETTURA FILE", "Impossibile leggere il file selezionato", "ERROR");
             return false;
         }
 
@@ -170,6 +146,5 @@ public class AnalysisImpl implements Serializable {
         }
         return true;
     }
-    
 
 }

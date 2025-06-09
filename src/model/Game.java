@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-
-import util.EnumDifficulty;
 import java.util.UUID;
 
 /**
@@ -14,11 +12,11 @@ import java.util.UUID;
 public class Game {
 
     private UUID id;
-    private EnumDifficulty difficulty;
     private int points;
     private String username;
+    private String difficulty;
 
-    public Game(EnumDifficulty difficulty,String username) {
+    public Game(String difficulty,String username) {
         this.difficulty = difficulty;
         this.username = username;
         id = UUID.randomUUID();
@@ -36,7 +34,7 @@ public class Game {
         return id;
     }
 
-    public EnumDifficulty getDifficulty() {
+    public String getDifficulty() {
         return difficulty;
     }
 
