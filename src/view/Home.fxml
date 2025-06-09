@@ -56,24 +56,24 @@
                 <!-- Contenitore profilo (nascosto di default) -->
                 <VBox fx:id="profileContainer" alignment="TOP_CENTER" managed="true" prefHeight="434.0" prefWidth="700.0" snapToPixel="false" visible="true">
                     <children>
-                        <HBox alignment="TOP_CENTER" prefHeight="165.0" prefWidth="700.0" styleClass="buttonContainer">
+                        <HBox alignment="TOP_CENTER" prefHeight="220.0" prefWidth="700.0" styleClass="buttonContainer">
                             <children>
-                                <VBox alignment="CENTER" prefHeight="135.0" prefWidth="269.0">
+                                <VBox alignment="CENTER" prefHeight="195.0" prefWidth="269.0">
                                     <children>
                                         <Label fx:id="ranking" alignment="TOP_CENTER" prefHeight="20.0" prefWidth="103.0" styleClass="rankingClass" text="Global Ranking">
                                             <VBox.margin>
                                                 <Insets bottom="10.0" />
                                             </VBox.margin>
                                         </Label>
-                                        <TableView fx:id="rankingTable" prefHeight="104.0" prefWidth="170.0" styleClass="tableClass">
+                                        <TableView fx:id="rankingTable" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="149.0" prefWidth="269.0" styleClass="tableClass">
                                             <columns>
-                                                <TableColumn fx:id="positionColumn" editable="false" minWidth="30.0" prefWidth="10.0" sortable="false" text="Pos" />
-                                                <TableColumn fx:id="usernameColumn" editable="false" prefWidth="75.0" sortable="false" text="Username" />
-                                                <TableColumn fx:id="pointsColumn" editable="false" prefWidth="75.0" sortable="false" text="Points" />
+                                                <TableColumn fx:id="positionColumn" editable="false" prefWidth="30.0" sortable="false" text="Pos" />
+                                                <TableColumn fx:id="usernameColumn" editable="false" prefWidth="85.0" sortable="false" text="Username" />
+                                                <TableColumn fx:id="pointsColumn" editable="false" prefWidth="85.0" sortable="false" text="Points" />
                                             </columns>
-                                            <columnResizePolicy>
-                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                            </columnResizePolicy>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
                                         </TableView>
                                     </children>
                                 </VBox>
@@ -84,10 +84,15 @@
                                 </Label>
                             </children>
                         </HBox>
-                        <Label fx:id="statisticsLabel" graphicTextGap="5.0" styleClass="statisticsClass" text="Your statistics :">
-                            
-                            
-                        </Label>
+                        <VBox alignment="CENTER" prefHeight="241.0" prefWidth="700.0" spacing="10.0">
+                            <children>
+                                <Label fx:id="statisticsLabel" alignment="CENTER" lineSpacing="5.0" prefHeight="199.0" prefWidth="341.0" styleClass="statisticsClass" text="Your statistics :" textAlignment="CENTER" wrapText="true">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
                     </children>
                 </VBox>
 

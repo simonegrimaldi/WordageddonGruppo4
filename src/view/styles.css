@@ -281,3 +281,25 @@
     -fx-font-size: 16px;
     -fx-text-fill: #444;
 }
+
+.tableClass {
+    -fx-background-color: #f4f4f4;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-table-cell-border-color: transparent;
+    -fx-font-size: 13px;
+    -fx-selection-bar: #cfe2ff;
+    -fx-selection-bar-non-focused: #e0e0e0;
+}
+
+.statisticsClass {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-padding: 10;
+    -fx-background-color: #e7f1ff;
+    -fx-background-radius: 10;
+    -fx-border-color: #c6d9ec;
+    -fx-border-radius: 10;
+}
