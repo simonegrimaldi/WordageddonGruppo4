@@ -14,7 +14,7 @@ import javafx.scene.control.Alert;
 public class AlertManager {
 
     public void showAlert(String title, String message, String type) {
-        Alert alert = new Alert(Alert.AlertType.valueOf(title));
+        Alert alert = new Alert(Alert.AlertType.valueOf(type.toUpperCase()));
 
         alert.setTitle(title);  
         alert.setHeaderText(null);  

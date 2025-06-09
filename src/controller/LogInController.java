@@ -81,7 +81,7 @@ public class LogInController implements Initializable {
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            alertManager.showAlert("ERRORE", "entrambi i campi Username e Password devono essere compilati", "ERROR");
+            alertManager.showAlert("ERRORE", "entrambi i campi Username e Password devono essere compilati","error");
             return;
         }
         String userType = daoUser.authentication(username, password);
@@ -92,7 +92,7 @@ public class LogInController implements Initializable {
                 controller.goHome(username);
             }
         } else {
-            alertManager.showAlert("Errore", "Username o password errati", "ERROR");
+            alertManager.showAlert("Errore", "Username o password errati","ERROR");
         }
     }
 }
