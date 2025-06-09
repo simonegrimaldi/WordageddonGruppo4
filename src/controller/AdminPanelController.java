@@ -83,7 +83,6 @@ public class AdminPanelController implements Initializable {
 
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Text files (.txt)", ".txt");
         fileChooser.getExtensionFilters().add(extFilter);
-
         File selected = fileChooser.showOpenDialog(openFileChooser.getScene().getWindow());
 
         if (selected != null) {

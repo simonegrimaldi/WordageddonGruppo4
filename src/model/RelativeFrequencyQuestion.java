@@ -39,8 +39,17 @@ public class RelativeFrequencyQuestion extends Question<String> {
 
         // Seleziona 4 parole distinte a caso
         Set<String> selectedWords = new LinkedHashSet<>();
+        int lastFreq = -1; // Inizializza con un valore impossibile
+    
         while (selectedWords.size() < 4) {
-            selectedWords.add(total.getRandom()); // PER IMPEDIRE DUPLICATI
+            String candidate = total.getRandom();
+            int candidateFreq = total.frequency(candidate);
+        
+        // Aggiungi solo se la frequenza è diversa dalla precedente
+            if (candidateFreq != lastFreq) {
+                selectedWords.add(candidate);
+                lastFreq = candidateFreq;
+            }
         }
 
         this.options = new ArrayList<>(selectedWords);
