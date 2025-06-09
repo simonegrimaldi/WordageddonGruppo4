@@ -34,10 +34,10 @@ public class AnalysisImpl implements Serializable {
     /**
      * @brief Mappa che associa parole (chiavi) a frequenze (valori).
      */
-    HashMap<String, Integer> analysis;
+    private HashMap<String, Integer> analysis;
         
     
-    private AlertManager alertManager = new AlertManager();
+    private transient AlertManager alertManager = new AlertManager();
 
 
     /**

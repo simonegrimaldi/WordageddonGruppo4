@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package controller;
 
+import IOOperation.IOAnalysis;
+import IOOperation.IOAnalysisImpl;
 import IOOperation.IOFile;
 import java.io.File;
 import java.net.URL;
@@ -21,9 +19,22 @@ import model.AnalysisImpl;
 import util.AlertManager;
 
 /**
- * FXML Controller class
+ * @class AdminPanelController
+ * @brief Controller associato alla view AdminPanel. Si occupa di gestire la
+ * logica per il caricamento, la validazione e la classificazione dei testi che
+ * vengono inseriti dall'amministratore. Implementa anche un meccanismo di
+ * gestione delle stopwords (una serie di parole che non devono essere
+ * utilizzate per la scelta della difficoltà del testo inserito). Permette
+ * infine anche di gestire la navigazione tra le view.
  *
- * @author simonegrimaldi
+ * In particolare questo controller permette all'admin di: - Inserire un file
+ * (rigorosamente in formato .txt) - Inserire una lista opzionale di stopwords
+ * (che nel caso in cui vengano inserite devono necessariamente essere inserite
+ * separate da virgole) - Classificare in automatico il file in tre livelli di
+ * difficoltà (facile, medio e difficile) - Salvare il file nella cartella
+ * corrispondente alla difficoltà del testo - Annullare tutte le modifiche fatte
+ * nella sessione corrente - Effettuare il logout
+ *
  */
 public class AdminPanelController implements Initializable {
 
@@ -47,27 +58,56 @@ public class AdminPanelController implements Initializable {
     private ChangeView controller;
     private AlertManager alertManager;
     private IOFile ioFile;
+    private AnalysisImpl analysis = new AnalysisImpl();
+    private IOAnalysisImpl ioa = new IOAnalysisImpl();
 
+    /**
+     * Imposta il controller di navigazione, l'username dell'admin (utile per
+     * far apparire un messaggio personalizzato di benvenuto), e l'interfaccio
+     * IO utile per il caricamento dei file.
+     *
+     *
+     * @param controller
+     * @param superUsername
+     * @param ioFile
+     */
     public void setChangeViewController(ChangeView controller, String superUsername, IOFile ioFile) {
         this.controller = controller;
         this.superUsername = superUsername;
-        if (this.superUsername != null) 
+        if (this.superUsername != null) {
             titleLabel.setText("Hello " + this.superUsername + " :)");
-        
+        }
+
         this.ioFile = ioFile;
     }
 
+    /**
+     * Inizializza i componenti della GUI e imposta un messaggio predefinito di
+     * benvenuto.
+     *
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         alertManager = new AlertManager();
         titleLabel.setText("Hello admin :)");
     }
 
+    /**
+     * Gestisce il logout dell'admin e il ritorno alla view di login
+     *
+     * @param event
+     */
     @FXML
     private void logoutButtonClick(ActionEvent event) {
         controller.goLogIn();
     }
 
+    /**
+     *Apre un file Chooser 
+     * @param event
+     */
     @FXML
     private void openFileChooserClick(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -106,9 +146,9 @@ public class AdminPanelController implements Initializable {
 
         Set<String> stopwords = new HashSet<>();
         stopwords = createStopWordsSet(stopwords);
-        AnalysisImpl a = new AnalysisImpl();
-        a.analyzeText(selectedFile, stopwords);
-        String difficulty = a.difficulty();
+        analysis.analyzeText(selectedFile, stopwords);
+        String difficulty = analysis.difficulty();
+        System.out.println(analysis.size());
 
         if (difficulty == null) {
             return;
@@ -118,12 +158,16 @@ public class AdminPanelController implements Initializable {
         if (!destDir.exists()) {
             destDir.mkdirs();
         }
-        
+
         boolean flag = ioFile.saveFile(new File(destDir, selectedFile.getName()), selectedFile);
-        if(flag)
+        if (flag) {
             alertManager.showAlert("File caricato con successo", "Il file \"" + selectedFile.getName() + "\" è stato salvato nella cartella: \"" + difficulty, "CONFIRMATION");
-        else
+            analysis.analyzeText(this.selectedFile, stopwords);
+            ioa.saveAnalysis(analysis, "testi/" + difficulty + "/" + this.selectedFile.getName().concat("Analysis"));
+
+        } else {
             alertManager.showAlert("Errore salvataggio", "Impossibile copiare il file nella cartella " + difficulty, "ERROR");
+        }
 
         controller.goAdminPanel(this.superUsername);
     }
