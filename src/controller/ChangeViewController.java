@@ -1,5 +1,6 @@
 package controller;
 
+import IOOperation.IOAnalysisImpl;
 import IOOperation.IOFileImpl;
 import dao.implementation.DaoGameImpl;
 import dao.implementation.DaoUserImpl;
@@ -10,6 +11,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.IOTextsImpl;
+import model.Quiz;
+import model.QuizBuilder;
 
 /**
  * Il ChangeViewController è responsabile del cambio di view all'interno dell'
@@ -21,7 +25,7 @@ public class ChangeViewController implements ChangeView {
     private Stage primaryStage;
     private String username;
     private String difficulty;
-    
+    private QuizBuilder quizBuilder;
     /**
      * Costruttore del {@code ChangeViewController}.
      *
@@ -181,7 +185,8 @@ public class ChangeViewController implements ChangeView {
 
             case "Reading":
                 ReadingController readingController = loader.getController();
-                readingController.setChangeViewController(this,username,difficulty,new IOFileImpl());
+                this.quizBuilder = new QuizBuilder(new IOTextsImpl(),new IOAnalysisImpl(),username);
+                readingController.setChangeViewController(this,username,difficulty,new IOFileImpl(), quizBuilder.creaQuiz(difficulty));
                 //readingController.setIOFile(new IOFileClass());
                 break;
 

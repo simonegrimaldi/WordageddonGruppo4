@@ -8,10 +8,16 @@ import java.util.List;
 public class Quiz {
     private List<String> testi;
     private List<Question> domande;
-
-    public Quiz(List<String> testi, List<Question> domande) {
+    private final String username;
+    
+    public Quiz(List<String> testi, List<Question> domande, String username) {
         this.testi = testi;
         this.domande = domande;
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public List<String> getTesti() {

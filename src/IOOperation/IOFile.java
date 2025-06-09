@@ -1,6 +1,7 @@
 package IOOperation;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * @interface IOFile
@@ -18,7 +19,7 @@ public interface IOFile {
      * @param filename, il nome del file da caricare
      * @return Il contenuto del file selezionato in formato String
      */
-    public String loadFile(String filename);
+    public String loadFile(List<String> filenames);
     
     public boolean saveFile(File destFile,File selectedFile);
 

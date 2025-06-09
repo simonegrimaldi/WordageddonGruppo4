@@ -15,7 +15,7 @@ import model.AnalysisImpl;
  *
  * @author simonegrimaldi
  */
-public class IOAnalysisImpl {
+public class IOAnalysisImpl implements IOAnalysis{
     public void saveAnalysis (AnalysisImpl a,String filename) {
     try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
         oos.writeObject(a);

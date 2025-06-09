@@ -33,64 +33,34 @@ import java.util.Scanner;
 public class IOFileImpl implements IOFile {
 
     @Override
-    public String loadFile(String difficulty) {
-
-        String basePath = Paths.get(System.getProperty("user.dir"), "testi", difficulty.toLowerCase()).toString();
-
-        File folder = new File(basePath);
-        System.out.println("📁 Cerco nella cartella: " + folder.getAbsolutePath());
-
-        File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".txt"));
-
-        if (files == null || files.length == 0) {
-            System.err.println("❌ Nessun file trovato nella cartella: " + basePath);
-            return "Nessun contenuto trovato!";
-        }
-
-        int numTesti;
-        switch (difficulty.toLowerCase()) {
-            case "facile":
-                numTesti = 1;
-                break;
-            case "media":
-                numTesti = 2;
-                break;
-            case "difficile":
-                numTesti = 3;
-                break;
-            default:
-                System.err.println("Difficoltà non riconosciuta: " + difficulty);
-                return "Errore: difficoltà non valida.";
-        }
-
-        // Mischia e seleziona
-        List<File> fileList = new ArrayList<>(Arrays.asList(files));
-        Collections.shuffle(fileList);
-
+    public String loadFile(List<String> filePaths) {
         StringBuilder contenutoComplessivo = new StringBuilder();
-        for (int i = 0; i < Math.min(numTesti, fileList.size()); i++) {
-            File file = fileList.get(i);
+
+        for (int i = 0; i < filePaths.size(); i++) {
+            File file = new File(filePaths.get(i));
+            contenutoComplessivo.append("Testo ").append(i + 1).append(": ").append(file.getName()).append("\n");
+
             try (Scanner scanner = new Scanner(file)) {
-                contenutoComplessivo.append("Testo ").append(i + 1).append("\n");
                 while (scanner.hasNextLine()) {
                     contenutoComplessivo.append(scanner.nextLine()).append("\n");
                 }
-                contenutoComplessivo.append("\n").append("\n");
             } catch (FileNotFoundException e) {
-                System.err.println(" File non trovato: " + file.getAbsolutePath());
+                System.err.println("⚠️ File non trovato: " + file.getAbsolutePath());
             }
+
+            contenutoComplessivo.append("\n\n");
         }
 
         return contenutoComplessivo.toString();
     }
 
     @Override
-    public boolean saveFile(File destFile,File selectedFile) {
-         try {
+    public boolean saveFile(File destFile, File selectedFile) {
+        try {
             Files.copy(selectedFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             return false;
         }
-         return true;
+        return true;
     }
 }
