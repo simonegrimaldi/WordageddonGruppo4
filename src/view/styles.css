@@ -59,11 +59,21 @@
     -fx-background-radius: 4px;
     -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 3, 0.5, 0, 1);
+    
+    /* Riserva spazio per il bordo per evitare spostamenti */
+    -fx-border-color: transparent;
+    -fx-border-width: 2;
+    -fx-border-radius: 4px;
 }
 
 .buttonClass:hover {
-    -fx-background-color: #3367d6;
+    -fx-background-color: white;
+    -fx-text-fill: #4285f4;
+    -fx-border-color: #4285f4;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0.2, 0, 0);
+
 }
+
 
 /* Contenitore dei pulsanti */
 .buttonContainer {
