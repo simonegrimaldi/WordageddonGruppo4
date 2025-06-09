@@ -30,13 +30,15 @@
                 <HBox alignment="CENTER" prefHeight="128.0" prefWidth="700.0" styleClass="buttonContainer">
                     <children>
                         <Button fx:id="profileButton" mnemonicParsing="false" onAction="#profileButtonClick" prefHeight="50.0" prefWidth="100.0" styleClass="profileButton" text="Profile">
-                     <font>
-                        <Font size="18.0" />
-                     </font></Button>
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Button>
                         <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonClick" prefHeight="50.0" prefWidth="100.0" styleClass="playButton" text="Play">
-                     <font>
-                        <Font size="18.0" />
-                     </font></Button>
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Button>
                     </children>
                     <VBox.margin>
                         <Insets />
@@ -45,9 +47,9 @@
                 <!-- Contenitore play (nascosto di default) -->
                 <VBox fx:id="playContainer" alignment="TOP_CENTER" managed="false" prefHeight="406.0" prefWidth="698.0" snapToPixel="false" visible="false">
                     <children>
-                        <HBox alignment="CENTER" prefHeight="132.0" prefWidth="698.0" styleClass="buttonContainer">
+                        <HBox alignment="CENTER" prefHeight="186.0" prefWidth="700.0" spacing="40.0">
                             <children>
-                                <SplitMenuButton fx:id="difficultyChooser" mnemonicParsing="false" styleClass="difficutChooser" text="Difficulty">
+                                <SplitMenuButton fx:id="difficultyChooser" mnemonicParsing="false" text="Difficulty">
                                     <font>
                                         <Font name="System Bold" size="13.0" />
                                     </font>
@@ -57,10 +59,13 @@
                         </HBox>
                         <VBox alignment="TOP_CENTER" prefHeight="285.0" prefWidth="700.0" spacing="10.0">
                             <children>
-                                <Label fx:id="labelRules" alignment="TOP_CENTER" lineSpacing="5.0" prefHeight="263.0" prefWidth="341.0" styleClass="statisticsClass" text="Game rules :" textAlignment="CENTER" wrapText="true">
+                                <Label fx:id="labelRules" alignment="TOP_CENTER" lineSpacing="5.0" prefHeight="212.0" prefWidth="540.0" styleClass="statisticsClass" text="Game rules :" textAlignment="CENTER" wrapText="true">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
                                 </Label>
                             </children>
                         </VBox>                
@@ -68,9 +73,9 @@
                 </VBox>
                 
                 <!-- Contenitore profilo (nascosto di default) -->
-                <VBox fx:id="profileContainer" alignment="TOP_CENTER" managed="false" prefHeight="434.0" prefWidth="700.0" snapToPixel="false" visible="false">
+                <VBox fx:id="profileContainer" alignment="TOP_CENTER" fillWidth="false" managed="false" prefHeight="400.0" prefWidth="700.0" snapToPixel="false" visible="false">
                     <children>
-                        <HBox alignment="TOP_CENTER" prefHeight="421.0" prefWidth="700.0" spacing="40.0">
+                        <HBox alignment="TOP_CENTER" prefHeight="394.0" prefWidth="700.0" spacing="40.0">
                             <children>
                                 <VBox alignment="TOP_CENTER" prefHeight="195.0" prefWidth="269.0">
                                     <children>
@@ -91,18 +96,18 @@
                                         </TableView>
                                     </children>
                                 </VBox>
-                              <VBox alignment="TOP_CENTER" prefHeight="390.0" prefWidth="310.0" spacing="10.0">
-                                  <children>
-                                      <Label fx:id="statisticsLabel" alignment="TOP_CENTER" lineSpacing="5.0" prefHeight="367.0" prefWidth="289.0" styleClass="statisticsClass" text="Your statistics :" textAlignment="CENTER" wrapText="true">
-                                          <font>
-                                              <Font name="System Bold" size="14.0" />
-                                          </font>
-                                 <VBox.margin>
-                                    <Insets top="30.0" />
-                                 </VBox.margin>
-                                      </Label>
-                                  </children>
-                              </VBox>
+                                <VBox alignment="TOP_CENTER" prefHeight="390.0" prefWidth="310.0" spacing="10.0">
+                                    <children>
+                                        <Label fx:id="statisticsLabel" alignment="TOP_CENTER" lineSpacing="5.0" prefHeight="367.0" prefWidth="289.0" styleClass="statisticsClass" text="Your statistics :" textAlignment="CENTER" wrapText="true">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets top="30.0" />
+                                            </VBox.margin>
+                                        </Label>
+                                    </children>
+                                </VBox>
                             </children>
                         </HBox>
                     </children>
@@ -113,6 +118,6 @@
         </VBox>
     
         <!-- 🔹 Bottone Logout flottante in alto a destra -->
-        <Button fx:id="logoutButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#logoutButtonClick" styleClass="logoutButton" text="Logout" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0" />
+        <Button fx:id="logoutButton" alignment="CENTER" mnemonicParsing="false" onAction="#logoutButtonClick" prefHeight="40.0" prefWidth="80.0" styleClass="logoutButton" text="LOGOUT" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
     </children>
 </AnchorPane>
