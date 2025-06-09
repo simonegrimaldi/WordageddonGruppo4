@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
+import model.Analysis;
 import util.AlertManager;
 
 /**
@@ -81,7 +82,7 @@ public class AdminPanelController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleziona una file .txt");
 
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Text files (.txt)", ".txt");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().add(extFilter);
         File selected = fileChooser.showOpenDialog(openFileChooser.getScene().getWindow());
 
@@ -118,8 +119,10 @@ public class AdminPanelController implements Initializable {
 
         Set<String> stopwords = new HashSet<>();
         stopwords=createStopWordsSet(stopwords);
-        
-        String difficulty=difficultyChooser(stopwords);
+        Analysis a = new Analysis();
+        a.analyzeText(selectedFile, stopwords);
+        String difficulty=a.difficulty();
+        // salvataggio in base a difficoltà:
         if(difficulty==null)
             return;
         

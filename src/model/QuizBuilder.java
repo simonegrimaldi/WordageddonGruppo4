@@ -27,15 +27,11 @@ public class QuizBuilder {
         List<String> testi = textReader.cercaTesti(difficolta);
         List<Analysis> analisiList = new ArrayList<>();
 
-        try {
-            for (String nomeTesto : testi) {
-                Analysis a = analysisReader.leggiAnalisi(nomeTesto);
-                if (a != null) {
-                    analisiList.add(a);
-                }
+        for (String nomeTesto : testi) {
+            Analysis a = analysisReader.loadAnalysis(nomeTesto);
+            if (a != null) {
+                analisiList.add(a);
             }
-        } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Errore lettura analisi: " + e.getMessage());
         }
 
         List<Question> domande = generatore.genera(analisiList);

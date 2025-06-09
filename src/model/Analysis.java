@@ -5,24 +5,45 @@
  */
 package model;
 
+import static java.awt.SystemColor.text;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeSet;
+import util.AlertManager;
 
 /**
- *  
+ *
  * @class Analysis
  * @brief Classe che rappresenta un'analisi di frequenza di parole.
  *
- * Questa classe memorizza una mappa di parole e la loro frequenza di occorrenza.
+ * Questa classe memorizza una mappa di parole e la loro frequenza di
+ * occorrenza.
  */
 public class Analysis implements Serializable {
+
     /**
      * @brief Mappa che associa parole (chiavi) a frequenze (valori).
      */
     HashMap<String, Integer> analysis;
+        
+    
+    private AlertManager alertManager = new AlertManager();
+
 
     /**
      * @brief Costruttore di default.
@@ -50,22 +71,22 @@ public class Analysis implements Serializable {
     public Integer frequency(String k) {
         return analysis.getOrDefault(k, 0);
     }
+
     /**
- * @brief Restituisce la parola con la frequenza più alta.
- * @return La parola più frequente, oppure null se la mappa è vuota.
- */
-public String mostFrequent() {
-    return analysis.entrySet().stream()
-            .max(java.util.Map.Entry.comparingByValue())
-            .map(java.util.Map.Entry::getKey)
-            .orElse(null);
-}
+     * @brief Restituisce la parola con la frequenza più alta.
+     * @return La parola più frequente, oppure null se la mappa è vuota.
+     */
+    public String mostFrequent() {
+        return analysis.entrySet().stream()
+                .max(java.util.Map.Entry.comparingByValue())
+                .map(java.util.Map.Entry::getKey)
+                .orElse(null);
+    }
 
     /**
      * @brief Restituisce una parola scelta casualmente dalla mappa.
      * @return Una parola casuale, oppure null se la mappa è vuota.
      */
-    
     public String getRandom() {
         if (analysis.isEmpty()) {
             return null;
@@ -76,28 +97,29 @@ public String mostFrequent() {
 
         return keys.stream().skip(randomIndex).findFirst().orElse(null);
     }
+
     public void mergeWith(Analysis other) {
         for (String word : other.analysis.keySet()) {
-        int totalFreq = this.frequency(word) + other.frequency(word);
-        this.put(word, totalFreq);
+            int totalFreq = this.frequency(word) + other.frequency(word);
+            this.put(word, totalFreq);
         }
     }
-    /**
- * @brief Restituisce l'insieme delle parole analizzate.
- * @return Un Set contenente tutte le parole presenti nell'analisi.
- */
-public Set<String> keySet() {
-    return analysis.keySet();
-}
 
+    /**
+     * @brief Restituisce l'insieme delle parole analizzate.
+     * @return Un Set contenente tutte le parole presenti nell'analisi.
+     */
+    public Set<String> keySet() {
+        return analysis.keySet();
+    }
 
     public int size() {
         return analysis.size();
     }
-    
-    public String difficulty (){
+
+    public String difficulty() {
         int wordCounter = size();
-    String difficulty = null;
+        String difficulty = null;
         if (wordCounter <= 250) {
             difficulty = "facile";
         } else if (wordCounter > 250 && wordCounter <= 750) {
@@ -107,29 +129,67 @@ public Set<String> keySet() {
         }
         return difficulty;
     }
-    
+
     /**
- * @brief Analizza un testo e popola la mappa con la frequenza delle parole, escludendo le stopwords.
- * 
- * @param text Il testo da analizzare.
- * @param stopwords Lista di parole da ignorare durante l'analisi (es. articoli, congiunzioni, punteggiatura).
- */
-    
+     * @brief Analizza un testo e popola la mappa con la frequenza delle parole,
+     * escludendo le stopwords.
+     *
+     * @param text Il testo da analizzare.
+     * @param stopwords Lista di parole da ignorare durante l'analisi (es.
+     * articoli, congiunzioni, punteggiatura).
+     */
+    public boolean analyzeText(File file, Set<String> stopwords) {
 
-public void analyzeText(String text, Set<String> stopwords) {
-    if (text == null || text.isEmpty()) {
-        return;
-    }
+        /*String word = null;
 
-    String[] words = text.toLowerCase().split("\\W+"); // Divide il testo usando caratteri non alfanumerici
+        try (Scanner s = new Scanner(new BufferedReader(new FileReader(filename)))) {
+            s.useDelimiter("[ \\n]+");
+            s.useLocale(Locale.US);
+            while (s.hasNext()) {
+                word = s.next();
+                if (!stopwords.contains(word.toLowerCase())) {
+                    analysis.merge(word.toLowerCase(), 1, Integer::sum);
+                }
+            }
 
-    for (String word : words) {
-        if (!word.isEmpty() && !stopwords.contains(word)) {
-            analysis.merge(word, 1, Integer::sum);
+        } catch (IOException ex) {
+            System.out.println("Errore nell'analisi del file");
+        }*/
+        
+        
+        List<String> lines = null;
+        try {
+            lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
+        } catch (IOException ex) {
+            alertManager.showAlert("ERRORE LETTURA FILE", "Impossibile leggere il file selezionato");
+            return false;
         }
+
+        for (String line : lines) {
+            String[] words = line.split("\\W+");
+            for (String word : words) {
+                if (!stopwords.contains(word.toLowerCase())) {
+                    analysis.merge(word.toLowerCase(), 1, Integer::sum);
+                }
+            }
+        }
+        return true;
+    }
+    public void saveAnalysis (Analysis a,String filename) {
+    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
+        oos.writeObject(a);
+        
+    } catch (IOException e) {
+        e.printStackTrace();
     }
 }
+    public Analysis loadAnalysis (String filename){
+        try ( ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+            return (Analysis) ois.readObject();
+        } catch (ClassNotFoundException | IOException ex){
+                ex.printStackTrace();
+                }
+       return null; 
+    }
 
-
-    
 }
