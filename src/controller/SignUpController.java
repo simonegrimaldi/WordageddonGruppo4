@@ -6,6 +6,7 @@ package controller;
 
 import util.AlertManager;
 import dao.implementation.DaoUserImpl;
+import dao.interfaces.DaoUser;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -29,21 +30,23 @@ public class SignUpController implements Initializable {
     private Button backButton;
     @FXML
     private Button SignUpButton;
-    private DaoUserImpl dao;
+    
+    private ChangeView controller;
+    private AlertManager alert;
+    private DaoUser daoUser;
+    
     /**
      * Initializes the controller class.
      */
-    ChangeView controller;
-    AlertManager alert;
       
-    public void setChangeViewController(ChangeView controller) {
+    public void setChangeViewController(ChangeView controller,DaoUser daoUser) {
+        this.daoUser = daoUser;
         this.controller = controller;
     }
 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        dao=new DaoUserImpl();
         alert=new AlertManager();
     }    
 
@@ -57,12 +60,12 @@ public class SignUpController implements Initializable {
         String username=usernameField.getText();
         String password=passwordField.getText();
         if(username.isEmpty() || password.isEmpty()){
-            alert.showAlert("Errore", "Tutti i campi sono obbligatori");
+            alert.showAlert("Errore", "Tutti i campi sono obbligatori","ERROR");
         }else{
-        if(dao.registration(username, password)){
+        if(daoUser.registration(username, password)){
             controller.goHome(username);
         }else{
-            alert.showAlert("Errore", "L'username già esiste");
+            alert.showAlert("Errore", "L'username già esiste","ERROR");
         }
         }
     }

@@ -24,12 +24,12 @@ public class RelativeFrequencyQuestion extends Question<String> {
      *
      * @param analyses Lista di oggetti Analysis da combinare.
      */
-    public RelativeFrequencyQuestion(List<Analysis> analyses) {
+    public RelativeFrequencyQuestion(List<AnalysisImpl> analyses) {
         this.question = "Quale tra le seguenti parole è la più frequente in tutti i documenti?";
-        Analysis total = new Analysis();
+        AnalysisImpl total = new AnalysisImpl();
 
         // Merge di tutte le analisi
-        for (Analysis a : analyses) {
+        for (AnalysisImpl a : analyses) {
             total.mergeWith(a);
         }
 

@@ -11,5 +11,5 @@ import java.util.List;
  * @author corry
  */
 public interface GeneratoreDomande {
-    List<Question> genera(List<Analysis> analisi);
+    List<Question> genera(List<AnalysisImpl> analisi);
 }

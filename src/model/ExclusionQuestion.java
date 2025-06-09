@@ -19,17 +19,17 @@ import java.util.Set;
 public class ExclusionQuestion extends Question<String>{
    
 
-    public ExclusionQuestion(List<Analysis> analisiQuesti, List<Analysis> analisiAltri) {
+    public ExclusionQuestion(List<AnalysisImpl> analisiQuesti, List<AnalysisImpl> analisiAltri) {
         this.question = "Quale di queste parole non compare mai in NESSUN documento proposto?";
         //  Merge degli inclusi
-        Analysis inclusi = new Analysis();
-        for (Analysis a : analisiQuesti) {
+        AnalysisImpl inclusi = new AnalysisImpl();
+        for (AnalysisImpl a : analisiQuesti) {
             inclusi.mergeWith(a);
         }
 
         // Merge degli esclusi
-        Analysis esclusi = new Analysis();
-        for (Analysis a : analisiAltri) {
+        AnalysisImpl esclusi = new AnalysisImpl();
+        for (AnalysisImpl a : analisiAltri) {
             esclusi.mergeWith(a);
         }
 

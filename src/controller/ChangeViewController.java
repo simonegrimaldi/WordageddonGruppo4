@@ -1,7 +1,8 @@
 package controller;
 
-import IOOperation.IOFileClass;
+import IOOperation.IOFileImpl;
 import dao.implementation.DaoGameImpl;
+import dao.implementation.DaoUserImpl;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
@@ -165,22 +166,22 @@ public class ChangeViewController implements ChangeView {
 
             case "LogIn":
                 LogInController loginController = loader.getController();
-                loginController.setChangeViewController(this);
+                loginController.setChangeViewController(this,new DaoUserImpl());
                 break;
 
             case "SignUp":
                 SignUpController signUpController = loader.getController();
-                signUpController.setChangeViewController(this);
+                signUpController.setChangeViewController(this, new DaoUserImpl());
                 break;
 
             case "AdminPanel":
                 AdminPanelController adminPanelController = loader.getController();
-                adminPanelController.setChangeViewController(this, username);
+                adminPanelController.setChangeViewController(this, username, new IOFileImpl());
                 break;
 
             case "Reading":
                 ReadingController readingController = loader.getController();
-                readingController.setChangeViewController(this,username,difficulty,new IOFileClass());
+                readingController.setChangeViewController(this,username,difficulty,new IOFileImpl());
                 //readingController.setIOFile(new IOFileClass());
                 break;
 

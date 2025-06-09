@@ -10,7 +10,7 @@ import java.util.List;
 public class GeneratoreStandard implements GeneratoreDomande {
 
     @Override
-    public List<Question> genera(List<Analysis> analisi) {
+    public List<Question> genera(List<AnalysisImpl> analisi) {
         List<Question> domande = new ArrayList<>();
 
         // Aggiunge una domanda di frequenza per il primo testo (se presente)
@@ -26,7 +26,7 @@ public class GeneratoreStandard implements GeneratoreDomande {
         // Aggiunge una domanda di esclusione se ci sono almeno 3 testi
         if (analisi.size() >= 3) {
            // List<Analysis> inclusi = List.of(analisi.get(0));
-            List<Analysis> esclusi = analisi.subList(1, analisi.size());
+            List<AnalysisImpl> esclusi = analisi.subList(1, analisi.size());
             //domande.add(new ExclusionQuestion(inclusi, esclusi));
         }
 

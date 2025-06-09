@@ -15,7 +15,7 @@ public class FrequencyQuestion extends Question<Integer> {
      * Costruisce una domanda di frequenza basata su un'analisi.
      * @param analysis L'analisi da cui estrarre la parola e la frequenza.
      */
-    public FrequencyQuestion(Analysis analysis) {
+    public FrequencyQuestion(AnalysisImpl analysis) {
         String p = analysis.getRandom();
 
         this.question = "Quante volte compare la parola \"" + p + "\"?";

@@ -22,13 +22,13 @@ public class DocumentQuestion extends Question<String>{
 n-esimo documento?*/
     
     
-    public DocumentQuestion(List<Analysis> analyses) {
+    public DocumentQuestion(List<AnalysisImpl> analyses) {
     if (analyses == null || analyses.size() < 1) {
         throw new IllegalArgumentException("La lista di analisi è vuota.");
     }
 
     int numero = new Random().nextInt(analyses.size());  // documento scelto casualmente
-    Analysis selected = analyses.get(numero);            // analisi del documento selezionato
+    AnalysisImpl selected = analyses.get(numero);            // analisi del documento selezionato
 
     this.question = "Qual è la parola più frequente nel documento numero " + (numero + 1);
 

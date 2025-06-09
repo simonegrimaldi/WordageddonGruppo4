@@ -4,6 +4,7 @@
  */
 package model;
 
+import IOOperation.IOAnalysis;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +26,10 @@ public class QuizBuilder {
 
     public Quiz creaQuiz(String difficolta, GeneratoreDomande generatore) {
         List<String> testi = textReader.cercaTesti(difficolta);
-        List<Analysis> analisiList = new ArrayList<>();
+        List<AnalysisImpl> analisiList = new ArrayList<>();
 
         for (String nomeTesto : testi) {
-            Analysis a = analysisReader.loadAnalysis(nomeTesto);
+            AnalysisImpl a =  analysisReader.loadAnalysis(nomeTesto);
             if (a != null) {
                 analisiList.add(a);
             }

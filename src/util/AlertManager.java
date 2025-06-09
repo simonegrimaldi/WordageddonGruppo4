@@ -12,12 +12,13 @@ import javafx.scene.control.Alert;
  * @author User
  */
 public class AlertManager {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    
-    public void showAlert(String title, String message) {
-    alert.setTitle(title);  // Imposta il titolo dell'alert
-    alert.setHeaderText(null);  // Non vogliamo un'intestazione
-    alert.setContentText(message);  // Imposta il messaggio dell'alert
-    alert.showAndWait();  // Mostra l'alert e aspetta che l'utente lo chiuda
-}
+
+    public void showAlert(String title, String message, String type) {
+        Alert alert = new Alert(Alert.AlertType.valueOf(title));
+
+        alert.setTitle(title);  
+        alert.setHeaderText(null);  
+        alert.setContentText(message);  
+        alert.showAndWait();  
+    }
 }

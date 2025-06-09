@@ -148,7 +148,7 @@ public class HomeController implements Initializable {
         
         switch (selectedDifficulty.toLowerCase()) {
             case "difficulty":
-                alertManager.showAlert("ERRORE", "Scegliere un livello di difficoltà!");
+                alertManager.showAlert("ERRORE", "Scegliere un livello di difficoltà!","ERROR");
                 break;
             default:
                 controller.goReading(selectedDifficulty);

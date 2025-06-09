@@ -1,5 +1,7 @@
 package IOOperation;
 
+import java.io.File;
+
 /**
  * @interface IOFile
  *
@@ -18,6 +20,6 @@ public interface IOFile {
      */
     public String loadFile(String filename);
     
-    public boolean saveFile(String difficulty);
+    public boolean saveFile(File destFile,File selectedFile);
 
 }
