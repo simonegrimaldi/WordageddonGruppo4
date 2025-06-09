@@ -261,7 +261,7 @@
 }
 
 /* Checkbox stile risposta */
-.checkBox, .checkBoxA {
+.checkBox {
     -fx-font-size: 14px;
     -fx-text-fill: #444;
     -fx-padding: 10px;
@@ -272,7 +272,7 @@
     -fx-cursor: hand;
 }
 
-.checkBox:hover, .checkBoxA:hover {
+.checkBox:hover {
     -fx-background-color: #e0e0e0;
 }
 

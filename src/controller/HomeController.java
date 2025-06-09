@@ -30,7 +30,7 @@ import util.AlertManager;
  * @author simonegrimaldi
  */
 public class HomeController implements Initializable {
-
+    
     @FXML
     private Button logoutButton;
     @FXML
@@ -59,18 +59,35 @@ public class HomeController implements Initializable {
     private TableColumn<String[], String> pointsColumn;
     @FXML
     private Label statisticsLabel;
-
+    
     private String username;
     private ChangeView controller;
     private DaoGame daoGame;
     private AlertManager alertManager = new AlertManager();
     private ObservableList<String[]> rankingObs = FXCollections.observableArrayList();
-
+    
     public void setChangeViewController(ChangeView controller, String username, DaoGame daoGame) throws Exception {
         this.controller = controller;
         this.daoGame = daoGame;
         this.username = username;
         title.textProperty().setValue("Hello " + username + " !");
+        labelRules.setText(
+                " Welcome to Wordageddon!"
+                + "The game that trains your mind through reading and memory!\n"
+                + "Your goal is to read one or more texts and remember as much information as possible"
+                + "in the shortest time. The chosen difficulty level determines the amount of text"
+                + "and the time available:\n"
+                + "Easy:\n"
+                + "- 1 short text (≤ 250 words)\n"
+                + "- Reading time: 4 minutes\n"
+                + "Medium:\n"
+                + "- medium-length texts (250–750 words each)\n"
+                + "- Reading time: 6 minutes\n"
+                + "Hard:\n"
+                + "- long texts (750–1000 words each)\n"
+                + "- Reading time: 9 minutes\n"
+                + "Get ready to challenge your memory!"
+        );
         setRankingTable();
         setStatistics();
     }
@@ -83,9 +100,9 @@ public class HomeController implements Initializable {
     ) {
         profileContainer.managedProperty().bind(profileContainer.visibleProperty());
         playContainer.managedProperty().bind(playContainer.visibleProperty());
-
+        
         rankingTable.setSelectionModel(null);
-
+        
         MenuItem easy = new MenuItem("Facile");
         MenuItem medium = new MenuItem("Media");
         MenuItem hard = new MenuItem("Difficile");
@@ -94,13 +111,13 @@ public class HomeController implements Initializable {
         hard.setOnAction(e -> difficultyChooser.setText("Difficile"));
         difficultyChooser.getItems().addAll(easy, medium, hard);
     }
-
+    
     @FXML
     private void logoutButtonClick(ActionEvent event
     ) {
         controller.goLogIn();
     }
-
+    
     @FXML
     private void profileButtonClick(ActionEvent event
     ) {
@@ -111,7 +128,7 @@ public class HomeController implements Initializable {
             profileContainer.setVisible(false);
         }
     }
-
+    
     @FXML
     private void playButtonClick(ActionEvent event
     ) {
@@ -122,12 +139,12 @@ public class HomeController implements Initializable {
             playContainer.setVisible(false);
         }
     }
-
+    
     @FXML
     private void startGameClick(ActionEvent event
     ) {
         String selectedDifficulty = difficultyChooser.getText();
-
+        
         switch (selectedDifficulty.toLowerCase()) {
             case "difficulty":
                 alertManager.showAlert("ERRORE", "Scegliere un livello di difficoltà!");
@@ -137,7 +154,7 @@ public class HomeController implements Initializable {
                 return;
         }
     }
-
+    
     private void setRankingTable() throws Exception {
         HashMap<String, Integer> topThree = daoGame.getTopThree();
         int position = 1;
@@ -148,22 +165,20 @@ public class HomeController implements Initializable {
                 rankingObs.add(new String[]{String.valueOf(position), usr, String.valueOf(pt)});
             }
             position++;
-
+            
         }
-
+        
         positionColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[0]));
         usernameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[1]));
         pointsColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[2]));
-
         rankingTable.setItems(rankingObs);
     }
-
+    
     public void setStatistics() throws Exception {
         int numGame = daoGame.getNumberGame(username);
         int pointsLastGame = daoGame.getLastMatch(username);
         double averageGame = daoGame.getAverageMatch(username);
         Integer bestScore = daoGame.getBestPointsPoints(username);
-        
         
         StringBuilder sb = new StringBuilder();
         sb.append("Your Score\n");
@@ -178,13 +193,13 @@ public class HomeController implements Initializable {
         } else {
             sb.append(String.format("Average Points : %.2f%%\n", averageGame));
         }
-
+        
         if (pointsLastGame == -1) {
             sb.append("Last Game Played : -\n");
         } else {
             sb.append("Last Game Played : ").append(pointsLastGame).append("/100\n");
         }
-
+        
         statisticsLabel.setText(sb.toString());
     }
 }

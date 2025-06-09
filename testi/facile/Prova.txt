@@ -1,0 +1,6 @@
+Username = Prova
+
+Simone,Visconti,0987654321,null,null,s.visconti@studenti.unisa.it,null,null,membro
+Vincenzo,Nazzaro,1234512345,null,null,v.nazzaro@stuidenti.unisa.it,null,null,membro
+Pasquale,Rodia,6789067890,null,null,p.rodia@studenti.unisa.it,null,null,membro
+Anthony,Vita12,1234567890,null,null,a.vita@studenti.unisa.it,null,null,Portavoce
