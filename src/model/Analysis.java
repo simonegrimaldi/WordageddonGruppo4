@@ -95,6 +95,19 @@ public Set<String> keySet() {
         return analysis.size();
     }
     
+    public String difficulty (){
+        int wordCounter = size();
+    String difficulty = null;
+        if (wordCounter <= 250) {
+            difficulty = "facile";
+        } else if (wordCounter > 250 && wordCounter <= 750) {
+            difficulty = "medio";
+        } else {
+            difficulty = "difficile";
+        }
+        return difficulty;
+    }
+    
     /**
  * @brief Analizza un testo e popola la mappa con la frequenza delle parole, escludendo le stopwords.
  * 
