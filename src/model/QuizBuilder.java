@@ -6,10 +6,8 @@ package model;
 
 import IOOperation.IOTexts;
 import IOOperation.IOAnalysis;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 /**
  *
@@ -35,9 +33,9 @@ public class QuizBuilder {
 
         for (String nomeTesto : testi) {
             String pathAnalisi = nomeTesto.replace(".txt", "Analysis.bin");
-            AnalysisImpl a = analysisReader.loadAnalysis(pathAnalisi);
+            Analysis a = analysisReader.loadAnalysis(pathAnalisi);
             if (a != null) {
-                analisiList.add(a);
+                analisiList.add((AnalysisImpl) a);
             }
         }
 

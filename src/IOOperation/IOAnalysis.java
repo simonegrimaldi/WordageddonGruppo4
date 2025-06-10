@@ -1,10 +1,11 @@
 package IOOperation;
 
-import model.AnalysisImpl;
+import model.Analysis;
+
 
 public interface IOAnalysis {
 
-    AnalysisImpl loadAnalysis(String filename);
+    Analysis loadAnalysis(String filename);
 
-    void saveAnalysis(AnalysisImpl a, String filename);
+    void saveAnalysis(Analysis a, String filename);
 }

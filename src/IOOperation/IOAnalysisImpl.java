@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import model.Analysis;
 import model.AnalysisImpl;
 
 /**
@@ -16,7 +17,7 @@ import model.AnalysisImpl;
  * @author simonegrimaldi
  */
 public class IOAnalysisImpl implements IOAnalysis{
-    public void saveAnalysis (AnalysisImpl a,String filename) {
+    public void saveAnalysis (Analysis a,String filename) {
     try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
         oos.writeObject(a);
         

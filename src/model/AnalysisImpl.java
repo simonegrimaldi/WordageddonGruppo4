@@ -32,7 +32,7 @@ import util.AlertManager;
  *
  *
  */
-public class AnalysisImpl implements Serializable {
+public class AnalysisImpl implements Serializable,Analysis {
 
     /**
      * @brief Mappa che associa parole (chiavi) a frequenze (valori).
@@ -42,8 +42,7 @@ public class AnalysisImpl implements Serializable {
      *
      */
     private HashMap<String, Integer> analysis;
-    private int wordCounter = 0;
-
+    private transient int wordCounter = 0;
     private transient AlertManager alertManager = new AlertManager();
 
     /**

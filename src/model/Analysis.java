@@ -29,10 +29,5 @@ public interface Analysis {
 
     public String difficulty();
 
-    public boolean analyzeText(File file, Set<String> stopwords);
-
-    public void saveAnalysis(AnalysisImpl a, String filename);
-
-    public AnalysisImpl loadAnalysis(String filename);
-
+    public int analyzeText(File file, Set<String> stopwords);
 }

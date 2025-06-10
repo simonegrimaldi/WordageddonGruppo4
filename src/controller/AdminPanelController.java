@@ -15,7 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
-import model.AnalysisImpl;
+import model.Analysis;
 import util.AlertManager;
 
 /**
@@ -58,8 +58,8 @@ public class AdminPanelController implements Initializable {
     private ChangeView controller;
     private AlertManager alertManager;
     private IOFile ioFile;
-    private AnalysisImpl analysis = new AnalysisImpl();
-    private IOAnalysisImpl ioa = new IOAnalysisImpl();
+    private Analysis analysis;
+    private IOAnalysis ioa;
 
     /**
      * Imposta il controller di navigazione, l'username dell'admin (utile per
@@ -70,15 +70,18 @@ public class AdminPanelController implements Initializable {
      * @param controller
      * @param superUsername
      * @param ioFile
+     * @param analysis
+     * @param ioa
      */
-    public void setChangeViewController(ChangeView controller, String superUsername, IOFile ioFile) {
+    public void setChangeViewController(ChangeView controller, String superUsername, IOFile ioFile, Analysis analysis, IOAnalysis ioa) {
         this.controller = controller;
         this.superUsername = superUsername;
         if (this.superUsername != null) {
             titleLabel.setText("Hello " + this.superUsername + " :)");
         }
-
         this.ioFile = ioFile;
+        this.analysis = analysis;
+        this.ioa = ioa;
     }
 
     /**
@@ -204,7 +207,7 @@ public class AdminPanelController implements Initializable {
 
         Set<String> stopwords = new HashSet<>();
         stopwords = createStopWordsSet(stopwords);
-        int wordCount = analysis.analyzeText(this.selectedFile, stopwords); // Questa riga fa tutto
+        int wordCount = analysis.analyzeText(selectedFile, stopwords); // Questa riga fa tutto
         String difficulty = analysis.difficulty();
 
         if (difficulty == null) {

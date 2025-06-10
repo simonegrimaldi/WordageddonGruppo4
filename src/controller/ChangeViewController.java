@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import IOOperation.IOTextsImpl;
+import model.AnalysisImpl;
 import model.Quiz;
 import model.QuizBuilder;
 
@@ -188,7 +189,7 @@ public class ChangeViewController implements ChangeView {
 
             case "AdminPanel":
                 AdminPanelController adminPanelController = loader.getController();
-                adminPanelController.setChangeViewController(this, username, new IOFileImpl());
+                adminPanelController.setChangeViewController(this, username, new IOFileImpl(), new AnalysisImpl(),new IOAnalysisImpl());
                 break;
 
             case "Reading":
