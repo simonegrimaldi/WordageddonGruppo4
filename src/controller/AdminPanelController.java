@@ -105,7 +105,19 @@ public class AdminPanelController implements Initializable {
     }
 
     /**
-     * Apre un file Chooser
+     * @brief Apre un file Chooser che consente all'Admin di selezionare un file
+     * in formato '.txt'.
+     *
+     * Nel momento in cui il file selezionato è in un formato valido, allora: -
+     * Il button con il simbolo '+' viene nascoto - Appare il nome del file che
+     * è stato selezionato
+     *
+     * Nel caso in cui il File non sia in formato '.txt' non sarà proprio
+     * possibile selezionarlo.
+     *
+     * Infine, viene salvato un "riferimento" al file scelto dall'amministratore
+     * che sarà utile in seguito per le operazioni di analisi e salvataggio del
+     * file
      *
      * @param event
      */
@@ -130,6 +142,20 @@ public class AdminPanelController implements Initializable {
         }
     }
 
+    /**
+     * @brief Annulla l'operazione corrente di selezione del file e inserimento
+     * delle stopwords.
+     *
+     * In particolare: - viene rimosso il riferimeno al selectedFile - pulisce
+     * la textArea dalle stopwords - il chooseFile viene reimpostato con il
+     * messaggio iniziale - il pulsante '+' per aprire il fileChooser viene reso
+     * di nuovo visibile
+     *
+     * Questo button risulta molto utile nel momento in cui l'Admin decide di
+     * annullare l'operazione corrente e di ricominciare da capo
+     *
+     * @param evento
+     */
     @FXML
     private void undoButtonClick(ActionEvent event) {
         this.selectedFile = null;
@@ -138,6 +164,37 @@ public class AdminPanelController implements Initializable {
         openFileChooser.setVisible(true);
     }
 
+    /**
+     * @brief Gestisce il click sul bottone di conferma per salvare il file e la
+     * sua analisi.
+     *
+     * In particolar modo possiamo dire che questo metodo esegue i seguenti
+     * passi: 1) Verifica se è stato effettivamente selezionato un file, se coì
+     * non fosse viene mostrato un messaggio di alert che invita l'Admin a
+     * selezionare un file prima di fare click sul bottone di conferma 2) Crea
+     * un lista di stopwords, che saranno utili per analizzare il testo 3)
+     * Determina la difficoltà del testo che è stato selezionato tramite i
+     * metodi della classe {
+     * @class Analysis}; la difficoltà viene selezionata in base al numero di
+     * parole significative contenute nel file selezionato. NB: per parole
+     * significative si intendono tutte le parole del file escluse eventuali
+     * stopwords 4) Salva il file nella cartella appropriata (corrispondente
+     * alla difficoltà del file) 5) Se il file è stato salvato con successo
+     * allora verrà mostrato un messaggio di conferma; nel caso in cui il
+     * salvataggio fallisca verrà mostrato un messaggio di errore 6) L'analisi
+     * del testo selezionato viene salvata insieme al file corrispondete nella
+     * cartella corrispondente alla difficoltà 7) Infine ritorna alla schermata
+     * iniziale del pannello amministratore, dando all' Admin la possibilità di
+     * aggiungere nuovi file
+     *
+     * Nota: nel caso in cui l'Admin decida di inserire un testo che era già
+     * stato inserito in precedenza(o con lo stesso nome di un file già presente
+     * nella cartella testi) non verranno generati duplicati, ma bensì il file
+     * verrà sostituito
+     *
+     *
+     * @param event
+     */
     @FXML
     private void confirmButtonClick(ActionEvent event) {
         if (this.selectedFile == null) {
@@ -162,7 +219,7 @@ public class AdminPanelController implements Initializable {
         boolean flag = ioFile.saveFile(new File(destDir, selectedFile.getName()), selectedFile);
         if (flag) {
             alertManager.showAlert("File caricato con successo", "Il file \"" + selectedFile.getName() + "\" è stato salvato nella cartella: \"" + difficulty, "CONFIRMATION");
-            ioa.saveAnalysis(analysis, "testi/" + difficulty + "/" + this.selectedFile.getName().replace(".txt", "Analisys.bin"));
+            ioa.saveAnalysis(analysis, "testi/" + difficulty + "/" + this.selectedFile.getName().replace(".txt", "Analysis.bin"));
         } else {
             alertManager.showAlert("Errore salvataggio", "Impossibile copiare il file nella cartella " + difficulty, "ERROR");
         }
@@ -170,6 +227,22 @@ public class AdminPanelController implements Initializable {
         controller.goAdminPanel(this.superUsername);
     }
 
+    /**
+     * @brief Crea un set di stopwords che saranno utili per la scelta della
+     * difficoltà del testo e per la sua analisi.
+     *
+     * Legge il contenuto della textArea, separa le parole usando ',' come
+     * delimitatore, e aggiunge la parola al Set di stopwords, dopo averla
+     * ripulita da eventuali spazi inutili e resa tutta minuscola. Eventuali
+     * "parole vuote" verranno ignorate.
+     *
+     * La scelta di utilizzare un set ci da la possibilità di evitare stopwords
+     * duplicate e quindi eventuali errori durante la fase di analisi del testo.
+     *
+     *
+     * @param stopwords
+     * @return
+     */
     public Set<String> createStopWordsSet(Set<String> stopwords) {
 
         String text = textArea.getText().trim();

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package controller;
 
 import util.AlertManager;
@@ -16,9 +12,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 /**
- * FXML Controller class
- *
- * @author simonegrimaldi
+ * @class SignUpController
+ * 
+ * @brief Controller per la schermata di SignUp.
+ * Gestisce la registrazione di un utente che non è registrato.
+ * Include azione come la compilazione di tutti i campi e l'interazione con il
+ * database per controllare la correttazza dei dati inseriti e salvarli. 
  */
 public class SignUpController implements Initializable {
 
