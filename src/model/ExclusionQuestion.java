@@ -60,6 +60,11 @@ public class ExclusionQuestion extends Question<String>{
 
         
     }
+
+    @Override
+    public int valuta(String selectedAnswer) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
 
 

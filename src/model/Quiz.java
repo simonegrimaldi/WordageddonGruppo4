@@ -2,20 +2,26 @@ package model; //quiz
 
 import IOOperation.IOTextsImpl;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Rappresenta un quiz contenente una lista di testi e una lista di domande.
  */
 public class Quiz {
+
     private List<String> testi;
     private List<Question> domande;
+    private int points=0;
+    private static int id=0;
     private final String username;
     private IOTextsImpl text;
     
+
     public Quiz(List<String> testi, List<Question> domande, String username) {
         this.testi = testi;
         this.domande = domande;
         this.username = username;
+        this.id++;
     }
 
     public String getUsername() {
@@ -29,11 +35,24 @@ public class Quiz {
     public List<Question> getDomande() {
         return domande;
     }
+   
+
     
 
-    public void mostra() {
-        for (Question q : domande) {
-            System.out.println(q.getQuestionText());
+    public void setPoints(List<String> selectedAnswers) {
+        
+
+        for (int i = 0; i < domande.size(); i++) {
+            Question q = domande.get(i);
+            String selectedAnswer = selectedAnswers.get(i);
+
+            this.points += q.valuta(selectedAnswer);
         }
+
+        
+    }
+    public int getPoints(){
+        return this.points;
     }
 }
+

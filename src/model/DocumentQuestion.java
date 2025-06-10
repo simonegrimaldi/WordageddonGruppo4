@@ -49,5 +49,13 @@ n-esimo documento?*/
     
 }
 
+    @Override
+    public int valuta(String selectedAnswer) {
+        if(selectedAnswer==null){
+                return 0;
+        }
+        return answerQuestion(selectedAnswer) ? 10 : -3 ;
+    }
+
     
 }

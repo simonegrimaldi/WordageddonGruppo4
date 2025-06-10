@@ -199,7 +199,7 @@ public class ChangeViewController implements ChangeView {
 
             case "Question":
                 QuestionController questionController = loader.getController();
-                questionController.setChangeViewController(this, new DaoGameImpl(), quiz,username);
+                questionController.setChangeViewController(this, new DaoGameImpl(), quiz,username, difficulty);
                 break;
 
             default:

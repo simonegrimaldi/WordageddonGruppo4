@@ -46,6 +46,16 @@ public class FrequencyQuestion extends Question<Integer> {
         Collections.shuffle(options);
         return options;
     }
+
+    @Override
+    public int valuta(String s) {
+        if(s==null){
+                return 0;
+        }
+        Integer selectedAnswer = Integer.parseInt(s);
+        
+        return answerQuestion(selectedAnswer) ? 10 : -3 ;
+    }
     
     
 }

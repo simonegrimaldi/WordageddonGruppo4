@@ -61,5 +61,7 @@ public abstract class Question<T> {
     public boolean answerQuestion(T userAnswer) {
         return answer.equals(userAnswer);
     }
+    public abstract int valuta(String selectedAnswer);
+       
 
 }

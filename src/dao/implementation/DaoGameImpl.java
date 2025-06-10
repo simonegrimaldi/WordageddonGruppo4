@@ -11,6 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Game;
 import dao.interfaces.DaoGame;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.LinkedHashMap;
 
 /**
@@ -32,15 +35,16 @@ public class DaoGameImpl implements DaoGame {
      * associata
      */
     @Override
-    public void inserisci(Game g) throws Exception {
+    public void inserisci( String difficulty, int punteggio,String username) throws Exception {
         String sql = "INSERT INTO public.partita(\n"
-                + "id, difficolta, punteggio, utente)\n"
-                + "	VALUES (?, ?, ?, ?);";
+                + " difficolta, punteggio, utente,data)\n"
+                + "	VALUES ( ?, ?, ?,?);";
         try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setObject(1, g.getId());
-            ps.setObject(2, g.getDifficulty());
-            ps.setInt(3, g.getPoints());
-            ps.setString(4, g.getUsername());
+            ps.setObject(1,difficulty);
+            ps.setInt(2, punteggio);
+            ps.setString(3, username);
+            java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(System.currentTimeMillis());
+            ps.setTimestamp(4, currentTimestamp);
             ps.executeUpdate();
         }
     }
@@ -159,4 +163,5 @@ public class DaoGameImpl implements DaoGame {
         }
         return averageGame;
     }
+    
 }

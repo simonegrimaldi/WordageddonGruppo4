@@ -16,7 +16,7 @@ import model.Game;
  */
 public interface DaoGame {
 
-    public void inserisci(Game g) throws Exception;
+    public void inserisci( String difficulty, int punteggio,String username) throws Exception;
 
     public Integer getBestPointsPoints(String username) throws Exception;
     
@@ -27,4 +27,6 @@ public interface DaoGame {
     public Integer getLastMatch(String username) throws Exception;
     
     public Double getAverageMatch(String username) throws Exception;
+    
+
 }

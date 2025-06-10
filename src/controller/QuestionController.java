@@ -6,6 +6,7 @@ package controller;
 
 import dao.interfaces.DaoGame;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -87,7 +88,7 @@ public class QuestionController implements Initializable {
     private RadioButton B5;
     @FXML
     private RadioButton D5;
-    
+    private String difficulty;
     private DaoGame daoGame;
     private Quiz quiz;
     private String username;
@@ -103,11 +104,12 @@ public class QuestionController implements Initializable {
     @FXML
     private ToggleGroup group5;
     
-    public void setChangeViewController(ChangeView controller, DaoGame daoGame,Quiz quiz,String username) {
+    public void setChangeViewController(ChangeView controller, DaoGame daoGame,Quiz quiz,String username, String difficulty) {
         this.controller = controller;
         this.daoGame = daoGame;
         this.quiz = quiz;
         this.username=username;
+        this.difficulty=difficulty;
         
         List<Question> domande = quiz.getDomande();
         System.out.println("Numero di domande: " + domande.size());
@@ -133,15 +135,41 @@ public class QuestionController implements Initializable {
     }    
 
     @FXML
-    private void confirmButtonClick(ActionEvent event) {
-        alertManager.showAlert("Successo", "Hai completato il quiz","SUCCESS");
+    private void confirmButtonClick(ActionEvent event) throws Exception {
+        List<String> selectedAnswers = new ArrayList<>();
+
+    // Recupera la risposta selezionata da ciascun ToggleGroup
+    selectedAnswers.add(getSelectedAnswer(group1)); // Risposta per la prima domanda
+    selectedAnswers.add(getSelectedAnswer(group2)); // Risposta per la seconda domanda
+    selectedAnswers.add(getSelectedAnswer(group3)); // Risposta per la terza domanda
+    selectedAnswers.add(getSelectedAnswer(group4)); // Risposta per la quarta domanda
+    selectedAnswers.add(getSelectedAnswer(group5)); // Risposta per la quinta domanda
+        quiz.setPoints(selectedAnswers);
+        int score=quiz.getPoints();
+        
+        String message = String.format("Hai completato il quiz con un punteggio di %d", score);
+        alertManager.showAlert("Successo", message, "CONFIRMATION");
+        daoGame.inserisci(difficulty, quiz.getPoints(), username);
         controller.goHome(username);
     }
 
     @FXML
-    private void cancelButtonClick(ActionEvent event) {
-        alertManager.showAlert("Termina", "Hai completato il quiz","INFORMATION");
+    private void cancelButtonClick(ActionEvent event) throws Exception {
+        alertManager.showAlert("Termina", "Sei sicuro di voler uscire? \nPerderai tutti i progressi!","INFORMATION");
         controller.goHome(username);
     }
+    
+    private String getSelectedAnswer(ToggleGroup group) {
+    // Ottieni la risposta selezionata dal ToggleGroup
+    RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
+    
+    // Se una risposta è selezionata, restituisci il testo della risposta
+    if (selectedRadioButton != null) {
+        return selectedRadioButton.getText();
+    }
+    
+    // Se nessuna risposta è selezionata, restituisci null
+    return null;
+}
     
 }
