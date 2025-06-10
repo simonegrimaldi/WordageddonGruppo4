@@ -69,7 +69,7 @@ public class LogInController implements Initializable {
     }
 
     /**
-     * @brie Metodo che gestisce il click sul button di signUp.
+     * @brief Metodo che gestisce il click sul button di signUp.
      *
      * In qualsiasi momento il bottone viene premuto la vista cambia e si passa
      * alla schermata di registrazione.

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package controller;
 
 import dao.interfaces.DaoGame;
@@ -26,9 +22,17 @@ import javafx.scene.layout.VBox;
 import util.AlertManager;
 
 /**
- * FXML Controller class
- *
- * @author simonegrimaldi
+ * @class HomeController
+ * 
+ * @brief Controller per la schermata principale. Gestisce la visualizzazione del
+ * profilo dell'utente, la selezione della difficoltà del gioco, la visualizzazione
+ * di una classifica di gioco. 
+ * 
+ * Nello specifico questo controller permette all'utente di:
+ *  - Visualizzare il proprio profilo e le statistiche di gioco
+ *  - Iniziare una nuova partita scegliendo la difficoltà di gioco
+ * 
+ * 
  */
 public class HomeController implements Initializable {
     
@@ -66,6 +70,17 @@ public class HomeController implements Initializable {
     private DaoGame daoGame;
     private AlertManager alertManager = new AlertManager();
     private ObservableList<String[]> rankingObs = FXCollections.observableArrayList();
+    
+    /**
+     * @brief Imposto il controller per permettere la navigazione tra le schermate
+     * L'interfaccia DaoGame che permette di gestire i dati del singolo giocatore 
+     * e della sessione di gioco.
+     * 
+     * @param controller
+     * @param username
+     * @param daoGame
+     * @throws Exception 
+     */
     
     public void setChangeViewController(ChangeView controller, String username, DaoGame daoGame) throws Exception {
         this.controller = controller;
@@ -113,12 +128,26 @@ public class HomeController implements Initializable {
         difficultyChooser.getItems().addAll(easy, medium, hard);
     }
     
+    /**
+     * @brief Metodo che gestisce il click sul button di Logout.
+     *
+     * In qualsiasi momento il bottone viene premuto la vista cambia e si passa
+     * alla schermata di LogIn.
+     * 
+     * @param event 
+     */
     @FXML
     private void logoutButtonClick(ActionEvent event
     ) {
         controller.goLogIn();
     }
     
+    /**
+     * @brief Metodo che gestisce il click sul button Profilo.  
+     * Mostrando o nascondendo il profilo dell'utente 
+     * 
+     * @param event 
+     */
     @FXML
     private void profileButtonClick(ActionEvent event
     ) {
@@ -129,7 +158,13 @@ public class HomeController implements Initializable {
             profileContainer.setVisible(false);
         }
     }
-    
+
+    /**
+     * @brief Metodo che gestisce il click sul button Play.  
+     * Mostrando o nascondendo le informazioni relative al gioco 
+     * 
+     * @param event 
+     */    
     @FXML
     private void playButtonClick(ActionEvent event
     ) {
@@ -141,6 +176,18 @@ public class HomeController implements Initializable {
         }
     }
     
+    /**
+     * @brief Metodo che gestisce il click sul button Play. 
+     * 
+     * Quando viene premuto, vengono verificati i dati inseriti relativamente
+     * alla difficoltà, e viene avviata una partita corrispondente alla difficoltà 
+     * selezionata. Nel caso in cui si voglia avviare una partita senza aver impostato
+     * un livello di difficoltà verrà visualizzato un messaggio di errore, stessa cosa
+     * che succede nel caso in cui non ci sono testi corrispondenti al livello di 
+     * difficoltà scelto. 
+     * 
+     * @param event 
+     */
     @FXML
     private void startGameClick(ActionEvent event) {
         String selectedDifficulty = difficultyChooser.getText();
@@ -157,6 +204,14 @@ public class HomeController implements Initializable {
         
     }
     
+    /**
+     * @brief Imposta la tabella che contiene la classifica, recuperando i
+     * migliori punteggi presenti nel database. La classifica conterrà posizione,
+     * punteggio e username. 
+     * 
+     * @throws Exception, nel caso in cui si presenti un errore nel recupero delle
+     * informazioni dal database
+     */
     private void setRankingTable() throws Exception {
          LinkedHashMap<String, Integer> topThree = daoGame.getTopThree();
         int position = 1;
@@ -176,6 +231,18 @@ public class HomeController implements Initializable {
         rankingTable.setItems(rankingObs);
     }
     
+    /**
+     * @brief Imposta le stats relative al singolo utente.
+     * 
+     * Le statistiche contengono:
+     *  - Il numero di partite giocate
+     *  - Il punteggio dell'ultima partita
+     *  - La media dei punteggi
+     *  - Il punteggio dell'ultima partita giocata
+     * 
+     * @throws Exception, nel caso in cui si presenti un errore nel recupero delle
+     * informazioni dal database
+     */
     public void setStatistics() throws Exception {
         int numGame = daoGame.getNumberGame(username);
         int pointsLastGame = daoGame.getLastMatch(username);
