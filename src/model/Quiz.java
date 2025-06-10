@@ -29,6 +29,7 @@ public class Quiz {
     public List<Question> getDomande() {
         return domande;
     }
+    
 
     public void mostra() {
         for (Question q : domande) {

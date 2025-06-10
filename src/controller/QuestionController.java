@@ -15,8 +15,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import model.Question;
 import model.Quiz;
+import util.AlertManager;
 
 /**
  * FXML Controller class
@@ -88,11 +90,24 @@ public class QuestionController implements Initializable {
     
     private DaoGame daoGame;
     private Quiz quiz;
+    private String username;
+    private AlertManager alertManager = new AlertManager();
+    @FXML
+    private ToggleGroup group1;
+    @FXML
+    private ToggleGroup group2;
+    @FXML
+    private ToggleGroup group3;
+    @FXML
+    private ToggleGroup group4;
+    @FXML
+    private ToggleGroup group5;
     
-    public void setChangeViewController(ChangeView controller, DaoGame daoGame,Quiz quiz) {
+    public void setChangeViewController(ChangeView controller, DaoGame daoGame,Quiz quiz,String username) {
         this.controller = controller;
         this.daoGame = daoGame;
         this.quiz = quiz;
+        this.username=username;
         
         List<Question> domande = quiz.getDomande();
         System.out.println("Numero di domande: " + domande.size());
@@ -119,10 +134,14 @@ public class QuestionController implements Initializable {
 
     @FXML
     private void confirmButtonClick(ActionEvent event) {
+        alertManager.showAlert("Successo", "Hai completato il quiz","SUCCESS");
+        controller.goHome(username);
     }
 
     @FXML
     private void cancelButtonClick(ActionEvent event) {
+        alertManager.showAlert("Termina", "Hai completato il quiz","INFORMATION");
+        controller.goHome(username);
     }
     
 }
