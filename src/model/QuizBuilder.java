@@ -50,8 +50,8 @@ public class QuizBuilder {
 
         // Aggiunge una domanda di frequenza per il primo testo (se presente)
         if (!analisi.isEmpty()) {
-            domande.add(new FrequencyQuestion(analisi.get(0)));
-            domande.add(new FrequencyQuestion(analisi.get(0)));
+            domande.add(new FrequencyQuestion((Analysis) analisi.get(0)));
+            domande.add(new FrequencyQuestion((Analysis) analisi.get(0)));
             domande.add(new RelativeFrequencyQuestion(analisi));
             domande.add(new RelativeFrequencyQuestion(analisi));
         }

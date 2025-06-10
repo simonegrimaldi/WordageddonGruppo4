@@ -5,7 +5,6 @@
 package dao.interfaces;
 
 import java.util.LinkedHashMap;
-import model.Game;
 
 /**
  * L'interfaccia {@code DaoGame} rappresenta il contratto per il pattern Data

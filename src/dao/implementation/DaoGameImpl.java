@@ -9,11 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.Game;
 import dao.interfaces.DaoGame;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.LinkedHashMap;
 
 /**
