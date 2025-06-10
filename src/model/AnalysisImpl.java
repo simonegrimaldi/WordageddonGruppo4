@@ -35,6 +35,7 @@ public class AnalysisImpl implements Serializable {
      * @brief Mappa che associa parole (chiavi) a frequenze (valori).
      */
     private HashMap<String, Integer> analysis;
+    private int wordCounter=0;
         
     
     private transient AlertManager alertManager = new AlertManager();
@@ -113,16 +114,13 @@ public class AnalysisImpl implements Serializable {
     }
 
     public String difficulty() {
-        int wordCounter = size();
-        String difficulty = null;
-        if (wordCounter <= 250) {
-            difficulty = "facile";
-        } else if (wordCounter > 250 && wordCounter <= 750) {
-            difficulty = "medio";
+        if (this.wordCounter <= 250) {
+            return "facile";
+        } else if (this.wordCounter > 250 && this.wordCounter <= 750) {
+            return "medio";
         } else {
-            difficulty = "difficile";
+            return "difficile";
         }
-        return difficulty;
     }
 
     /**
@@ -133,42 +131,25 @@ public class AnalysisImpl implements Serializable {
      * @param stopwords Lista di parole da ignorare durante l'analisi (es.
      * articoli, congiunzioni, punteggiatura).
      */
-    public boolean analyzeText(File file, Set<String> stopwords) {
-
-        /*String word = null;
-
-        try (Scanner s = new Scanner(new BufferedReader(new FileReader(filename)))) {
-            s.useDelimiter("[ \\n]+");
-            s.useLocale(Locale.US);
-            while (s.hasNext()) {
-                word = s.next();
-                if (!stopwords.contains(word.toLowerCase())) {
-                    analysis.merge(word.toLowerCase(), 1, Integer::sum);
-                }
-            }
-
-        } catch (IOException ex) {
-            System.out.println("Errore nell'analisi del file");
-        }*/
-        
-        
+    public int analyzeText(File file, Set<String> stopwords) {        
+        this.wordCounter=0; // azzeramento del contatore
         List<String> lines = null;
         try {
             lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
         } catch (IOException ex) {
-            //alertManager.showAlert("ERRORE LETTURA FILE", "Impossibile leggere il file selezionato");
-            return false;
+            ex.printStackTrace();
+            System.err.println("ERRORE nel metodo analyzeText di AnalysisImpl\n");
         }
 
         for (String line : lines) {
             String[] words = line.split("\\W+");
             for (String word : words) {
-                if (!stopwords.contains(word.toLowerCase())) {
-                    analysis.merge(word.toLowerCase(), 1, Integer::sum);
+                if (!word.isEmpty() && !stopwords.contains(word.toLowerCase())) {
+                    wordCounter++;
                 }
             }
         }
-        return true;
+        return this.wordCounter;
     }
     
 

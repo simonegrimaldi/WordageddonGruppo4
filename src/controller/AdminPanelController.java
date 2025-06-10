@@ -105,7 +105,8 @@ public class AdminPanelController implements Initializable {
     }
 
     /**
-     *Apre un file Chooser 
+     * Apre un file Chooser
+     *
      * @param event
      */
     @FXML
@@ -146,9 +147,8 @@ public class AdminPanelController implements Initializable {
 
         Set<String> stopwords = new HashSet<>();
         stopwords = createStopWordsSet(stopwords);
-        analysis.analyzeText(selectedFile, stopwords);
+        int wordCount = analysis.analyzeText(this.selectedFile, stopwords); // Questa riga fa tutto
         String difficulty = analysis.difficulty();
-        System.out.println(analysis.size());
 
         if (difficulty == null) {
             return;
@@ -162,9 +162,7 @@ public class AdminPanelController implements Initializable {
         boolean flag = ioFile.saveFile(new File(destDir, selectedFile.getName()), selectedFile);
         if (flag) {
             alertManager.showAlert("File caricato con successo", "Il file \"" + selectedFile.getName() + "\" è stato salvato nella cartella: \"" + difficulty, "CONFIRMATION");
-            analysis.analyzeText(this.selectedFile, stopwords);
-            ioa.saveAnalysis(analysis, "testi/" + difficulty + "/" + this.selectedFile.getName().concat("Analysis"));
-
+            ioa.saveAnalysis(analysis, "testi/" + difficulty + "/" + this.selectedFile.getName().replace(".txt", "Analisys.bin"));
         } else {
             alertManager.showAlert("Errore salvataggio", "Impossibile copiare il file nella cartella " + difficulty, "ERROR");
         }
