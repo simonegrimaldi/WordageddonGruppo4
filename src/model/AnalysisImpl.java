@@ -5,7 +5,6 @@
  */
 package model;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -35,11 +34,9 @@ public class AnalysisImpl implements Serializable {
      * @brief Mappa che associa parole (chiavi) a frequenze (valori).
      */
     private HashMap<String, Integer> analysis;
-    private int wordCounter=0;
-        
-    
-    private transient AlertManager alertManager = new AlertManager();
+    private int wordCounter = 0;
 
+    private transient AlertManager alertManager = new AlertManager();
 
     /**
      * @brief Costruttore di default.
@@ -131,8 +128,8 @@ public class AnalysisImpl implements Serializable {
      * @param stopwords Lista di parole da ignorare durante l'analisi (es.
      * articoli, congiunzioni, punteggiatura).
      */
-    public int analyzeText(File file, Set<String> stopwords) {        
-        this.wordCounter=0; // azzeramento del contatore
+    public int analyzeText(File file, Set<String> stopwords) {
+        this.wordCounter = 0; // azzeramento del contatore
         List<String> lines = null;
         try {
             lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
@@ -145,12 +142,12 @@ public class AnalysisImpl implements Serializable {
             String[] words = line.split("\\W+");
             for (String word : words) {
                 if (!word.isEmpty() && !stopwords.contains(word.toLowerCase())) {
+                    analysis.merge(word.toLowerCase(), 1, Integer::sum);
                     wordCounter++;
                 }
             }
         }
         return this.wordCounter;
     }
-    
 
 }

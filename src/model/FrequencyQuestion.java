@@ -35,7 +35,7 @@ public class FrequencyQuestion extends Question<Integer> {
         Random rand = new Random();
 
         options.add(correctAnswer);
-
+        System.out.println("numero:"+options.size());
         while (options.size() < 4) {
             int wrongAnswer = correctAnswer + rand.nextInt(11) - 5; // ±5
             if (wrongAnswer >= 0 && !options.contains(wrongAnswer)) {

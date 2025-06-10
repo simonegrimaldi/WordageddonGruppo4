@@ -27,11 +27,12 @@ public class RelativeFrequencyQuestion extends Question<String> {
     public RelativeFrequencyQuestion(List<AnalysisImpl> analyses) {
         this.question = "Quale tra le seguenti parole è la più frequente in tutti i documenti?";
         AnalysisImpl total = new AnalysisImpl();
-
+ 
         // Merge di tutte le analisi
         for (AnalysisImpl a : analyses) {
             total.mergeWith(a);
         }
+        System.out.println(total.keySet().toString());
 
         if (total.size() < 4) {
             throw new IllegalArgumentException("Non ci sono abbastanza parole per generare la domanda.");

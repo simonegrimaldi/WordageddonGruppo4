@@ -17,7 +17,8 @@ import java.util.TreeSet;
  *
  * @author corry
  */
-public abstract class Question<T>  {
+public abstract class Question<T> {
+
     protected String question;
     protected List<T> options;
     protected T answer;
@@ -33,31 +34,32 @@ public abstract class Question<T>  {
     public T getAnswer() {
         return answer;
     }
-    @Override
-   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append(question).append("\n");
 
-    char label = 'A';
-    if (options==null){System.out.println("ciaoooodi");}
-    for (T option : options) {
-        sb.append(label).append(". ").append(option).append("\n");
-        label++;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(question).append("\n");
+
+        char label = 'A';
+        if (options == null) {
+            System.out.println("ciaoooodi");
+        }
+        for (T option : options) {
+            sb.append(label).append(". ").append(option).append("\n");
+            label++;
+        }
+
+        return sb.toString();
     }
 
-    return sb.toString();
-}
-   /**
- * Verifica se la risposta dell'utente è corretta.
- * @param userAnswer la risposta data dall'utente
- * @return true se è corretta, false altrimenti
- */
-public boolean answerQuestion(T userAnswer) {
-    return answer.equals(userAnswer);
-}
+    /**
+     * Verifica se la risposta dell'utente è corretta.
+     *
+     * @param userAnswer la risposta data dall'utente
+     * @return true se è corretta, false altrimenti
+     */
+    public boolean answerQuestion(T userAnswer) {
+        return answer.equals(userAnswer);
+    }
 
-
-    
 }
-    
-

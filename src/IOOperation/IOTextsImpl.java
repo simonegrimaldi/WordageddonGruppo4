@@ -6,6 +6,7 @@
 package IOOperation;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,12 +39,16 @@ public class IOTextsImpl implements IOTexts {
         }
         
         String path = Paths.get(System.getProperty("user.dir"), "testi", difficulty.toLowerCase()).toString();
+        if (!Files.exists(Paths.get(path))) 
+            return null;
+        
         File folder = new File(path);
-               // Ottieni i file .txt usando Stream e filter, e mettili in una lista di stringhe
+      
         List<String> fileNames = Arrays.stream(folder.list())
                                       .filter(name -> name.endsWith(".txt"))
                                       .collect(Collectors.toList());
-
+        if(fileNames.isEmpty())
+            return null;
         List<String> risultati = new ArrayList<>();
         if (fileNames != null) {
             for (String name : fileNames) {

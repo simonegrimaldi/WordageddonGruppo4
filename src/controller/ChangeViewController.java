@@ -25,7 +25,8 @@ public class ChangeViewController implements ChangeView {
     private Stage primaryStage;
     private String username;
     private String difficulty;
-    private QuizBuilder quizBuilder;
+    private Quiz quiz;
+
     /**
      * Costruttore del {@code ChangeViewController}.
      *
@@ -106,19 +107,27 @@ public class ChangeViewController implements ChangeView {
     /**
      * Carica e mostra la schermata per la lettura dei testi
      *
+     * @param difficulty
+     * @return 
      * @pre l'utente è autenticato
      * @pre l'utente avvia una partita
      * @post visualizzazione della schermata home
      * @param username
      */
     @Override
-    public void goReading(String difficulty) {
+    public boolean goReading(String difficulty) {
         this.difficulty = difficulty;
+        QuizBuilder quizBuilder = new QuizBuilder(new IOTextsImpl(), new IOAnalysisImpl(), username);
+        this.quiz = quizBuilder.creaQuiz(difficulty);
+        if (quiz == null) {
+            return false;
+        }
         try {
             show("Reading");
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return true;
     }
 
     /**
@@ -158,19 +167,18 @@ public class ChangeViewController implements ChangeView {
         switch (fxml) {
             case "Home":
                 HomeController homeController = loader.getController();
-            {
-                try {
-                    homeController.setChangeViewController(this,username,new DaoGameImpl());
-                } catch (Exception ex) {
-                    Logger.getLogger(ChangeViewController.class.getName()).log(Level.SEVERE, null, ex);
+                 {
+                    try {
+                        homeController.setChangeViewController(this, username, new DaoGameImpl());
+                    } catch (Exception ex) {
+                        Logger.getLogger(ChangeViewController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }
                 break;
-
 
             case "LogIn":
                 LogInController loginController = loader.getController();
-                loginController.setChangeViewController(this,new DaoUserImpl());
+                loginController.setChangeViewController(this, new DaoUserImpl());
                 break;
 
             case "SignUp":
@@ -185,14 +193,13 @@ public class ChangeViewController implements ChangeView {
 
             case "Reading":
                 ReadingController readingController = loader.getController();
-                this.quizBuilder = new QuizBuilder(new IOTextsImpl(),new IOAnalysisImpl(),username);
-                readingController.setChangeViewController(this,username,difficulty,new IOFileImpl(), quizBuilder.creaQuiz(difficulty));
+                readingController.setChangeViewController(this, username, difficulty, new IOFileImpl(), quiz);
                 //readingController.setIOFile(new IOFileClass());
                 break;
 
             case "Question":
                 QuestionController questionController = loader.getController();
-                questionController.setChangeViewController(this);
+                questionController.setChangeViewController(this, new DaoGameImpl(), quiz);
                 break;
 
             default:

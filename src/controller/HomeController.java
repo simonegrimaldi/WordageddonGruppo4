@@ -142,8 +142,7 @@ public class HomeController implements Initializable {
     }
     
     @FXML
-    private void startGameClick(ActionEvent event
-    ) {
+    private void startGameClick(ActionEvent event) {
         String selectedDifficulty = difficultyChooser.getText();
         
         switch (selectedDifficulty.toLowerCase()) {
@@ -151,9 +150,11 @@ public class HomeController implements Initializable {
                 alertManager.showAlert("ERRORE", "Scegliere un livello di difficoltà!","ERROR");
                 break;
             default:
-                controller.goReading(selectedDifficulty);
+                if(!controller.goReading(selectedDifficulty))
+                    alertManager.showAlert("ERRORE", "Non ci sono testi disponibili per questa difficoltà","ERROR");
                 return;
         }
+        
     }
     
     private void setRankingTable() throws Exception {
