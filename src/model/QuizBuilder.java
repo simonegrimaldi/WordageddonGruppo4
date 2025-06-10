@@ -4,6 +4,7 @@
  */
 package model;
 
+import IOOperation.IOTexts;
 import IOOperation.IOAnalysis;
 import java.io.IOException;
 import java.util.ArrayList;

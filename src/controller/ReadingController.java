@@ -56,11 +56,11 @@ public class ReadingController implements Initializable {
         this.file=file;
     }*/
 
-    public void setChangeViewController(ChangeView controller, String username_read, String difficulty,IOFile iOFile, Quiz quiz) {
+    public void setChangeViewController(ChangeView controller, String username_read, String difficulty,IOFile ioFile, Quiz quiz) {
         this.controller = controller;
         this.username_read = username_read;
         this.difficulty = difficulty;
-        this.quiz = this.quiz;
+        this.quiz = quiz;
         this.ioFile = ioFile;
         caricaTesti();
         startTimer();
@@ -153,6 +153,7 @@ public class ReadingController implements Initializable {
     }
 
     public void caricaTesti() {
+        System.out.println(quiz.getTesti());
         String content = ioFile.loadFile(quiz.getTesti());
 
         if (content == null || content.isEmpty()) {

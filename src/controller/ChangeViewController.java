@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.IOTextsImpl;
+import IOOperation.IOTextsImpl;
 import model.Quiz;
 import model.QuizBuilder;
 

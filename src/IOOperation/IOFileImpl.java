@@ -34,6 +34,7 @@ public class IOFileImpl implements IOFile {
 
     @Override
     public String loadFile(List<String> filePaths) {
+        System.out.println(filePaths);
         StringBuilder contenutoComplessivo = new StringBuilder();
 
         for (int i = 0; i < filePaths.size(); i++) {
@@ -45,7 +46,7 @@ public class IOFileImpl implements IOFile {
                     contenutoComplessivo.append(scanner.nextLine()).append("\n");
                 }
             } catch (FileNotFoundException e) {
-                System.err.println("⚠️ File non trovato: " + file.getAbsolutePath());
+                System.err.println(" File non trovato: " + file.getAbsolutePath());
             }
 
             contenutoComplessivo.append("\n\n");

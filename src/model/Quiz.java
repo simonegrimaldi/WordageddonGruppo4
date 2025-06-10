@@ -1,5 +1,6 @@
 package model; //quiz
 
+import IOOperation.IOTextsImpl;
 import java.util.List;
 
 /**
@@ -9,6 +10,7 @@ public class Quiz {
     private List<String> testi;
     private List<Question> domande;
     private final String username;
+    private IOTextsImpl text;
     
     public Quiz(List<String> testi, List<Question> domande, String username) {
         this.testi = testi;
