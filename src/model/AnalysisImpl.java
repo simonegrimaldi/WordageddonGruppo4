@@ -139,8 +139,15 @@ public class AnalysisImpl implements Serializable {
     }
 
     /**
+     * @brief Determina la difficoltà del testo in base al numero di parole 
+     * significative che questo contiene
      * 
-     * @return 
+     * Classifica il testo come:
+     *  - facile se il numero di parole è ≤ 250
+     *  - medio se il numero di parole è compreso tra 250 e 750
+     *  - difficile se il numero di parole è > di 750
+     * 
+     * @return una stringa contenente la difficoltà del testo
      */
     public String difficulty() {
         if (this.wordCounter <= 250) {
@@ -157,8 +164,11 @@ public class AnalysisImpl implements Serializable {
      * escludendo le stopwords.
      *
      * @param text Il testo da analizzare.
+     * @param file Il file da analizzare
      * @param stopwords Lista di parole da ignorare durante l'analisi (es.
      * articoli, congiunzioni, punteggiatura).
+     * 
+     * @return il numero di parole significative presenti all'interno del testo
      */
     public int analyzeText(File file, Set<String> stopwords) {
         this.wordCounter = 0; // azzeramento del contatore
