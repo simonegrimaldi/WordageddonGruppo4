@@ -17,7 +17,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import model.Question;
+import util.Question;
 import model.Quiz;
 import util.AlertManager;
 

@@ -9,5 +9,5 @@ public interface IOTexts {
      * - "media": 2 testi
      * - "difficile": 3 testi
      */
-    List<String> cercaTesti(String difficolta);
+    public List<String> cercaTesti(String difficolta);
 }

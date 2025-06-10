@@ -5,7 +5,7 @@ import model.Analysis;
 
 public interface IOAnalysis {
 
-    Analysis loadAnalysis(String filename);
+    public Analysis loadAnalysis(String filename);
 
-    void saveAnalysis(Analysis a, String filename);
+    public void saveAnalysis(Analysis a, String filename);
 }

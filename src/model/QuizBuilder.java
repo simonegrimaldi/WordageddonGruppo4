@@ -4,6 +4,10 @@
  */
 package model;
 
+import util.Question;
+import util.RelativeFrequencyQuestion;
+import util.DocumentQuestion;
+import util.FrequencyQuestion;
 import IOOperation.IOTexts;
 import IOOperation.IOAnalysis;
 import java.util.ArrayList;

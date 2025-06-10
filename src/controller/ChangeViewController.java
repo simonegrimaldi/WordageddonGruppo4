@@ -109,7 +109,7 @@ public class ChangeViewController implements ChangeView {
      * Carica e mostra la schermata per la lettura dei testi
      *
      * @param difficulty
-     * @return 
+     * @return
      * @pre l'utente è autenticato
      * @pre l'utente avvia una partita
      * @post visualizzazione della schermata home
@@ -189,26 +189,23 @@ public class ChangeViewController implements ChangeView {
 
             case "AdminPanel":
                 AdminPanelController adminPanelController = loader.getController();
-                adminPanelController.setChangeViewController(this, username, new IOFileImpl(), new AnalysisImpl(),new IOAnalysisImpl());
+                adminPanelController.setChangeViewController(this, username, new IOFileImpl(), new AnalysisImpl(), new IOAnalysisImpl());
                 break;
 
             case "Reading":
                 ReadingController readingController = loader.getController();
                 readingController.setChangeViewController(this, username, difficulty, new IOFileImpl(), quiz);
-                //readingController.setIOFile(new IOFileClass());
                 break;
 
             case "Question":
                 QuestionController questionController = loader.getController();
-                questionController.setChangeViewController(this, new DaoGameImpl(), quiz,username, difficulty);
+                questionController.setChangeViewController(this, new DaoGameImpl(), quiz, username, difficulty);
                 break;
 
             default:
                 System.out.println("Unknown FXML: " + fxml);
                 break;
         }
-
-        // Crea e imposta la scena
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();

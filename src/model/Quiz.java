@@ -1,8 +1,8 @@
 package model; //quiz
 
+import util.Question;
 import IOOperation.IOTextsImpl;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Rappresenta un quiz contenente una lista di testi e una lista di domande.
