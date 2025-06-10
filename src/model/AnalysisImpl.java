@@ -176,7 +176,7 @@ public class AnalysisImpl implements Serializable,Analysis {
         }
 
         for (String line : lines) {
-            String[] words = line.split("\\W+");
+            String[] words = line.replaceAll("[^a-zA-Zàèìòùé]", " ").split("\\s+");
             for (String word : words) {
                 if (!word.isEmpty() && !stopwords.contains(word.toLowerCase())) {
                     analysis.merge(word.toLowerCase(), 1, Integer::sum);

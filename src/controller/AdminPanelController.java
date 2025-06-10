@@ -2,10 +2,15 @@ package controller;
 
 import IOOperation.IOAnalysis;
 import IOOperation.IOFile;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -207,6 +212,7 @@ public class AdminPanelController implements Initializable {
         Set<String> stopwords = new HashSet<>();
         stopwords = createStopWordsSet(stopwords);
         int wordCount = analysis.analyzeText(selectedFile, stopwords); // Questa riga fa tutto
+        System.out.println("Parole considerate :" + analysis.keySet().toString());
         String difficulty = analysis.difficulty();
 
         if (difficulty == null) {
@@ -248,7 +254,19 @@ public class AdminPanelController implements Initializable {
     public Set<String> createStopWordsSet(Set<String> stopwords) {
 
         String text = textArea.getText().trim();
-
+        
+        try(Scanner s = new Scanner( new BufferedReader(new FileReader("./analyticsFile/stopWordsList.txt")))) {
+            String str = null;
+            s.useDelimiter(",");
+            s.useLocale(Locale.US);
+            while(s.hasNext()) {
+                if((str = s.next().trim()) != null) 
+                    stopwords.add(str.toLowerCase());
+            }
+        } catch(IOException ex) {
+            System.out.println("Errore in lettura dal file delle StopWords!");
+        }
+        
         if (!text.isEmpty()) {
             String[] components = text.split(",");
             for (String parola : components) {
@@ -258,6 +276,7 @@ public class AdminPanelController implements Initializable {
                 }
             }
         }
+        System.out.println("Lista stopwords : " + stopwords);
         return stopwords;
     }
 }
