@@ -8,7 +8,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * @class SignUpController
@@ -21,13 +25,18 @@ import javafx.scene.control.TextField;
 public class SignUpController implements Initializable {
 
     @FXML
+    private TextField passwordTextField;  // Per la password visibile in chiaro
+    @FXML
     private TextField usernameField;
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
     @FXML
     private Button backButton;
     @FXML
     private Button SignUpButton;
+    
+    @FXML
+    private ImageView simboloMostraPassword;
 
     private ChangeView controller;
     private AlertManager alert;
@@ -54,6 +63,7 @@ public class SignUpController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         alert = new AlertManager();
+       
     }
 
     /**
@@ -89,14 +99,34 @@ public class SignUpController implements Initializable {
         String username = usernameField.getText();
         String password = passwordField.getText();
         if (username.isEmpty() || password.isEmpty()) {
-            alert.showAlert("Errore", "Tutti i campi sono obbligatori", "ERROR");
+            ButtonType response = alert.showAlert("Errore", "Tutti i campi sono obbligatori", "ERROR");
         } else {
             if (daoUser.registration(username, password)) {
                 controller.goHome(username);
             } else {
-                alert.showAlert("Errore", "L'username già esiste", "ERROR");
+                ButtonType response = alert.showAlert("Errore", "L'username già esiste", "ERROR");
             }
         }
     }
+    public void viewPassword() {
+    if (passwordField.isVisible()) {
+        // Se la password è nascosta, mostriamola in chiaro
+        passwordField.setVisible(false);
+        passwordTextField.setVisible(true);
+        passwordTextField.setText(passwordField.getText());  // Copia la password nel TextField
+        
+        // Cambia l'icona in "occhio aperto"
+        simboloMostraPassword.setImage(new Image(getClass().getResource("@../utilities/occhio-chiuso.png").toExternalForm()));
+    } else {
+        // Se la password è visibile, nascondiamola
+        passwordTextField.setVisible(false);
+        passwordField.setVisible(true);
+        passwordField.setText(passwordTextField.getText());  // Copia la password dal TextField nel PasswordField
+        
+        // Cambia l'icona in "occhio chiuso"
+        simboloMostraPassword.setImage(new Image(getClass().getResource("../utilities/occhio-chiuso.png").toExternalForm()));
+    }
+}
+
 
 }

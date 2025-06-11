@@ -3,17 +3,21 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignUpController">
    <children>
-      <VBox alignment="CENTER" layoutX="50.0" layoutY="50.0" spacing="20" styleClass="container" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+      <VBox alignment="CENTER" fillWidth="false" layoutX="50.0" layoutY="50.0" prefHeight="405.0" prefWidth="800.0" spacing="20" styleClass="container" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
          <children>
-            <Label styleClass="title" text="Wordageddon App">
+            <Label prefHeight="44.0" prefWidth="293.0" styleClass="title" text="Wordageddon App">
                <font>
                   <Font size="36.0" />
                </font>
@@ -21,28 +25,40 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <VBox alignment="CENTER" prefWidth="400.0" spacing="10" styleClass="formContainer">
+            <VBox alignment="TOP_CENTER" prefHeight="366.0" prefWidth="640.0" spacing="10" styleClass="formContainer" VBox.vgrow="ALWAYS">
                <children>
-                  <Label styleClass="subtitle" text="Sign-Up" />
-                  <VBox spacing="8">
+                  <Label alignment="TOP_CENTER" cache="true" prefHeight="23.0" prefWidth="65.0" styleClass="subtitle" text="Sign-Up" VBox.vgrow="ALWAYS" />
+                  <VBox alignment="TOP_CENTER" spacing="8">
                      <children>
-                        <Label styleClass="labelText" text="Username" />
-                        <TextField fx:id="usernameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="448.0" promptText="insert username" styleClass="inputField" />
-                        <Label styleClass="labelText" text="Password" />
-                        <TextField fx:id="passwordField" accessibleRole="PASSWORD_FIELD" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="insert password" styleClass="inputField" />
+                        <Label prefHeight="18.0" prefWidth="500.0" styleClass="labelText" text="Username" />
+                        <TextField fx:id="usernameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="448.0" promptText="Insert username" styleClass="inputField" />
+                        <Label prefHeight="18.0" prefWidth="499.0" styleClass="labelText" text="Password" />
+                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                           <children>
+                              <!-- PasswordField per la password nascosta (pallini) -->
+                              <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="500.0" promptText="Insert password" styleClass="inputField" />
+                              
+                              <!-- TextField per la password visibile in chiaro -->
+                              <TextField fx:id="passwordTextField" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="500.0" styleClass="inputField" visible="false" />
+
+                              <!-- Icona dell'occhio per alternare la visibilità della password -->
+                              <ImageView fx:id="simboloMostraPassword" fitHeight="21.0" fitWidth="21.0" onMouseClicked="#viewPassword" pickOnBounds="true" preserveRatio="true">
+                                 <StackPane.margin>
+                                    <Insets left="450.0" />
+                                 </StackPane.margin>
+                                 <image>
+                                    <Image url="@../utilities/icons8-occhio-chiuso-50.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </StackPane>
                      </children>
                   </VBox>
-                  <HBox alignment="CENTER" spacing="20" styleClass="buttonContainer">
+                  <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="60.0" spacing="20" styleClass="buttonContainer" VBox.vgrow="ALWAYS">
                      <children>
-                        <Button fx:id="backButton" onAction="#backButtonClick" styleClass="buttonClass" text="Back" />
-                        <Button fx:id="SignUpButton" onAction="#SignUpButtonClick" styleClass="buttonClass" text="Sign-Up" />
+                        <Button fx:id="backButton" cancelButton="true" onAction="#backButtonClick" styleClass="buttonClass" text="Back" />
+                        <Button fx:id="SignUpButton" defaultButton="true" onAction="#SignUpButtonClick" styleClass="buttonClassSelected" text="Sign-Up" />
                      </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <opaqueInsets>
-                        <Insets top="10.0" />
-                     </opaqueInsets>
                   </HBox>
                </children>
             </VBox>

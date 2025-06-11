@@ -57,14 +57,14 @@
                                 <Button fx:id="startGame" mnemonicParsing="false" onAction="#startGameClick" styleClass="startGame" text="Start Game" />
                             </children>
                         </HBox>
-                        <VBox alignment="CENTER" prefHeight="387.0" prefWidth="700.0" spacing="10.0">
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="700.0" spacing="10.0">
                             <children>
                         <Label styleClass="rankingClass" text="GAME RULES">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
                         </Label>
-                                <Label fx:id="labelRules" alignment="TOP_LEFT" contentDisplay="TOP" graphicTextGap="2.0" lineSpacing="1.0" prefHeight="280.0" prefWidth="662.0" styleClass="statisticsClass" wrapText="true">
+                                <Label fx:id="labelRules" alignment="TOP_LEFT" contentDisplay="TOP" graphicTextGap="2.0" lineSpacing="1.0" prefHeight="180.0" prefWidth="662.0" styleClass="statisticsClass" wrapText="true">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>

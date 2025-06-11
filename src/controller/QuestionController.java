@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -171,8 +172,8 @@ public class QuestionController implements Initializable {
         quiz.setPoints(selectedAnswers);
         int score = quiz.getPoints();
 
-        String message = String.format("Hai completato il quiz con un punteggio di %d", score);
-        alertManager.showAlert("Successo", message, "CONFIRMATION");
+        String message = String.format("Hai completato il quiz con un punteggio di: %d", score);
+        ButtonType response =alertManager.showAlert("Successo", message, "INFORMATION");
         daoGame.inserisci(difficulty, quiz.getPoints(), username);
         controller.goHome(username);
     }
@@ -188,8 +189,11 @@ public class QuestionController implements Initializable {
      */
     @FXML
     private void cancelButtonClick(ActionEvent event) throws Exception {
-        alertManager.showAlert("Termina", "Sei sicuro di voler uscire? \nPerderai tutti i progressi!", "INFORMATION");
-        controller.goHome(username);
+        ButtonType response = alertManager.showAlert("Termina", "Sei sicuro di voler uscire? \nPerderai tutti i progressi!", "CONFIRMATION");
+        if (response == ButtonType.OK) {
+            controller.goHome(username);
+        }
+        
     }
 
     /**

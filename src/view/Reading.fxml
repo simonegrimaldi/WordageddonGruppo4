@@ -28,7 +28,7 @@
                   </ProgressBar>
                </children>
             </VBox>
-            <ScrollPane fx:id="textArea" fitToHeight="true" fitToWidth="true" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="600.0" styleClass="textArea">
+            <ScrollPane fx:id="textArea" accessibleRole="INCREMENT_BUTTON" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxWidth="-Infinity" minWidth="-Infinity" pannable="true" prefHeight="374.0" prefWidth="600.0" styleClass="textArea">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>

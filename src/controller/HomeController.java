@@ -22,19 +22,19 @@ import util.AlertManager;
 
 /**
  * @class HomeController
- * 
- * @brief Controller per la schermata principale. Gestisce la visualizzazione del
- * profilo dell'utente, la selezione della difficoltà del gioco, la visualizzazione
- * di una classifica di gioco. 
- * 
- * Nello specifico questo controller permette all'utente di:
- *  - Visualizzare il proprio profilo e le statistiche di gioco
- *  - Iniziare una nuova partita scegliendo la difficoltà di gioco
- * 
- * 
+ *
+ * @brief Controller per la schermata principale. Gestisce la visualizzazione
+ * del profilo dell'utente, la selezione della difficoltà del gioco, la
+ * visualizzazione di una classifica di gioco.
+ *
+ * Nello specifico questo controller permette all'utente di: - Visualizzare il
+ * proprio profilo e le statistiche di gioco - Iniziare una nuova partita
+ * scegliendo la difficoltà di gioco
+ *
+ *
  */
 public class HomeController implements Initializable {
-    
+
     @FXML
     private Button logoutButton;
     @FXML
@@ -63,24 +63,23 @@ public class HomeController implements Initializable {
     private TableColumn<String[], String> pointsColumn;
     @FXML
     private Label statisticsLabel;
-    
+
     private String username;
     private ChangeView controller;
     private DaoGame daoGame;
     private AlertManager alertManager = new AlertManager();
     private ObservableList<String[]> rankingObs = FXCollections.observableArrayList();
-    
+
     /**
-     * @brief Imposto il controller per permettere la navigazione tra le schermate
-     * L'interfaccia DaoGame che permette di gestire i dati del singolo giocatore 
-     * e della sessione di gioco.
-     * 
+     * @brief Imposto il controller per permettere la navigazione tra le
+     * schermate L'interfaccia DaoGame che permette di gestire i dati del
+     * singolo giocatore e della sessione di gioco.
+     *
      * @param controller
      * @param username
      * @param daoGame
-     * @throws Exception 
+     * @throws Exception
      */
-    
     public void setChangeViewController(ChangeView controller, String username, DaoGame daoGame) throws Exception {
         this.controller = controller;
         this.daoGame = daoGame;
@@ -92,16 +91,6 @@ public class HomeController implements Initializable {
                 + "Your goal is to read one or more texts and remember as much information as possible"
                 + "in the shortest time. The chosen difficulty level determines the amount of text"
                 + "and the time available:\n"
-                + "Easy:\n"
-                + "- 1 short text (≤ 250 words)\n"
-                + "- Reading time: 4 minutes\n"
-                + "Medium:\n"
-                + "- medium-length texts (250–750 words each)\n"
-                + "- Reading time: 6 minutes\n"
-                + "Hard:\n"
-                + "- long texts (750–1000 words each)\n"
-                + "- Reading time: 9 minutes\n"
-                + "Get ready to challenge your memory!"
         );
         setRankingTable();
         setStatistics();
@@ -115,37 +104,46 @@ public class HomeController implements Initializable {
     ) {
         profileContainer.managedProperty().bind(profileContainer.visibleProperty());
         playContainer.managedProperty().bind(playContainer.visibleProperty());
-        
+
         rankingTable.setSelectionModel(null);
-        
+
         MenuItem easy = new MenuItem("Facile");
         MenuItem medium = new MenuItem("Media");
         MenuItem hard = new MenuItem("Difficile");
-        easy.setOnAction(e -> difficultyChooser.setText("Facile"));
-        medium.setOnAction(e -> difficultyChooser.setText("Media"));
-        hard.setOnAction(e -> difficultyChooser.setText("Difficile"));
+        easy.setOnAction(e -> {
+            difficultyChooser.setText("Facile");
+            updateLabelRules("Facile");
+        });
+        medium.setOnAction(e -> {
+            difficultyChooser.setText("Media");
+            updateLabelRules("Media");
+        });
+        hard.setOnAction(e -> {
+            difficultyChooser.setText("Difficile");
+            updateLabelRules("Difficile");
+        });
         difficultyChooser.getItems().addAll(easy, medium, hard);
     }
-    
+
     /**
      * @brief Metodo che gestisce il click sul button di Logout.
      *
      * In qualsiasi momento il bottone viene premuto la vista cambia e si passa
      * alla schermata di LogIn.
-     * 
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void logoutButtonClick(ActionEvent event
     ) {
         controller.goLogIn();
     }
-    
+
     /**
-     * @brief Metodo che gestisce il click sul button Profilo.  
-     * Mostrando o nascondendo il profilo dell'utente 
-     * 
-     * @param event 
+     * @brief Metodo che gestisce il click sul button Profilo. Mostrando o
+     * nascondendo il profilo dell'utente
+     *
+     * @param event
      */
     @FXML
     private void profileButtonClick(ActionEvent event
@@ -157,58 +155,58 @@ public class HomeController implements Initializable {
     }
 
     /**
-     * @brief Metodo che gestisce il click sul button Play.  
-     * Mostrando o nascondendo le informazioni relative al gioco 
-     * 
-     * @param event 
-     */    
+     * @brief Metodo che gestisce il click sul button Play. Mostrando o
+     * nascondendo le informazioni relative al gioco
+     *
+     * @param event
+     */
     @FXML
-    private void playButtonClick(ActionEvent event
-    ) {
+    private void playButtonClick(ActionEvent event) {
         if (!playContainer.isVisible()) {
             playContainer.setVisible(true);
             profileContainer.setVisible(false);
         }
     }
-    
+
     /**
-     * @brief Metodo che gestisce il click sul button Play. 
-     * 
+     * @brief Metodo che gestisce il click sul button Play.
+     *
      * Quando viene premuto, vengono verificati i dati inseriti relativamente
-     * alla difficoltà, e viene avviata una partita corrispondente alla difficoltà 
-     * selezionata. Nel caso in cui si voglia avviare una partita senza aver impostato
-     * un livello di difficoltà verrà visualizzato un messaggio di errore, stessa cosa
-     * che succede nel caso in cui non ci sono testi corrispondenti al livello di 
-     * difficoltà scelto. 
-     * 
-     * @param event 
+     * alla difficoltà, e viene avviata una partita corrispondente alla
+     * difficoltà selezionata. Nel caso in cui si voglia avviare una partita
+     * senza aver impostato un livello di difficoltà verrà visualizzato un
+     * messaggio di errore, stessa cosa che succede nel caso in cui non ci sono
+     * testi corrispondenti al livello di difficoltà scelto.
+     *
+     * @param event
      */
     @FXML
     private void startGameClick(ActionEvent event) {
         String selectedDifficulty = difficultyChooser.getText();
-        
+
         switch (selectedDifficulty.toLowerCase()) {
             case "difficulty":
-                alertManager.showAlert("ERRORE", "Scegliere un livello di difficoltà!","ERROR");
+                alertManager.showAlert("ERRORE", "Scegliere un livello di difficoltà!", "ERROR");
                 break;
             default:
-                if(!controller.goReading(selectedDifficulty))
-                    alertManager.showAlert("ERRORE", "Non ci sono testi disponibili per questa difficoltà","ERROR");
+                if (!controller.goReading(selectedDifficulty)) {
+                    alertManager.showAlert("ERRORE", "Non ci sono testi disponibili per questa difficoltà", "ERROR");
+                }
                 return;
         }
-        
+
     }
-    
+
     /**
      * @brief Imposta la tabella che contiene la classifica, recuperando i
-     * migliori punteggi presenti nel database. La classifica conterrà posizione,
-     * punteggio e username. 
-     * 
-     * @throws Exception, nel caso in cui si presenti un errore nel recupero delle
-     * informazioni dal database
+     * migliori punteggi presenti nel database. La classifica conterrà
+     * posizione, punteggio e username.
+     *
+     * @throws Exception, nel caso in cui si presenti un errore nel recupero
+     * delle informazioni dal database
      */
     private void setRankingTable() throws Exception {
-         LinkedHashMap<String, Integer> topThree = daoGame.getTopThree();
+        LinkedHashMap<String, Integer> topThree = daoGame.getTopThree();
         int position = 1;
         for (Map.Entry<String, Integer> entry : topThree.entrySet()) {
             String usr = entry.getKey();
@@ -217,33 +215,31 @@ public class HomeController implements Initializable {
                 rankingObs.add(new String[]{String.valueOf(position), usr, String.valueOf(pt)});
             }
             position++;
-            
+
         }
-        
+
         positionColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[0]));
         usernameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[1]));
         pointsColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[2]));
         rankingTable.setItems(rankingObs);
     }
-    
+
     /**
      * @brief Imposta le stats relative al singolo utente.
-     * 
-     * Le statistiche contengono:
-     *  - Il numero di partite giocate
-     *  - Il punteggio dell'ultima partita
-     *  - La media dei punteggi
-     *  - Il punteggio dell'ultima partita giocata
-     * 
-     * @throws Exception, nel caso in cui si presenti un errore nel recupero delle
-     * informazioni dal database
+     *
+     * Le statistiche contengono: - Il numero di partite giocate - Il punteggio
+     * dell'ultima partita - La media dei punteggi - Il punteggio dell'ultima
+     * partita giocata
+     *
+     * @throws Exception, nel caso in cui si presenti un errore nel recupero
+     * delle informazioni dal database
      */
     public void setStatistics() throws Exception {
         int numGame = daoGame.getNumberGame(username);
         int pointsLastGame = daoGame.getLastMatch(username);
         double averageGame = daoGame.getAverageMatch(username);
         Integer bestScore = daoGame.getBestPointsPoints(username);
-        
+
         StringBuilder sb = new StringBuilder();
         sb.append("Game Played : ").append(numGame).append("\n");
         if (bestScore == -1) {
@@ -256,13 +252,53 @@ public class HomeController implements Initializable {
         } else {
             sb.append(String.format("Average Points : %.2f%%\n", averageGame));
         }
-        
+
         if (pointsLastGame == -1) {
             sb.append("Last Game Played : -\n");
         } else {
             sb.append("Last Game Played : ").append(pointsLastGame).append("/100\n");
         }
-        
+
         statisticsLabel.setText(sb.toString());
+    }
+
+    private void updateLabelRules(String difficulty) {
+        String text = "";
+        switch (difficulty.toLowerCase()) {
+            case "facile":
+                text = " Welcome to Wordageddon!"
+                + "The game that trains your mind through reading and memory!\n"
+                + "Your goal is to read one or more texts and remember as much information as possible"
+                + "in the shortest time. The chosen difficulty level determines the amount of text"
+                + "and the time available:\n"
+                + "Easy:\n"
+                + "- 1 short text (≤ 250 words)\n"
+                + "- Reading time: 4 minutes\n";
+                break;
+            case "media":
+                text =  " Welcome to Wordageddon!"
+                + "The game that trains your mind through reading and memory!\n"
+                + "Your goal is to read one or more texts and remember as much information as possible"
+                + "in the shortest time. The chosen difficulty level determines the amount of text"
+                + "and the time available:\n"
+                + "Medium:\n"
+                + "- medium-length texts (250–750 words each)\n"
+                + "- Reading time: 6 minutes\n";
+                break;
+            case "difficile":
+                text =  " Welcome to Wordageddon!"
+                + "The game that trains your mind through reading and memory!\n"
+                + "Your goal is to read one or more texts and remember as much information as possible"
+                + "in the shortest time. The chosen difficulty level determines the amount of text"
+                + "and the time available:\n"
+                + "Hard:\n"
+                + "- long texts (750–1000 words each)\n"
+                + "- Reading time: 9 minutes\n"
+                + "Get ready to challenge your memory!";
+                break;
+            default:
+                text = "Please select a difficulty.";
+        }
+        labelRules.setText(text); // Imposta il testo del Label
     }
 }

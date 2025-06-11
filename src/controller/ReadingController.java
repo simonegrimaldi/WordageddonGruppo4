@@ -10,11 +10,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import model.Quiz;
+import util.AlertManager;
 
 /**
  * @class ReadingController
@@ -49,6 +51,7 @@ public class ReadingController implements Initializable {
 
     private String username_read;
 
+    private AlertManager alertManager = new AlertManager();
     private ChangeView controller;
     private Timeline timeline;
     private int timer = 0;
@@ -94,10 +97,19 @@ public class ReadingController implements Initializable {
      */
     @FXML
     private void closeButtonClick(ActionEvent event) {
-        if (timeline != null) {
-            timeline.stop();
+        // Chiamata al metodo showAlert per chiedere conferma
+        ButtonType response = alertManager.showAlert("Attenzione", "Sei sicuro di voler uscire?", "CONFIRMATION");
+
+        // Se l'utente ha premuto "OK", ferma il timer e torna alla schermata Home
+        if (response == ButtonType.OK) {
+            if (timeline != null) {
+                timeline.stop();
+            }
+            controller.goHome(username_read);
+        } else {
+            // Se l'utente ha premuto "Annulla", non fare nulla
+            System.out.println("L'utente ha deciso di non uscire.");
         }
-        controller.goHome(username_read);
     }
 
     /**

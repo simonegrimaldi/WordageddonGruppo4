@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 
 /**
@@ -99,7 +100,7 @@ public class LogInController implements Initializable {
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            alertManager.showAlert("ERRORE", "entrambi i campi Username e Password devono essere compilati", "error");
+            ButtonType response =alertManager.showAlert("ERRORE", "entrambi i campi Username e Password devono essere compilati", "error");
             return;
         }
         String userType = daoUser.authentication(username, password);
@@ -110,7 +111,7 @@ public class LogInController implements Initializable {
                 controller.goHome(username);
             }
         } else {
-            alertManager.showAlert("Errore", "Username o password errati", "ERROR");
+            ButtonType response = alertManager.showAlert("Errore", "Username o password errati", "ERROR");
         }
     }
 }
