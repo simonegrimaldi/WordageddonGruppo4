@@ -39,7 +39,7 @@
                               <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="500.0" promptText="Insert password" styleClass="inputField" />
                               
                               <!-- TextField per la password visibile in chiaro -->
-                              <TextField fx:id="passwordTextField" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="500.0" styleClass="inputField" visible="false" />
+                              <TextField fx:id="passwordTextField" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="500.0" styleClass="inputField" visible="false" />
 
                               <!-- Icona dell'occhio per alternare la visibilità della password -->
                               <ImageView fx:id="simboloMostraPassword" fitHeight="21.0" fitWidth="21.0" onMouseClicked="#viewPassword" pickOnBounds="true" preserveRatio="true">
@@ -47,7 +47,7 @@
                                     <Insets left="450.0" />
                                  </StackPane.margin>
                                  <image>
-                                    <Image url="@../utilities/icons8-occhio-chiuso-50.png" />
+                                    <Image url="@../utilities/hidden.png" />
                                  </image>
                               </ImageView>
                            </children>

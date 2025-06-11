@@ -116,7 +116,8 @@ public class SignUpController implements Initializable {
         passwordTextField.setText(passwordField.getText());  // Copia la password nel TextField
         
         // Cambia l'icona in "occhio aperto"
-        simboloMostraPassword.setImage(new Image(getClass().getResource("@../utilities/occhio-chiuso.png").toExternalForm()));
+simboloMostraPassword.setImage(new Image(getClass().getResource("/utilities/eye.png").toExternalForm()));
+
     } else {
         // Se la password è visibile, nascondiamola
         passwordTextField.setVisible(false);
@@ -124,7 +125,7 @@ public class SignUpController implements Initializable {
         passwordField.setText(passwordTextField.getText());  // Copia la password dal TextField nel PasswordField
         
         // Cambia l'icona in "occhio chiuso"
-        simboloMostraPassword.setImage(new Image(getClass().getResource("../utilities/occhio-chiuso.png").toExternalForm()));
+        simboloMostraPassword.setImage(new Image(getClass().getResource("/utilities/hidden.png").toExternalForm()));
     }
 }
 
