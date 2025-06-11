@@ -17,9 +17,22 @@ import model.Quiz;
 import model.QuizBuilder;
 
 /**
- * Il ChangeViewController è responsabile del cambio di view all'interno dell'
- * applicazione JavaFX. Implementa l'interfaccia {@code ChangeView} e fornisce i
- * metodi per navigare tra le diverse schermate.
+ * @class ChangeViewController
+ *
+ * @breif Gestisce la navigazione tra le varie schermate dell'applicazione
+ *
+ * La classe è responsabile della navigazione tra le schermate
+ * dell'applicazione. Implementa l'interfaccia {@link ChangeView} e fornisce i
+ * metodi necessari per il caricamento e il cambiamento delle viste.
+ *
+ * Inoltre, la classe gestisce anche l'inizializzazione dei controller per ogni
+ * schermata, passando le dipendenze necessarie e settando i dati dell'utente
+ * per ciascuna vista.
+ *
+ * NOTA: la documentazione dei metodi che forniscono un implementazione concreta
+ * dei metodi definiti nell'interfaccia è presenta nell'interfaccia
+ * {@link ChangeView}
+ *
  */
 public class ChangeViewController implements ChangeView {
 
@@ -29,23 +42,19 @@ public class ChangeViewController implements ChangeView {
     private Quiz quiz;
 
     /**
-     * Costruttore del {@code ChangeViewController}.
+     * @brief Costruttore del {@code ChangeViewController}.
+     *
+     * Inizializza il controller con il {@code PrimaryStage} che gestisce le
+     * varie scene dell'applicazione.
      *
      * @pre {@code primaryStage} non è null
      * @post il controller è pronto a gestire il cambio viste
-     * @param primaryStage Lo stage principale su cui impostare le scene.
+     * @param primaryStage Lo stage principale su cui impostare le varie scene
      */
     public ChangeViewController(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
-    /**
-     * Carica e mostra la schermata signUp
-     *
-     * @pre -
-     * @post visualizzazione della schermata signUp
-     * @param username
-     */
     @Override
     public void goSignUp() {
         try {
@@ -55,13 +64,6 @@ public class ChangeViewController implements ChangeView {
         }
     }
 
-    /**
-     * Carica e mostra la schermata LogIn
-     *
-     * @pre -
-     * @post visualizzazione della schermata LogIn
-     * @param username
-     */
     @Override
     public void goLogIn() {
         try {
@@ -71,13 +73,6 @@ public class ChangeViewController implements ChangeView {
         }
     }
 
-    /**
-     * Carica e mostra la schermata AdminPanel
-     *
-     * @pre l'utente possiede effettua l'accesso con credenziali admin
-     * @post visualizzazione della schermata AdminPanel
-     * @param username
-     */
     @Override
     public void goAdminPanel(String superUsername) {
         this.username = superUsername;
@@ -88,13 +83,6 @@ public class ChangeViewController implements ChangeView {
         }
     }
 
-    /**
-     * Carica e mostra la schermata home
-     *
-     * @pre l'utente è autenticato
-     * @post visualizzazione della schermata home
-     * @param username
-     */
     @Override
     public void goHome(String username) {
         this.username = username;
@@ -105,16 +93,6 @@ public class ChangeViewController implements ChangeView {
         }
     }
 
-    /**
-     * Carica e mostra la schermata per la lettura dei testi
-     *
-     * @param difficulty
-     * @return
-     * @pre l'utente è autenticato
-     * @pre l'utente avvia una partita
-     * @post visualizzazione della schermata home
-     * @param username
-     */
     @Override
     public boolean goReading(String difficulty) {
         this.difficulty = difficulty;
@@ -131,14 +109,6 @@ public class ChangeViewController implements ChangeView {
         return true;
     }
 
-    /**
-     * Carica e mostra la schermata per la risposta alle domande
-     *
-     * @pre l'utente è autenticato
-     * @pre l'utente avvia una partita
-     * @post visualizzazione della schermata home
-     * @param username
-     */
     @Override
     public void goQuestion() {
         try {
@@ -149,11 +119,14 @@ public class ChangeViewController implements ChangeView {
     }
 
     /**
-     * Carica una vista FXML dal nome specificato, imposta il controller e
-     * aggiorna la scena.
+     * @brief Carica una vista FXML dal nome specificato, imposta il controller
+     * appropriato e aggiorna la scena.
      *
-     * @pre {@code fxml} è uno tra : {Home, LogIn, SignUp, AdminPanel, Reading,
-     * Question}
+     * Il metodo carica il file FXML specificato, imposta il controller
+     * appropriato e procede ad aggiornare la scena
+     *
+     * @pre L'{@code fxml} è uno tra : {Home, LogIn, SignUp, AdminPanel,
+     * Reading, Question}
      * @post la scena corrente è aggiornata con la nuova vista e il relativo
      * controller inizializzato.
      *
