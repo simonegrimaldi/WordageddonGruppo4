@@ -42,9 +42,6 @@ public class QuestionController implements Initializable {
     @FXML
     private Button cancelButton;
 
-    /**
-     * Initializes the controller class.
-     */
     ChangeView controller;
     @FXML
     private Label question1;
@@ -138,10 +135,10 @@ public class QuestionController implements Initializable {
         for (int i = 0; i < domande.size(); i++) {
             Question q = domande.get(i);
 
-            // Imposta il testo della domanda dinamicamente
+            
             questionLabels[i].setText(q.getQuestionText());
             System.out.println(q.getOptions());
-            // Imposta le risposte dinamicamente
+            
             for (int j = 0; j < q.getOptions().size(); j++) {
                 answerLabels[i][j].setText(q.getOptions().get(j).toString());
             }
@@ -166,12 +163,11 @@ public class QuestionController implements Initializable {
     private void confirmButtonClick(ActionEvent event) throws Exception {
         List<String> selectedAnswers = new ArrayList<>();
 
-        // Recupera la risposta selezionata da ciascun ToggleGroup
-        selectedAnswers.add(getSelectedAnswer(group1)); // Risposta per la prima domanda
-        selectedAnswers.add(getSelectedAnswer(group2)); // Risposta per la seconda domanda
-        selectedAnswers.add(getSelectedAnswer(group3)); // Risposta per la terza domanda
-        selectedAnswers.add(getSelectedAnswer(group4)); // Risposta per la quarta domanda
-        selectedAnswers.add(getSelectedAnswer(group5)); // Risposta per la quinta domanda
+        selectedAnswers.add(getSelectedAnswer(group1)); 
+        selectedAnswers.add(getSelectedAnswer(group2)); 
+        selectedAnswers.add(getSelectedAnswer(group3)); 
+        selectedAnswers.add(getSelectedAnswer(group4)); 
+        selectedAnswers.add(getSelectedAnswer(group5)); 
         quiz.setPoints(selectedAnswers);
         int score = quiz.getPoints();
 
@@ -196,6 +192,14 @@ public class QuestionController implements Initializable {
         controller.goHome(username);
     }
 
+    /**
+     * @brief Restituisce la risposta selezionata da un toggle group
+     * 
+     * 
+     * @param group rappresenta il ToggleGroup contenente le risposte
+     * @return la risposta selezionata sotto forma di stringa, o null nel caso
+     * in cui non sia stata selezionata nessuna opzione
+     */
     private String getSelectedAnswer(ToggleGroup group) {
         RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
 
