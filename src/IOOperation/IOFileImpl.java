@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package IOOperation;
 
 import java.io.File;
@@ -14,20 +9,31 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Carica il contenuto di un file di testo.
+ * @class IOFileImpl
  *
- * Questo metodo apre un file di testo, legge ogni sua riga e restituisce il
- * contenuto come una stringa. Se il file non viene trovato, restituisce un
- * messaggio di errore.
+ * @brief Implementazione concreta per l'interfaccia 'IOFile' per il salvataggio
+ * e il caricamento dei file
  *
- * @param filename Il nome del file da caricare (senza estensione .txt).
- * @return Il contenuto del file come una stringa, o un messaggio di errore se
- * il file non è stato trovato.
- * @throws FileNotFoundException Se il file non viene trovato nel percorso
- * specificato.
+ * La classe fornisce le operazioni concrete per il contenuto di un file di
+ * testo e per salvare un file in una destinazione specificata.
+ *
  */
 public class IOFileImpl implements IOFile {
 
+    /**
+     * @brief Carica il contenuto di uno o più file di testo
+     *
+     * Il metodo apre ogni file presente nell'elenco 'filePaths', legge il
+     * contenuto di ogni file e restituisce il risultato complessivo concatenato
+     * in una stringa.
+     *
+     * Nel caso in cui uno dei file non viene trovato, verrà sollevata un
+     * eccezione e stampato un messaggio che ci avvisa che il file non è stato
+     * trovato.
+     *
+     * @param filename lista dei file da caricare
+     * @return Il contenuto del file selezionato sotto forma di unica Stringa
+     */
     @Override
     public String loadFile(List<String> filePaths) {
         System.out.println(filePaths);
@@ -51,6 +57,19 @@ public class IOFileImpl implements IOFile {
         return contenutoComplessivo.toString();
     }
 
+    /**
+     * @brief Salva il contenuto di un file selezionato in uno specifico file di
+     * destinazione
+     *
+     * In particolare, il metodo copia il contenuto del 'selectedFile' nel file
+     * di destinazione 'destFile'. Nel caso in cui il file di destinazione
+     * esista già, allora questo verrà sovrascritto.
+     *
+     * @param destFile il file di destinazione dove il contenuto verrà copiato
+     * @param selectedFile il file di origine da cui copiare il contenuto
+     * @return 'true' se il file è stato salvato con successo, altrimenti
+     * 'false'
+     */
     @Override
     public boolean saveFile(File destFile, File selectedFile) {
         try {
