@@ -22,10 +22,10 @@ public interface IOTexts {
      * I testi verranno letti dalla cartella corrispondente alla difficoltà e
      * restituiti sotto forma di stringa concatenata.
      *
-     * @param difficolta la difficoltà secondo la quale recuperare i
+     * @param difficulty la difficoltà secondo la quale recuperare i
      * testi(facile, medio, difficile)
      * @return Una lista di stringhe che contiene i percorsi associati ai file
      * che sono stati scelti.
      */
-    public List<String> cercaTesti(String difficolta);
+    public List<String> cercaTesti(String difficulty);
 }
