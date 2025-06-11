@@ -153,8 +153,6 @@ public class HomeController implements Initializable {
         if (!profileContainer.isVisible()) {
             profileContainer.setVisible(true);
             playContainer.setVisible(false);
-        } else {
-            profileContainer.setVisible(false);
         }
     }
 
@@ -170,8 +168,6 @@ public class HomeController implements Initializable {
         if (!playContainer.isVisible()) {
             playContainer.setVisible(true);
             profileContainer.setVisible(false);
-        } else {
-            playContainer.setVisible(false);
         }
     }
     
@@ -249,12 +245,11 @@ public class HomeController implements Initializable {
         Integer bestScore = daoGame.getBestPointsPoints(username);
         
         StringBuilder sb = new StringBuilder();
-        sb.append("Your Score\n");
         sb.append("Game Played : ").append(numGame).append("\n");
         if (bestScore == -1) {
             sb.append("Non hai mai giocato! Cosa aspetti ?");
         } else {
-            sb.append(String.format("Your best score : " + bestScore + "\n"));
+            sb.append(String.format("Your record : " + bestScore + "\n"));
         }
         if (averageGame == -1.0) {
             sb.append("Average Points : -\n");

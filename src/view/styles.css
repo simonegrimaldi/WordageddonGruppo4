@@ -304,9 +304,16 @@
 }
 
 .statisticsClass {
-    -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
+    -fx-padding: 10;
+    -fx-background-color: #e7f1ff;
+    -fx-background-radius: 10;
+    -fx-border-color: #c6d9ec;
+    -fx-border-radius: 10;
+}
+
+.statisticsLabel {
     -fx-padding: 10;
     -fx-background-color: #e7f1ff;
     -fx-background-radius: 10;

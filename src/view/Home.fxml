@@ -45,7 +45,7 @@
                     </VBox.margin>
                 </HBox>
                 <!-- Contenitore play (nascosto di default) -->
-                <VBox fx:id="playContainer" alignment="TOP_CENTER" managed="false" prefHeight="406.0" prefWidth="698.0" snapToPixel="false" visible="false">
+                <VBox fx:id="playContainer" alignment="TOP_CENTER" managed="true" prefHeight="406.0" prefWidth="698.0" snapToPixel="false" visible="true">
                     <children>
                         <HBox alignment="CENTER" prefHeight="103.0" prefWidth="700.0" spacing="40.0">
                             <children>
@@ -84,7 +84,7 @@
                             <children>
                                 <VBox alignment="TOP_CENTER" prefHeight="195.0" prefWidth="269.0">
                                     <children>
-                                        <Label fx:id="ranking" alignment="TOP_CENTER" prefHeight="20.0" prefWidth="103.0" styleClass="rankingClass" text="Global Ranking">
+                                        <Label fx:id="ranking" alignment="TOP_CENTER" prefHeight="20.0" prefWidth="144.0" styleClass="rankingClass" text="GLOBAL RANKING">
                                             <VBox.margin>
                                                 <Insets bottom="10.0" top="5.0" />
                                             </VBox.margin>
@@ -103,12 +103,17 @@
                                 </VBox>
                                 <VBox alignment="TOP_CENTER" prefHeight="390.0" prefWidth="310.0" spacing="10.0">
                                     <children>
-                                        <Label fx:id="statisticsLabel" alignment="TOP_CENTER" lineSpacing="5.0" prefHeight="367.0" prefWidth="289.0" styleClass="statisticsClass" text="Your statistics :" textAlignment="CENTER" wrapText="true">
+                              <Label fx:id="statisticsTitle" alignment="TOP_CENTER" prefHeight="20.0" prefWidth="157.0" styleClass="rankingClass" text="YOUR STATISTICS">
+                                 <VBox.margin>
+                                    <Insets bottom="8.0" top="5.0" />
+                                 </VBox.margin>
+                              </Label>
+                                        <Label fx:id="statisticsLabel" alignment="CENTER" lineSpacing="20.0" prefHeight="238.0" prefWidth="289.0" styleClass="statisticsLabel" textAlignment="CENTER" wrapText="true">
                                             <font>
-                                                <Font name="System Bold" size="14.0" />
+                                                <Font name="System Bold" size="18.0" />
                                             </font>
                                             <VBox.margin>
-                                                <Insets top="30.0" />
+                                                <Insets />
                                             </VBox.margin>
                                         </Label>
                                     </children>
