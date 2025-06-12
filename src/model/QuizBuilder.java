@@ -89,8 +89,8 @@ public class QuizBuilder {
         List<Question> domande = new ArrayList<>();
 
         if (!analisi.isEmpty()) {
-            domande.add(new FrequencyQuestion((Analysis) analisi.get(0)));
-            domande.add(new FrequencyQuestion((Analysis) analisi.get(0)));
+            domande.add(new FrequencyQuestion(analisi));
+            domande.add(new FrequencyQuestion(analisi));
             domande.add(new RelativeFrequencyQuestion(analisi));
             domande.add(new RelativeFrequencyQuestion(analisi));
         }

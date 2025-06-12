@@ -34,7 +34,7 @@ public class RelativeFrequencyQuestion extends Question<String> {
      * generare la domanda.
      */
     public RelativeFrequencyQuestion(List<AnalysisImpl> analyses) {
-        this.question = "Quale tra le seguenti parole è la più frequente in tutti i documenti?";
+        this.question = "Quale tra le seguenti parole è comparsa più volte?";
         AnalysisImpl total = new AnalysisImpl();
 
         for (AnalysisImpl a : analyses) {

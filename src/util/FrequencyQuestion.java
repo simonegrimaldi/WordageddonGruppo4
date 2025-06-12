@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import model.Analysis;
+import model.AnalysisImpl;
 
 /**
  * @class FrequencyQuestion
@@ -29,10 +30,12 @@ public class FrequencyQuestion extends Question<Integer> {
      *
      * @param analysis L'analisi del documento da cui verrà estratta la parola e la frequenza. 
      */
-    public FrequencyQuestion(Analysis analysis) {
-        String p = analysis.getRandom();
-        super.question = "Quante volte compare la parola \"" + p + "\"?";
-        super.answer = analysis.frequency(p);
+    public FrequencyQuestion(List<AnalysisImpl> analyses) {
+        int numero = new Random().nextInt(analyses.size());
+        AnalysisImpl selected = analyses.get(numero);
+        String p = analyses.get(numero).getRandom();
+        super.question = "Quante volte compare la parola \"" + p + "\" nel testo numero " + (numero+1) + "?";
+        super.answer = selected.frequency(p);
         super.options = generateOptions(answer);
     }
 
