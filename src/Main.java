@@ -10,7 +10,7 @@ public class Main extends Application {
         ChangeViewController controller = new ChangeViewController(primaryStage);
         
         // Mostra la schermata di login
-        controller.goLogIn();
+        controller.goEntry();
     }
 
     public static void main(String[] args) {

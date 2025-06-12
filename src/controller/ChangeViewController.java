@@ -117,6 +117,15 @@ public class ChangeViewController implements ChangeView {
             e.printStackTrace();
         }
     }
+    
+    @Override
+    public void goEntry(){
+        try {
+            show("Entry");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * @brief Carica una vista FXML dal nome specificato, imposta il controller
@@ -139,6 +148,13 @@ public class ChangeViewController implements ChangeView {
         Parent root = loader.load();
 
         switch (fxml) {
+            
+            case "Entry":
+                EntryController entryController =loader.getController();
+                        entryController.setChangeViewController(this);               
+                break;
+                
+                
             case "Home":
                 HomeController homeController = loader.getController();
                  {

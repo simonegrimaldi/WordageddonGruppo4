@@ -73,4 +73,6 @@ public interface ChangeView {
      * appena letto.
      */
     public void goQuestion();
+    
+    public void goEntry();
 }
