@@ -148,9 +148,6 @@ public class ReadingController implements Initializable {
      * automatico dall'applicazione.
      */
     public void startTimer() {
-        if (timeline != null) {
-            timeline.stop();
-        }
 
         int totalSeconds;
 
@@ -167,42 +164,32 @@ public class ReadingController implements Initializable {
             default:
                 totalSeconds = 600;
         }
-
         timer = totalSeconds;
         progressBar.setProgress(0);
         timerLabel.setText(formatTime(timer));
-        timerLabel.setStyle("-fx-text-fill: black;");
-
-        progressBar.getStyleClass().removeAll("warning");
-        if (!progressBar.getStyleClass().contains("normal")) {
-            progressBar.getStyleClass().add("normal");
+        if (timeline != null) {
+            timeline.stop();
         }
-
-        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+        timerLabel.setStyle("-fx-text-fill: balck;");
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             if (timer >= 0) {
                 timerLabel.setText(formatTime(timer));
-
+                timer--;
                 double progress = (double) (totalSeconds - timer) / totalSeconds;
                 progressBar.setProgress(Math.min(progress, 1.0));
-
-                if (timer == 30) {
+                if (timer < 30) {
                     timerLabel.setStyle("-fx-text-fill: red;");
-
-                    progressBar.getStyleClass().removeAll("normal");
-                    if (!progressBar.getStyleClass().contains("warning")) {
-                        progressBar.getStyleClass().add("warning");
-                    }
                 }
-
-                timer--;
             } else {
                 timeline.stop();
-                confirmButton.fire();
             }
         }));
-
+        timeline.setOnFinished(event -> {
+            confirmButtonClick(null);
+        });
         timeline.setCycleCount(totalSeconds + 1);
         timeline.play();
+
     }
 
     /**

@@ -226,7 +226,7 @@
 
 /* ProgressBar rossa */
 .progressBar .bar {
-    -fx-background-color: black; /* oppure green, blue, ecc. */
+    -fx-background-color: red; /* oppure green, blue, ecc. */
 }
 
 

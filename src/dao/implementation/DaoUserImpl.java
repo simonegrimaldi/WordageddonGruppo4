@@ -62,6 +62,7 @@ public class DaoUserImpl implements DaoUser {
         if (checkPassword(password, password_ricevuta)) {
             return tipo;
         } else {
+            System.out.println(password + username);
             return null;
         }
     }
