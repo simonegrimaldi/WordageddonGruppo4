@@ -146,11 +146,11 @@ public class AnalysisImpl implements Serializable,Analysis {
      */
     public String difficulty() {
         if (this.wordCounter <= 250) {
-            return "facile";
+            return "easy";
         } else if (this.wordCounter > 250 && this.wordCounter <= 750) {
-            return "media";
+            return "medium";
         } else {
-            return "difficile";
+            return "hard";
         }
     }
 

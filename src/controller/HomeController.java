@@ -107,20 +107,20 @@ public class HomeController implements Initializable {
 
         rankingTable.setSelectionModel(null);
 
-        MenuItem easy = new MenuItem("Facile");
-        MenuItem medium = new MenuItem("Media");
-        MenuItem hard = new MenuItem("Difficile");
+        MenuItem easy = new MenuItem("Easy");
+        MenuItem medium = new MenuItem("Medium");
+        MenuItem hard = new MenuItem("Hard");
         easy.setOnAction(e -> {
-            difficultyChooser.setText("Facile");
-            updateLabelRules("Facile");
+            difficultyChooser.setText("Easy");
+            updateLabelRules("Easy");
         });
         medium.setOnAction(e -> {
-            difficultyChooser.setText("Media");
-            updateLabelRules("Media");
+            difficultyChooser.setText("Medium");
+            updateLabelRules("Medium");
         });
         hard.setOnAction(e -> {
-            difficultyChooser.setText("Difficile");
-            updateLabelRules("Difficile");
+            difficultyChooser.setText("Hard");
+            updateLabelRules("Hard");
         });
         difficultyChooser.getItems().addAll(easy, medium, hard);
     }
@@ -265,7 +265,7 @@ public class HomeController implements Initializable {
     private void updateLabelRules(String difficulty) {
         String text = "";
         switch (difficulty.toLowerCase()) {
-            case "facile":
+            case "easy":
                 text = " Welcome to Wordageddon!"
                 + "The game that trains your mind through reading and memory!\n"
                 + "Your goal is to read one or more texts and remember as much information as possible"
@@ -276,7 +276,7 @@ public class HomeController implements Initializable {
                 + "- Reading time: 5 minutes\n"
                 + "Get ready to challenge your memory!";                
                 break;
-            case "media":
+            case "medium":
                 text =  " Welcome to Wordageddon!"
                 + "The game that trains your mind through reading and memory!\n"
                 + "Your goal is to read one or more texts and remember as much information as possible"
@@ -287,7 +287,7 @@ public class HomeController implements Initializable {
                 + "- Reading time:  7 minutes\n"
                 + "Get ready to challenge your memory!";                
                 break;
-            case "difficile":
+            case "hard":
                 text =  " Welcome to Wordageddon!"
                 + "The game that trains your mind through reading and memory!\n"
                 + "Your goal is to read one or more texts and remember as much information as possible"

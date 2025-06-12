@@ -159,13 +159,13 @@ public class ReadingController implements Initializable {
         int totalSeconds;
 
         switch (difficulty.toLowerCase()) {
-            case "facile":
+            case "easy":
                 totalSeconds = 300;
                 break;
-            case "media":
+            case "medium":
                 totalSeconds = 420;
                 break;
-            case "difficile":
+            case "hard":
                 totalSeconds = 540;
                 break;
             default:

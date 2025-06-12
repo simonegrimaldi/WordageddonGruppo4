@@ -42,17 +42,16 @@ public class IOTextsImpl implements IOTexts {
     public List<String> cercaTesti(String difficulty) {
         int numTesti = 0;
         switch (difficulty.toLowerCase()) {
-            case "facile":
+            case "easy":
                 numTesti = 1;
                 break;
-            case "media":
+            case "medium":
                 numTesti = 2;
                 break;
-            case "difficile":
+            case "hard":
                 numTesti = 3;
                 break;
             default:
-                System.err.println("Difficoltà non riconosciuta: " + difficulty);
                 return null;
         }
 
@@ -75,9 +74,7 @@ public class IOTextsImpl implements IOTexts {
                 risultati.add(path + "/" + name);
             }
         }
-        System.out.println(risultati);
         Collections.shuffle(risultati);
-        System.out.println(risultati.subList(0, Math.min(numTesti, risultati.size())));
         return risultati.subList(0, Math.min(numTesti, risultati.size()));
     }
 
