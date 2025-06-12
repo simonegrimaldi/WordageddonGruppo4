@@ -19,21 +19,22 @@ import util.AlertManager;
 
 /**
  * @class QuestionController
- * 
+ *
  * @brief Controller per la schermata delle domande del quiz. Gestisce la
  * visualizzazione delle domande e delle risposte, raccoglie le risposte
  * selezionate, calcola il punteggio e interagisce con il database per salvare
  * il punteggio ottenuto dall'utente.
- * 
- * il controller gestisce la logica per mostrare le domande e le opzioni di risposta,
- * reccogliere le risposte selezionate dall'utente, calcolare il punteggio ottenuto
- * al quiz, mostrare un messaggio di successo contenente il punteggio ottenuto
- * dal giocatore, salvare il punteggio ottenuto dall'utente sul database. 
- * 
- * Come caso eccezionale il giocatore può anche scegliere di annullare la partita,
- * in questo caso verrà annullata la partita e sarà come se il giocatore non l'abbia
- * mai iniziata. 
- * 
+ *
+ * il controller gestisce la logica per mostrare le domande e le opzioni di
+ * risposta, reccogliere le risposte selezionate dall'utente, calcolare il
+ * punteggio ottenuto al quiz, mostrare un messaggio di successo contenente il
+ * punteggio ottenuto dal giocatore, salvare il punteggio ottenuto dall'utente
+ * sul database.
+ *
+ * Come caso eccezionale il giocatore può anche scegliere di annullare la
+ * partita, in questo caso verrà annullata la partita e sarà come se il
+ * giocatore non l'abbia mai iniziata.
+ *
  *
  */
 public class QuestionController implements Initializable {
@@ -111,15 +112,14 @@ public class QuestionController implements Initializable {
     private ToggleGroup group5;
 
     /**
-     * @brief Imposta il controller di navigazione, il quiz, il
-     * nome utente e la difficoltà.Recupera e imposta le domande e le risposte
-     * dinamicamente.
-     * 
+     * @brief Imposta il controller di navigazione, il quiz, il nome utente e la
+     * difficoltà.Recupera e imposta le domande e le risposte dinamicamente.
+     *
      * @param controller
      * @param daoGame
      * @param quiz
      * @param username
-     * @param difficulty 
+     * @param difficulty
      */
     public void setChangeViewController(ChangeView controller, DaoGame daoGame, Quiz quiz, String username, String difficulty) {
         this.controller = controller;
@@ -136,10 +136,9 @@ public class QuestionController implements Initializable {
         for (int i = 0; i < domande.size(); i++) {
             Question q = domande.get(i);
 
-            
             questionLabels[i].setText(q.getQuestionText());
             System.out.println(q.getOptions());
-            
+
             for (int j = 0; j < q.getOptions().size(); j++) {
                 answerLabels[i][j].setText(q.getOptions().get(j).toString());
             }
@@ -153,98 +152,94 @@ public class QuestionController implements Initializable {
     }
 
     /**
-     * @brief Metodo che gestisce il click sul pulsante di conferma. Raccoglie le
-     * risposte selezionate , calcola il punteggio ottenuto dall'utente e mostra un
-     * messaggio di successo. Infine salva il punteggio sul databse.
-     * 
+     * @brief Metodo che gestisce il click sul pulsante di conferma. Raccoglie
+     * le risposte selezionate , calcola il punteggio ottenuto dall'utente e
+     * mostra un messaggio di successo. Infine salva il punteggio sul databse.
+     *
      * @param event
-     * @throws Exception 
+     * @throws Exception
      */
- @FXML
-private void confirmButtonClick(ActionEvent event) throws Exception {
-    List<String> selectedAnswers = new ArrayList<>();
-    List<String> correctAnswers = new ArrayList<>();
-    StringBuilder resultMessage = new StringBuilder();
-    int totalScore = 0;
+    @FXML
+    private void confirmButtonClick(ActionEvent event) throws Exception {
+        List<String> selectedAnswers = new ArrayList<>();
+        List<String> correctAnswers = new ArrayList<>();
+        StringBuilder resultMessage = new StringBuilder();
+        int totalScore = 0;
 
-    selectedAnswers.add(getSelectedAnswer(group1)); 
-    selectedAnswers.add(getSelectedAnswer(group2)); 
-    selectedAnswers.add(getSelectedAnswer(group3)); 
-    selectedAnswers.add(getSelectedAnswer(group4)); 
-    selectedAnswers.add(getSelectedAnswer(group5)); 
+        selectedAnswers.add(getSelectedAnswer(group1));
+        selectedAnswers.add(getSelectedAnswer(group2));
+        selectedAnswers.add(getSelectedAnswer(group3));
+        selectedAnswers.add(getSelectedAnswer(group4));
+        selectedAnswers.add(getSelectedAnswer(group5));
 
-
-    for (int i = 0; i < quiz.getDomande().size(); i++) {
-        Question q = quiz.getDomande().get(i);
-        correctAnswers.add(q.getAnswer().toString()); 
-    }
-
-
-    for (int i = 0; i < selectedAnswers.size(); i++) {
-        String selectedAnswer = selectedAnswers.get(i);
-        String correctAnswer = correctAnswers.get(i);
-
-
-        int questionScore = 0;
-       
-
-        if (selectedAnswer != null && selectedAnswer.equals(correctAnswer)) {
-            questionScore = 10;
-            totalScore =totalScore+10; 
-        } 
-       
-        else if (selectedAnswer != null) {
-            questionScore = -3;
-            totalScore -= 3;
+        for (int i = 0; i < quiz.getDomande().size(); i++) {
+            Question q = quiz.getDomande().get(i);
+            correctAnswers.add(q.getAnswer().toString());
         }
-        
-        if(selectedAnswer.equals(correctAnswer)){
-        
-        resultMessage.append("Domanda ").append(i + 1).append(": ")
-                .append(quiz.getDomande().get(i).getQuestionText()).append("\n")
-                .append("Risposta corretta: ").append(correctAnswer).append("\n")
-                .append("Risposta data: ").append(selectedAnswer).append("  ✓").append("\n")
-                .append("Punteggio per questa domanda: ").append(questionScore).append("\n\n");
-        }else{
-            resultMessage.append("Domanda ").append(i + 1).append(": ")
-                .append(quiz.getDomande().get(i).getQuestionText()).append("\n")
-                .append("Risposta corretta: ").append(correctAnswer).append("\n")
-                .append("Risposta data: ").append(selectedAnswer).append("  x").append("\n")
-                .append("Punteggio per questa domanda: ").append(questionScore).append("\n\n");
+
+        for (int i = 0; i < selectedAnswers.size(); i++) {
+            String selectedAnswer = selectedAnswers.get(i);
+            String correctAnswer = correctAnswers.get(i);
+
+            int questionScore = 0;
+
+            if (selectedAnswer != null && selectedAnswer.equals(correctAnswer)) {
+                questionScore = 10;
+                totalScore = totalScore + 10;
+            } else if (selectedAnswer != null) {
+                questionScore = -3;
+                totalScore -= 3;
+            }
+
+            if (selectedAnswer.equals(correctAnswer)) {
+
+                resultMessage.append("Domanda ").append(i + 1).append(": ")
+                        .append(quiz.getDomande().get(i).getQuestionText()).append("\n")
+                        .append("Risposta corretta: ").append(correctAnswer).append("\n")
+                        .append("Risposta data: ").append(selectedAnswer).append("  ✓").append("\n")
+                        .append("Punteggio per questa domanda: ").append(questionScore).append("\n\n");
+            } else {
+                resultMessage.append("Domanda ").append(i + 1).append(": ")
+                        .append(quiz.getDomande().get(i).getQuestionText()).append("\n")
+                        .append("Risposta corretta: ").append(correctAnswer).append("\n")
+                        .append("Risposta data: ").append(selectedAnswer).append("  x").append("\n")
+                        .append("Punteggio per questa domanda: ").append(questionScore).append("\n\n");
+            }
         }
+
+        resultMessage.append("Hai completato il quiz con un punteggio totale di: ").append(totalScore).append("\n");
+
+        ButtonType response = alertManager.showAlert("Risultato del quiz", resultMessage.toString(), "INFORMATION");
+
+        daoGame.inserisci(difficulty, totalScore, username);
+
+        controller.goHome(username);
     }
-
-
-    resultMessage.append("Hai completato il quiz con un punteggio totale di: ").append(totalScore).append("\n");
-
-
-    ButtonType response = alertManager.showAlert("Risultato del quiz", resultMessage.toString(), "INFORMATION");
-
-
-    daoGame.inserisci(difficulty, totalScore, username);
-
-    controller.goHome(username);
-}
-
-private String getSelectedAnswer(ToggleGroup group) {
-    RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
-    if (selectedRadioButton != null) {
-        return selectedRadioButton.getText();
-    }
-    return null;
-}
-
-
-
 
     /**
-     * @brief Metodo che gestisce il click sul pulsante di annullamento. 
-     * 
-     * Prima di riportare l'utente alla schermata Home, apparirà un'allert che 
-     * chiederà conferma all'utente che quella sia la sua reale intenzione. 
-     * 
+     * @brief Restituisce la risposta selezionata da un toggle group
+     *
+     *
+     * @param group rappresenta il ToggleGroup contenente le risposte
+     * @return la risposta selezionata sotto forma di stringa, o null nel caso
+     * in cui non sia stata selezionata nessuna opzione
+     */
+    private String getSelectedAnswer(ToggleGroup group) {
+        RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
+        if (selectedRadioButton != null) {
+            return selectedRadioButton.getText();
+        }
+        return null;
+    }
+
+    /**
+     * @brief Metodo che gestisce il click sul pulsante di annullamento.
+     *
+     * Prima di riportare l'utente alla schermata Home, apparirà un'allert che
+     * chiederà conferma all'utente che quella sia la sua reale intenzione.
+     *
      * @param event
-     * @throws Exception 
+     * @throws Exception
      */
     @FXML
     private void cancelButtonClick(ActionEvent event) throws Exception {
@@ -252,17 +247,7 @@ private String getSelectedAnswer(ToggleGroup group) {
         if (response == ButtonType.OK) {
             controller.goHome(username);
         }
-        
+
     }
-
-    /**
-     * @brief Restituisce la risposta selezionata da un toggle group
-     * 
-     * 
-     * @param group rappresenta il ToggleGroup contenente le risposte
-     * @return la risposta selezionata sotto forma di stringa, o null nel caso
-     * in cui non sia stata selezionata nessuna opzione
-     */
-
 
 }
