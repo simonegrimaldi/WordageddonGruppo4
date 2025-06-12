@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import util.Question;
@@ -14,8 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @class QuizBuilder
+ * @brief La classe costruisce un quiz in base alla difficoltà selezionata
+ * sfruttando i testi e le analisi
  *
- * @author corry
+ * La classe è responsabile della creazione del quiz. Utilizza l'interfaccio
+ * IOTexts per caricare i testi in base alla difficoltà e l'interfaccia
+ * IOAnalysis per caricare le analisi persistenti associate ai testi.
+ * Successivamente genera una lista di domande basata sulle analisi e crea un
+ * oggetto {@code Quiz}
+ *
  */
 public class QuizBuilder {
 
@@ -23,16 +27,39 @@ public class QuizBuilder {
     private IOAnalysis analysisReader;
     private String username;
 
+    /**
+     * @brief Costruttore della classe QuizBuilder
+     *
+     * Inizializza l'oggetto QuizBuilder con le interfacce necessarie per
+     * leggere i testi e le analisi, insieme al nome utente che sta per avviare
+     * il quiz
+     *
+     * @param textReader Interfaccia per la lettura dei testi
+     * @param analysisReader Interfaccia per la lettura delle analisi
+     * @param username Il nome utente che crea il quiz
+     */
     public QuizBuilder(IOTexts textReader, IOAnalysis analysisReader, String username) {
         this.textReader = textReader;
         this.analysisReader = analysisReader;
         this.username = username;
     }
 
+    /**
+     * @brief Crea un quiz in base alla difficoltà selezionata
+     *
+     * Il metodo carica i testi associati alla difficoltà, carica le relative
+     * analisi e genera una lista di domande. Infine crea un oggetto Quiz con i
+     * testi e le domande
+     *
+     * @param difficolta la difficoltà selezionata per il quiz
+     * @return un oggetto quiz contenente i testi e le domande generate, oppure
+     * null se non ci sono testi
+     */
     public Quiz creaQuiz(String difficolta) {
         List<String> testi = textReader.cercaTesti(difficolta);
-        if(testi == null)
-                return null;
+        if (testi == null) {
+            return null;
+        }
         List<AnalysisImpl> analisiList = new ArrayList<>();
 
         for (String nomeTesto : testi) {
@@ -47,10 +74,20 @@ public class QuizBuilder {
         return new Quiz(testi, domande, username);
     }
 
+    /**
+     * @brief Genera una lista di domande basate sulle analisi dei testi
+     *
+     * Questo metodo crea domande di frequenza assoluta, frequenza relatica e
+     * domande sui documenti, in base alla disponibilità e al numero di testi
+     * caricati
+     *
+     * @param analisi lista di oggetti di tipo AnalysisImpl contenenti le
+     * analisi dei testi
+     * @return Una lista di domande generate
+     */
     public List<Question> genera(List<AnalysisImpl> analisi) {
         List<Question> domande = new ArrayList<>();
 
-        // Aggiunge una domanda di frequenza per il primo testo (se presente)
         if (!analisi.isEmpty()) {
             domande.add(new FrequencyQuestion((Analysis) analisi.get(0)));
             domande.add(new FrequencyQuestion((Analysis) analisi.get(0)));
@@ -63,18 +100,6 @@ public class QuizBuilder {
         } else {
             domande.add(new DocumentQuestion(analisi));
         }
-
-        // Aggiunge una domanda di frequenza relativa se ci sono almeno 2 testi
-        /* if (analisi.size() >= 2) {
-            domande.add(new RelativeFrequencyQuestion(analisi));
-        }*/
-
- /* Aggiunge una domanda di esclusione se ci sono almeno 3 testi
-        if (analisi.size() >= 3) {
-            List<Analysis> inclusi = Collecti.(analisi.get(0));
-            List<AnalysisImpl> esclusi = analisi.subList(1, analisi.size());
-            domande.add(new ExclusionQuestion(inclusi, esclusi));
-        }*/
         return domande;
     }
 }
