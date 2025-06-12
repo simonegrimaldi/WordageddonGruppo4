@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignUpController">
    <children>
-      <VBox alignment="CENTER" fillWidth="false" layoutX="50.0" layoutY="50.0" prefHeight="405.0" prefWidth="800.0" spacing="20" styleClass="container" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
+      <VBox alignment="CENTER" fillWidth="false" layoutX="50.0" layoutY="50.0" prefHeight="405.0" prefWidth="800.0" spacing="10.0" styleClass="container" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label prefHeight="44.0" prefWidth="293.0" styleClass="title" text="Wordageddon App">
                <font>
@@ -61,8 +61,17 @@
                      </children>
                   </HBox>
                </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
             </VBox>
          </children>
+         <padding>
+            <Insets top="1.0" />
+         </padding>
       </VBox>
    </children>
+   <padding>
+      <Insets top="10.0" />
+   </padding>
 </AnchorPane>

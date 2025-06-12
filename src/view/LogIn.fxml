@@ -51,10 +51,10 @@
                               <TextField fx:id="passwordTextField" styleClass="inputField" visible="false" />
                               <ImageView fx:id="simboloMostraPassword" fitHeight="25.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                                  <StackPane.margin>
-                                    <Insets left="440.0" />
+                                    <Insets left="450.0" />
                                  </StackPane.margin>
                                  <image>
-                                    <Image url="@../utilities/eye.png" />
+                                    <Image url="@../utilities/hidden.png" />
                                  </image>
                               </ImageView>
                            </children>
