@@ -190,7 +190,7 @@ public class HomeController implements Initializable {
                 break;
             default:
                 if (!controller.goReading(selectedDifficulty)) {
-                    alertManager.showAlert("ERRORE", "Non ci sono testi disponibili per questa difficoltà", "ERROR");
+                    alertManager.showAlert("ERRORE", "Non ci sono abbastanza testi\ndisponibili per questa difficoltà", "ERROR");
                 }
                 return;
         }

@@ -65,7 +65,7 @@ public class IOTextsImpl implements IOTexts {
         List<String> fileNames = Arrays.stream(folder.list())
                 .filter(name -> name.endsWith(".txt"))
                 .collect(Collectors.toList());
-        if (fileNames.isEmpty()) {
+        if (fileNames.isEmpty() || fileNames.size() < numTesti) {
             return null;
         }
         List<String> risultati = new ArrayList<>();
