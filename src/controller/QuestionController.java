@@ -160,23 +160,82 @@ public class QuestionController implements Initializable {
      * @param event
      * @throws Exception 
      */
-    @FXML
-    private void confirmButtonClick(ActionEvent event) throws Exception {
-        List<String> selectedAnswers = new ArrayList<>();
+ @FXML
+private void confirmButtonClick(ActionEvent event) throws Exception {
+    List<String> selectedAnswers = new ArrayList<>();
+    List<String> correctAnswers = new ArrayList<>();
+    StringBuilder resultMessage = new StringBuilder();
+    int totalScore = 0;
 
-        selectedAnswers.add(getSelectedAnswer(group1)); 
-        selectedAnswers.add(getSelectedAnswer(group2)); 
-        selectedAnswers.add(getSelectedAnswer(group3)); 
-        selectedAnswers.add(getSelectedAnswer(group4)); 
-        selectedAnswers.add(getSelectedAnswer(group5)); 
-        quiz.setPoints(selectedAnswers);
-        int score = quiz.getPoints();
+    selectedAnswers.add(getSelectedAnswer(group1)); 
+    selectedAnswers.add(getSelectedAnswer(group2)); 
+    selectedAnswers.add(getSelectedAnswer(group3)); 
+    selectedAnswers.add(getSelectedAnswer(group4)); 
+    selectedAnswers.add(getSelectedAnswer(group5)); 
 
-        String message = String.format("Hai completato il quiz con un punteggio di: %d", score);
-        ButtonType response =alertManager.showAlert("Successo", message, "INFORMATION");
-        daoGame.inserisci(difficulty, quiz.getPoints(), username);
-        controller.goHome(username);
+
+    for (int i = 0; i < quiz.getDomande().size(); i++) {
+        Question q = quiz.getDomande().get(i);
+        correctAnswers.add(q.getAnswer().toString()); 
     }
+
+
+    for (int i = 0; i < selectedAnswers.size(); i++) {
+        String selectedAnswer = selectedAnswers.get(i);
+        String correctAnswer = correctAnswers.get(i);
+
+
+        int questionScore = 0;
+       
+
+        if (selectedAnswer != null && selectedAnswer.equals(correctAnswer)) {
+            questionScore = 10;
+            totalScore =totalScore+10; 
+        } 
+       
+        else if (selectedAnswer != null) {
+            questionScore = -3;
+            totalScore -= 3;
+        }
+        
+        if(selectedAnswer.equals(correctAnswer)){
+        
+        resultMessage.append("Domanda ").append(i + 1).append(": ")
+                .append(quiz.getDomande().get(i).getQuestionText()).append("\n")
+                .append("Risposta corretta: ").append(correctAnswer).append("\n")
+                .append("Risposta data: ").append(selectedAnswer).append("  ✓").append("\n")
+                .append("Punteggio per questa domanda: ").append(questionScore).append("\n\n");
+        }else{
+            resultMessage.append("Domanda ").append(i + 1).append(": ")
+                .append(quiz.getDomande().get(i).getQuestionText()).append("\n")
+                .append("Risposta corretta: ").append(correctAnswer).append("\n")
+                .append("Risposta data: ").append(selectedAnswer).append("  x").append("\n")
+                .append("Punteggio per questa domanda: ").append(questionScore).append("\n\n");
+        }
+    }
+
+
+    resultMessage.append("Hai completato il quiz con un punteggio totale di: ").append(totalScore).append("\n");
+
+
+    ButtonType response = alertManager.showAlert("Risultato del quiz", resultMessage.toString(), "INFORMATION");
+
+
+    daoGame.inserisci(difficulty, totalScore, username);
+
+    controller.goHome(username);
+}
+
+private String getSelectedAnswer(ToggleGroup group) {
+    RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
+    if (selectedRadioButton != null) {
+        return selectedRadioButton.getText();
+    }
+    return null;
+}
+
+
+
 
     /**
      * @brief Metodo che gestisce il click sul pulsante di annullamento. 
@@ -204,13 +263,6 @@ public class QuestionController implements Initializable {
      * @return la risposta selezionata sotto forma di stringa, o null nel caso
      * in cui non sia stata selezionata nessuna opzione
      */
-    private String getSelectedAnswer(ToggleGroup group) {
-        RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
 
-        if (selectedRadioButton != null) {
-            return selectedRadioButton.getText();
-        }
-        return null;
-    }
 
 }
