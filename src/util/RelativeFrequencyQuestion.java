@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package util;
 
 import java.util.ArrayList;
@@ -13,23 +8,35 @@ import java.util.Set;
 import model.AnalysisImpl;
 
 /**
+ * @class RelativeFrequencyQuestion
+ * @brief Rappresenta una domanda in cui l'utente deve identificare la parola
+ * più frequente tra tutte quelle presenti in più documenti.
  *
- * @author corry
+ * Questa classe estende la classe `Question` e genera una domanda del tipo:
+ * "Quale tra le seguenti parole è la più frequente in tutti i documenti?".
+ *
+ * La domanda viene generata utilizzando una lista di oggetti `AnalysisImpl` che
+ * vengono combinati per calcolare la frequenza di tutte le parole presenti nei
+ * documenti analizzati. La risposta corretta è la parola con la frequenza più
+ * alta.
  */
 public class RelativeFrequencyQuestion extends Question<String> {
-    
 
     /**
-     * Crea una domanda del tipo:
-     * "Quale tra le seguenti parole è la più frequente in tutti i documenti?"
+     * Costruisce una domanda del tipo "Quale tra le seguenti parole è la più
+     * frequente in tutti i documenti?". La domanda viene generata analizzando
+     * una lista di oggetti `AnalysisImpl` e selezionando quattro parole con
+     * frequenze differenti.
      *
-     * @param analyses Lista di oggetti Analysis da combinare.
+     * @param analyses La lista di oggetti `AnalysisImpl` che rappresentano le
+     * analisi dei documenti.
+     * @throws IllegalArgumentException Se non ci sono abbastanza parole per
+     * generare la domanda.
      */
     public RelativeFrequencyQuestion(List<AnalysisImpl> analyses) {
         this.question = "Quale tra le seguenti parole è la più frequente in tutti i documenti?";
         AnalysisImpl total = new AnalysisImpl();
- 
-        // Merge di tutte le analisi
+
         for (AnalysisImpl a : analyses) {
             total.mergeWith(a);
         }
@@ -39,15 +46,13 @@ public class RelativeFrequencyQuestion extends Question<String> {
             throw new IllegalArgumentException("Non ci sono abbastanza parole per generare la domanda.");
         }
 
-        // Seleziona 4 parole distinte a caso
         Set<String> selectedWords = new LinkedHashSet<>();
-        int lastFreq = -1; // Inizializza con un valore impossibile
-    
+        int lastFreq = -1;
+
         while (selectedWords.size() < 4) {
             String candidate = total.getRandom();
             int candidateFreq = total.frequency(candidate);
-        
-        // Aggiungi solo se la frequenza è diversa dalla precedente
+
             if (candidateFreq != lastFreq) {
                 selectedWords.add(candidate);
                 lastFreq = candidateFreq;
@@ -55,21 +60,26 @@ public class RelativeFrequencyQuestion extends Question<String> {
         }
 
         this.options = new ArrayList<>(selectedWords);
-        
-        // Trova quella con frequenza massima
-        this.answer = this.options.stream()
-            .max(Comparator.comparingInt(total::frequency))
-            .orElse(null);
 
-        
+        this.answer = this.options.stream()
+                .max(Comparator.comparingInt(total::frequency))
+                .orElse(null);
+
     }
 
+    /**
+     * @brief Valuta la risposta dell'utente.
+     *
+     * @param selectedAnswer La risposta selezionata dall'utente.
+     * @return Il punteggio ottenuto per la risposta: - 10 se la risposta è
+     * corretta - -3 se la risposta è errata
+     */
     @Override
     public int valuta(String selectedAnswer) {
-        if(selectedAnswer==null){
-                return 0;
+        if (selectedAnswer == null) {
+            return 0;
         }
-        return answerQuestion(selectedAnswer) ? 10 : -3 ;
+        return answerQuestion(selectedAnswer) ? 10 : -3;
     }
-    
+
 }

@@ -272,8 +272,9 @@ public class HomeController implements Initializable {
                 + "in the shortest time. The chosen difficulty level determines the amount of text"
                 + "and the time available:\n"
                 + "Easy:\n"
-                + "- 1 short text (≤ 250 words)\n"
-                + "- Reading time: 4 minutes\n";
+                + "- One short text (≤ 250 words)\n"
+                + "- Reading time: 5 minutes\n"
+                + "Get ready to challenge your memory!";                
                 break;
             case "media":
                 text =  " Welcome to Wordageddon!"
@@ -282,8 +283,9 @@ public class HomeController implements Initializable {
                 + "in the shortest time. The chosen difficulty level determines the amount of text"
                 + "and the time available:\n"
                 + "Medium:\n"
-                + "- medium-length texts (250–750 words each)\n"
-                + "- Reading time: 6 minutes\n";
+                + "- Two medium-length texts (250–750 words each)\n"
+                + "- Reading time:  7 minutes\n"
+                + "Get ready to challenge your memory!";                
                 break;
             case "difficile":
                 text =  " Welcome to Wordageddon!"
@@ -292,7 +294,7 @@ public class HomeController implements Initializable {
                 + "in the shortest time. The chosen difficulty level determines the amount of text"
                 + "and the time available:\n"
                 + "Hard:\n"
-                + "- long texts (750–1000 words each)\n"
+                + "- Three long texts (750–1000 words each)\n"
                 + "- Reading time: 9 minutes\n"
                 + "Get ready to challenge your memory!";
                 break;
