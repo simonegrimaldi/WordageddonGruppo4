@@ -36,7 +36,6 @@ public class IOFileImpl implements IOFile {
      */
     @Override
     public String loadFile(List<String> filePaths) {
-        System.out.println(filePaths);
         StringBuilder contenutoComplessivo = new StringBuilder();
 
         for (int i = 0; i < filePaths.size(); i++) {

@@ -190,7 +190,7 @@ public class HomeController implements Initializable {
                 break;
             default:
                 if (!controller.goReading(selectedDifficulty)) {
-                    alertManager.showAlert("ERRORE", "Non ci sono abbastanza testi\ndisponibili per questa difficoltà", "ERROR");
+                    alertManager.showAlert("ERRORE", "Non ci sono abbastanza testi disponibili per questa difficoltà", "ERROR");
                 }
                 return;
         }
@@ -267,40 +267,40 @@ public class HomeController implements Initializable {
         switch (difficulty.toLowerCase()) {
             case "easy":
                 text = " Welcome to Wordageddon!"
-                + "The game that trains your mind through reading and memory!\n"
-                + "Your goal is to read one or more texts and remember as much information as possible"
-                + "in the shortest time. The chosen difficulty level determines the amount of text"
-                + "and the time available:\n"
-                + "Easy:\n"
-                + "- One short text (≤ 250 words)\n"
-                + "- Reading time: 5 minutes\n"
-                + "Get ready to challenge your memory!";                
+                        + "The game that trains your mind through reading and memory!\n"
+                        + "Your goal is to read one or more texts and remember as much information as possible"
+                        + "in the shortest time. The chosen difficulty level determines the amount of text"
+                        + "and the time available:\n"
+                        + "Easy:\n"
+                        + "- One short text (≤ 250 words)\n"
+                        + "- Reading time: 5 minutes\n"
+                        + "Get ready to challenge your memory!";
                 break;
             case "medium":
-                text =  " Welcome to Wordageddon!"
-                + "The game that trains your mind through reading and memory!\n"
-                + "Your goal is to read one or more texts and remember as much information as possible"
-                + "in the shortest time. The chosen difficulty level determines the amount of text"
-                + "and the time available:\n"
-                + "Medium:\n"
-                + "- Two medium-length texts (250–750 words each)\n"
-                + "- Reading time:  7 minutes\n"
-                + "Get ready to challenge your memory!";                
+                text = " Welcome to Wordageddon!"
+                        + "The game that trains your mind through reading and memory!\n"
+                        + "Your goal is to read one or more texts and remember as much information as possible"
+                        + "in the shortest time. The chosen difficulty level determines the amount of text"
+                        + "and the time available:\n"
+                        + "Medium:\n"
+                        + "- Two medium-length texts (250–750 words each)\n"
+                        + "- Reading time:  7 minutes\n"
+                        + "Get ready to challenge your memory!";
                 break;
             case "hard":
-                text =  " Welcome to Wordageddon!"
-                + "The game that trains your mind through reading and memory!\n"
-                + "Your goal is to read one or more texts and remember as much information as possible"
-                + "in the shortest time. The chosen difficulty level determines the amount of text"
-                + "and the time available:\n"
-                + "Hard:\n"
-                + "- Three long texts (750–1000 words each)\n"
-                + "- Reading time: 9 minutes\n"
-                + "Get ready to challenge your memory!";
+                text = " Welcome to Wordageddon!"
+                        + "The game that trains your mind through reading and memory!\n"
+                        + "Your goal is to read one or more texts and remember as much information as possible"
+                        + "in the shortest time. The chosen difficulty level determines the amount of text"
+                        + "and the time available:\n"
+                        + "Hard:\n"
+                        + "- Three long texts (750–1000 words each)\n"
+                        + "- Reading time: 9 minutes\n"
+                        + "Get ready to challenge your memory!";
                 break;
             default:
                 text = "Please select a difficulty.";
         }
-        labelRules.setText(text); // Imposta il testo del Label
+        labelRules.setText(text);
     }
 }

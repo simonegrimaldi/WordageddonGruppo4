@@ -25,7 +25,7 @@ import javafx.scene.image.ImageView;
 public class SignUpController implements Initializable {
 
     @FXML
-    private TextField passwordTextField;  // Per la password visibile in chiaro
+    private TextField passwordTextField;
     @FXML
     private TextField usernameField;
     @FXML
@@ -34,7 +34,6 @@ public class SignUpController implements Initializable {
     private Button backButton;
     @FXML
     private Button SignUpButton;
-    
     @FXML
     private ImageView simboloMostraPassword;
 
@@ -63,9 +62,7 @@ public class SignUpController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         alert = new AlertManager();
-         // Gestiamo l'evento del clic sull'icona dell'occhio
-    simboloMostraPassword.setOnMouseClicked(event -> viewPassword());
-       
+        simboloMostraPassword.setOnMouseClicked(event -> viewPassword());
     }
 
     /**
@@ -110,26 +107,20 @@ public class SignUpController implements Initializable {
             }
         }
     }
+
     public void viewPassword() {
-    if (passwordField.isVisible()) {
-        // Se la password è nascosta, mostriamola in chiaro
-        passwordField.setVisible(false);
-        passwordTextField.setVisible(true);
-        passwordTextField.setText(passwordField.getText());  // Copia la password nel TextField
-        
-        // Cambia l'icona in "occhio aperto"
-    simboloMostraPassword.setImage(new Image(getClass().getResource("/utilities/eye.png").toExternalForm()));
+        if (passwordField.isVisible()) {
+            passwordField.setVisible(false);
+            passwordTextField.setVisible(true);
+            passwordTextField.setText(passwordField.getText());
+            simboloMostraPassword.setImage(new Image(getClass().getResource("/utilities/eye.png").toExternalForm()));
 
-    } else {
-        // Se la password è visibile, nascondiamola
-        passwordTextField.setVisible(false);
-        passwordField.setVisible(true);
-        passwordField.setText(passwordTextField.getText());  // Copia la password dal TextField nel PasswordField
-        
-        // Cambia l'icona in "occhio chiuso"
-        simboloMostraPassword.setImage(new Image(getClass().getResource("/utilities/hidden.png").toExternalForm()));
+        } else {
+            passwordTextField.setVisible(false);
+            passwordField.setVisible(true);
+            passwordField.setText(passwordTextField.getText());
+            simboloMostraPassword.setImage(new Image(getClass().getResource("/utilities/hidden.png").toExternalForm()));
+        }
     }
-}
-
 
 }

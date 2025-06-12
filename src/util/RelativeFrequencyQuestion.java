@@ -40,7 +40,6 @@ public class RelativeFrequencyQuestion extends Question<String> {
         for (AnalysisImpl a : analyses) {
             total.mergeWith(a);
         }
-        System.out.println(total.keySet().toString());
 
         if (total.size() < 4) {
             throw new IllegalArgumentException("Non ci sono abbastanza parole per generare la domanda.");

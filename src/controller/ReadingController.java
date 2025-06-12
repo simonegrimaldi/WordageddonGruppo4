@@ -50,7 +50,6 @@ public class ReadingController implements Initializable {
     private TextArea stampaTesti;
 
     private String username_read;
-
     private AlertManager alertManager = new AlertManager();
     private ChangeView controller;
     private Timeline timeline;
@@ -97,17 +96,14 @@ public class ReadingController implements Initializable {
      */
     @FXML
     private void closeButtonClick(ActionEvent event) {
-        // Chiamata al metodo showAlert per chiedere conferma
         ButtonType response = alertManager.showAlert("Attenzione", "Sei sicuro di voler uscire?", "CONFIRMATION");
 
-        // Se l'utente ha premuto "OK", ferma il timer e torna alla schermata Home
         if (response == ButtonType.OK) {
             if (timeline != null) {
                 timeline.stop();
             }
             controller.goHome(username_read);
         } else {
-            // Se l'utente ha premuto "Annulla", non fare nulla
             System.out.println("L'utente ha deciso di non uscire.");
         }
     }
@@ -217,11 +213,9 @@ public class ReadingController implements Initializable {
      * nell'area di testo della schermata di lettura.
      */
     public void caricaTesti() {
-        System.out.println(quiz.getTesti());
         String content = ioFile.loadFile(quiz.getTesti());
 
         if (content == null || content.isEmpty()) {
-            System.out.println("Nessun contenuto trovato!");
             return;
         }
 

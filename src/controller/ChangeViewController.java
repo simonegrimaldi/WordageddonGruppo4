@@ -191,7 +191,6 @@ public class ChangeViewController implements ChangeView {
                 break;
 
             default:
-                System.out.println("Unknown FXML: " + fxml);
                 break;
         }
         Scene scene = new Scene(root);

@@ -254,19 +254,20 @@ public class AdminPanelController implements Initializable {
     public Set<String> createStopWordsSet(Set<String> stopwords) {
 
         String text = textArea.getText().trim();
-        
-        try(Scanner s = new Scanner( new BufferedReader(new FileReader("./analyticsFile/stopWordsList.txt")))) {
+
+        try (Scanner s = new Scanner(new BufferedReader(new FileReader("./analyticsFile/stopWordsList.txt")))) {
             String str = null;
             s.useDelimiter(",");
             s.useLocale(Locale.US);
-            while(s.hasNext()) {
-                if((str = s.next().trim()) != null) 
+            while (s.hasNext()) {
+                if ((str = s.next().trim()) != null) {
                     stopwords.add(str.toLowerCase());
+                }
             }
-        } catch(IOException ex) {
-            System.out.println("Errore in lettura dal file delle StopWords!");
+        } catch (IOException ex) {
+            return null;
         }
-        
+
         if (!text.isEmpty()) {
             String[] components = text.split(",");
             for (String parola : components) {
@@ -276,7 +277,6 @@ public class AdminPanelController implements Initializable {
                 }
             }
         }
-        System.out.println("Lista stopwords : " + stopwords);
         return stopwords;
     }
 }

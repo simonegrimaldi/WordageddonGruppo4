@@ -49,11 +49,11 @@ public class DocumentQuestion extends Question<String> {
         Set<String> selectedWords = new LinkedHashSet<>();
         selectedWords.add(this.answer);
         while (selectedWords.size() < 4) {
-            selectedWords.add(selected.getRandom()); // PER IMPEDIRE DUPLICATI
+            selectedWords.add(selected.getRandom());
         }
 
         this.options = new ArrayList<>(selectedWords);
-        Collections.shuffle(this.options);  // mischiamo le opzioni
+        Collections.shuffle(this.options);
 
     }
 

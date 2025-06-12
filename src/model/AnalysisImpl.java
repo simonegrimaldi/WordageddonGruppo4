@@ -28,7 +28,7 @@ import util.AlertManager;
  *
  *
  */
-public class AnalysisImpl implements Serializable,Analysis {
+public class AnalysisImpl implements Serializable, Analysis {
 
     /**
      * @brief Mappa che associa parole (chiavi) a frequenze (valori).
@@ -67,10 +67,10 @@ public class AnalysisImpl implements Serializable,Analysis {
 
     /**
      * @brief Restituisce la frequenza associata a una parola.
-     * 
+     *
      * Nel caso in cui la parola non sia presente nella mappa verrà restituito
-     * zero. 
-     * 
+     * zero.
+     *
      * @param k La parola di cui si vuole conoscere la frequenza.
      * @return La frequenza della parola, o 0 se non è presente nella mappa.
      */
@@ -90,9 +90,9 @@ public class AnalysisImpl implements Serializable,Analysis {
     }
 
     /**
-     * @brief Restituisce una parola scelta casualmente dalla mappa (quindi una 
+     * @brief Restituisce una parola scelta casualmente dalla mappa (quindi una
      * parola presente nel testo che si sta analizzando).
-     * 
+     *
      * @return Una parola casuale, oppure null se la mappa è vuota.
      */
     public String getRandom() {
@@ -108,10 +108,10 @@ public class AnalysisImpl implements Serializable,Analysis {
 
     /**
      * @brief Unisce due analisi, sommando la frequenza delle parole comuni
-     * 
+     *
      * Le frequenze vengono sommate solo nel caso in cui la parola che stiamo
      * considerando è presente in entrambe le analisi
-     * 
+     *
      * @param other un altro ogetto AnalysisImpl da unire all'analisi corrente.
      */
     public void mergeWith(AnalysisImpl other) {
@@ -134,14 +134,13 @@ public class AnalysisImpl implements Serializable,Analysis {
     }
 
     /**
-     * @brief Determina la difficoltà del testo in base al numero di parole 
+     * @brief Determina la difficoltà del testo in base al numero di parole
      * significative che questo contiene
-     * 
-     * Classifica il testo come:
-     *  - facile se il numero di parole è ≤ 250
-     *  - medio se il numero di parole è compreso tra 250 e 750
-     *  - difficile se il numero di parole è > di 750
-     * 
+     *
+     * Classifica il testo come: - facile se il numero di parole è ≤ 250 - medio
+     * se il numero di parole è compreso tra 250 e 750 - difficile se il numero
+     * di parole è > di 750
+     *
      * @return una stringa contenente la difficoltà del testo
      */
     public String difficulty() {
@@ -162,11 +161,11 @@ public class AnalysisImpl implements Serializable,Analysis {
      * @param file Il file da analizzare
      * @param stopwords Lista di parole da ignorare durante l'analisi (es.
      * articoli, congiunzioni, punteggiatura).
-     * 
+     *
      * @return il numero di parole significative presenti all'interno del testo
      */
     public int analyzeText(File file, Set<String> stopwords) {
-        this.wordCounter = 0; // azzeramento del contatore
+        this.wordCounter = 0;
         List<String> lines = null;
         try {
             lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);

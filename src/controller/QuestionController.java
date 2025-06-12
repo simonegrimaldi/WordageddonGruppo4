@@ -43,8 +43,6 @@ public class QuestionController implements Initializable {
     private Button confirmButton;
     @FXML
     private Button cancelButton;
-
-    ChangeView controller;
     @FXML
     private Label question1;
     @FXML
@@ -123,6 +121,7 @@ public class QuestionController implements Initializable {
     private static boolean flag = true;
     private AlertManager alertManager = new AlertManager();
     private List<String> correctAnswers = new ArrayList<>();
+    private ChangeView controller;
 
     /**
      * @brief Imposta il controller di navigazione, il quiz, il nome utente e la
@@ -142,7 +141,6 @@ public class QuestionController implements Initializable {
         this.difficulty = difficulty;
 
         List<Question> domande = quiz.getDomande();
-        System.out.println("Numero di domande: " + domande.size());
 
         Label[] questionLabels = {question1, question2, question3, question4, question5};
         RadioButton[][] answerLabels = {{A1, B1, C1, D1}, {A2, B2, C2, D2}, {A3, B3, C3, D3}, {A4, B4, C4, D4}, {A5, B5, C5, D5}};
@@ -155,13 +153,11 @@ public class QuestionController implements Initializable {
                 correctAnswers.add(String.valueOf((Integer) answer));
             }
             questionLabels[i].setText(q.getQuestionText());
-            System.out.println(q.getOptions());
 
             for (int j = 0; j < q.getOptions().size(); j++) {
                 answerLabels[i][j].setText(q.getOptions().get(j).toString());
             }
         }
-        System.out.println(correctAnswers);
 
     }
 
@@ -200,6 +196,7 @@ public class QuestionController implements Initializable {
                 answerLabels[i].setManaged(true);
                 answerLabels[i].setText("La risposta corretta è : " + correctAnswers.get(i));
             }
+            cancelButton.setVisible(false);
             flag = false;
         } else {
             controller.goHome(username);

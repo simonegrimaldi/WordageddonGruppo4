@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import controller.ChangeViewController;
 import javafx.application.Application;
@@ -8,14 +8,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Crea il controller e passa il primaryStage
         ChangeViewController controller = new ChangeViewController(primaryStage);
-        
-        // Mostra la schermata di login
+
         controller.goEntry();
     }
 
     public static void main(String[] args) {
-        launch(args);  // Avvia l'applicazione JavaFX
+        launch(args);
     }
 }

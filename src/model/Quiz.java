@@ -20,9 +20,7 @@ public class Quiz {
     private List<String> testi;
     private List<Question> domande;
     private int points = 0;
-    private static int id = 0;
     private final String username;
-    private IOTextsImpl text;
 
     /**
      * @brief Costruttore del quiz
@@ -43,7 +41,6 @@ public class Quiz {
         this.testi = testi;
         this.domande = domande;
         this.username = username;
-        this.id++;
     }
 
     /**
@@ -89,7 +86,7 @@ public class Quiz {
         for (int i = 0; i < domande.size(); i++) {
             Question q = domande.get(i);
             String selectedAnswer = selectedAnswers.get(i);
-            
+
             this.points += q.valuta(selectedAnswer);
         }
 
@@ -97,7 +94,7 @@ public class Quiz {
 
     /**
      * @brief Restituisce il punteggio finale del quiz
-     * 
+     *
      * @return il punteggio calcolato in base alle risposte selezionate
      */
     public int getPoints() {

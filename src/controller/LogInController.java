@@ -71,8 +71,8 @@ public class LogInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         alertManager = new AlertManager();
-         // Gestiamo l'evento del clic sull'icona dell'occhio
-    simboloMostraPassword.setOnMouseClicked(event -> viewPassword());
+        // Gestiamo l'evento del clic sull'icona dell'occhio
+        simboloMostraPassword.setOnMouseClicked(event -> viewPassword());
     }
 
     /**

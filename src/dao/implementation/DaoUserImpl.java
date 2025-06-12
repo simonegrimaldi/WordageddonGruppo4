@@ -47,13 +47,12 @@ public class DaoUserImpl implements DaoUser {
         String password_ricevuta = null;
         String tipo = null;
         String sql = "select password, tipo from utente where username=?";
-        try (Connection conn = getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql);) {
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql);) {
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 password_ricevuta = rs.getString("password");
-                tipo = rs.getString("tipo");  // Ottieni il tipo dell'utente (admin o user)
+                tipo = rs.getString("tipo");
                 password_ricevuta = rs.getString("password");
             }
         } catch (SQLException ex) {
@@ -92,8 +91,7 @@ public class DaoUserImpl implements DaoUser {
         boolean esecuzione = false;
         String sql_username = "select username from utente where username=?";
         String Username_ricevuto = null;
-        try (Connection conn = getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql_username);) {
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql_username);) {
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -107,8 +105,7 @@ public class DaoUserImpl implements DaoUser {
         } else {
             esecuzione = true;
             String sql_insert = "insert into utente(username,password,tipo) values(?,?,?)";
-            try (Connection conn = getConnection();
-                    PreparedStatement ps = conn.prepareStatement(sql_insert);) {
+            try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql_insert);) {
                 ps.setString(1, username);
                 ps.setString(2, password_criptata);
                 ps.setString(3, "User");
