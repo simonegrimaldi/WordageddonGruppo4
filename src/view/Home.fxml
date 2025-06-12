@@ -22,7 +22,7 @@
                 <!-- Titolo -->
                 <Label fx:id="title" alignment="CENTER" prefHeight="44.0" prefWidth="698.0" styleClass="title" text="Hello User !" textAlignment="CENTER">
                     <VBox.margin>
-                        <Insets />
+                        <Insets top="25.0" />
                     </VBox.margin>
                 </Label>
 
@@ -41,7 +41,7 @@
                         </Button>
                     </children>
                     <VBox.margin>
-                        <Insets />
+                        <Insets top="25.0" />
                     </VBox.margin>
                 </HBox>
                 <!-- Contenitore play (nascosto di default) -->
@@ -56,6 +56,9 @@
                                 </SplitMenuButton>
                                 <Button fx:id="startGame" mnemonicParsing="false" onAction="#startGameClick" styleClass="startGame" text="Start Game" />
                             </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
                         </HBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="700.0" spacing="10.0">
                             <children>
@@ -73,6 +76,9 @@
                            </VBox.margin>
                                 </Label>
                             </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
                         </VBox>                
                     </children>
                 </VBox>

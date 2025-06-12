@@ -9,7 +9,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * @class LogInController
@@ -36,11 +39,15 @@ public class LogInController implements Initializable {
     @FXML
     private TextField usernameField;
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
     @FXML
     private Button SignUpButton;
     @FXML
     private Button LoginInButton;
+    @FXML
+    private TextField passwordTextField;  // Per la password visibile in chiaro
+    @FXML
+    private ImageView simboloMostraPassword;
 
     private AlertManager alertManager = new AlertManager();
     private ChangeView controller;
@@ -64,6 +71,8 @@ public class LogInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         alertManager = new AlertManager();
+         // Gestiamo l'evento del clic sull'icona dell'occhio
+    simboloMostraPassword.setOnMouseClicked(event -> viewPassword());
     }
 
     /**
@@ -100,7 +109,7 @@ public class LogInController implements Initializable {
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            ButtonType response =alertManager.showAlert("ERRORE", "entrambi i campi Username e Password devono essere compilati", "error");
+            ButtonType response = alertManager.showAlert("ERRORE", "entrambi i campi Username e Password devono essere compilati", "error");
             return;
         }
         String userType = daoUser.authentication(username, password);
@@ -112,6 +121,27 @@ public class LogInController implements Initializable {
             }
         } else {
             ButtonType response = alertManager.showAlert("Errore", "Username o password errati", "ERROR");
+        }
+    }
+
+    public void viewPassword() {
+        if (passwordField.isVisible()) {
+            // Se la password è nascosta, mostriamola in chiaro
+            passwordField.setVisible(false);
+            passwordTextField.setVisible(true);
+            passwordTextField.setText(passwordField.getText());  // Copia la password nel TextField
+
+            // Cambia l'icona in "occhio aperto"
+            simboloMostraPassword.setImage(new Image(getClass().getResource("/utilities/eye.png").toExternalForm()));
+
+        } else {
+            // Se la password è visibile, nascondiamola
+            passwordTextField.setVisible(false);
+            passwordField.setVisible(true);
+            passwordField.setText(passwordTextField.getText());  // Copia la password dal TextField nel PasswordField
+
+            // Cambia l'icona in "occhio chiuso"
+            simboloMostraPassword.setImage(new Image(getClass().getResource("/utilities/hidden.png").toExternalForm()));
         }
     }
 }

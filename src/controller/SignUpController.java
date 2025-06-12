@@ -63,6 +63,8 @@ public class SignUpController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         alert = new AlertManager();
+         // Gestiamo l'evento del clic sull'icona dell'occhio
+    simboloMostraPassword.setOnMouseClicked(event -> viewPassword());
        
     }
 
@@ -116,7 +118,7 @@ public class SignUpController implements Initializable {
         passwordTextField.setText(passwordField.getText());  // Copia la password nel TextField
         
         // Cambia l'icona in "occhio aperto"
-simboloMostraPassword.setImage(new Image(getClass().getResource("/utilities/eye.png").toExternalForm()));
+    simboloMostraPassword.setImage(new Image(getClass().getResource("/utilities/eye.png").toExternalForm()));
 
     } else {
         // Se la password è visibile, nascondiamola
