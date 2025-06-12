@@ -49,7 +49,7 @@
                            <children>
                               <PasswordField fx:id="passwordField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="500.0" promptText="Insert Password" styleClass="inputField" />
                               <TextField fx:id="passwordTextField" styleClass="inputField" visible="false" />
-                              <ImageView fx:id="simboloMostraPassword" fitHeight="25.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="simboloMostraPassword" fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                                  <StackPane.margin>
                                     <Insets left="450.0" />
                                  </StackPane.margin>

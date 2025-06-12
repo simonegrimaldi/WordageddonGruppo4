@@ -7,7 +7,7 @@
 <AnchorPane fx:id="splashScreenPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EntryController">
     <children>
         <!-- Immagine del logo che avrà l'animazione di fade -->
-        <ImageView fx:id="splashImage" fitHeight="200.0" fitWidth="200.0" layoutX="300.0" layoutY="200.0" preserveRatio="true">
+        <ImageView fx:id="splashImage" fitHeight="200.0" fitWidth="200.0" layoutX="310.0" layoutY="200.0" preserveRatio="true" AnchorPane.bottomAnchor="230.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="170.0">
             <image>
             <Image url="@../utilities/logo_b.png" />
             </image>
