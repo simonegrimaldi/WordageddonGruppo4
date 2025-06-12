@@ -89,7 +89,7 @@ public class Quiz {
         for (int i = 0; i < domande.size(); i++) {
             Question q = domande.get(i);
             String selectedAnswer = selectedAnswers.get(i);
-
+            
             this.points += q.valuta(selectedAnswer);
         }
 

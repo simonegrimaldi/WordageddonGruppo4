@@ -78,7 +78,7 @@ public class FrequencyQuestion extends Question<Integer> {
      */
     @Override
     public int valuta(String s) {
-        if (s == null) {
+        if (s == "") {
             return 0;
         }
         Integer selectedAnswer = Integer.parseInt(s);

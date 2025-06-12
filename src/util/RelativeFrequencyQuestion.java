@@ -76,7 +76,7 @@ public class RelativeFrequencyQuestion extends Question<String> {
      */
     @Override
     public int valuta(String selectedAnswer) {
-        if (selectedAnswer == null) {
+        if (selectedAnswer == "") {
             return 0;
         }
         return answerQuestion(selectedAnswer) ? 10 : -3;

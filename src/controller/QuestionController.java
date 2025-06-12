@@ -95,11 +95,6 @@ public class QuestionController implements Initializable {
     private RadioButton B5;
     @FXML
     private RadioButton D5;
-    private String difficulty;
-    private DaoGame daoGame;
-    private Quiz quiz;
-    private String username;
-    private AlertManager alertManager = new AlertManager();
     @FXML
     private ToggleGroup group1;
     @FXML
@@ -110,6 +105,24 @@ public class QuestionController implements Initializable {
     private ToggleGroup group4;
     @FXML
     private ToggleGroup group5;
+    @FXML
+    private Label answer1;
+    @FXML
+    private Label answer2;
+    @FXML
+    private Label answer3;
+    @FXML
+    private Label answer4;
+    @FXML
+    private Label answer5;
+
+    private String difficulty;
+    private DaoGame daoGame;
+    private Quiz quiz;
+    private String username;
+    private static boolean flag = true;
+    private AlertManager alertManager = new AlertManager();
+    private List<String> correctAnswers = new ArrayList<>();
 
     /**
      * @brief Imposta il controller di navigazione, il quiz, il nome utente e la
@@ -135,7 +148,12 @@ public class QuestionController implements Initializable {
         RadioButton[][] answerLabels = {{A1, B1, C1, D1}, {A2, B2, C2, D2}, {A3, B3, C3, D3}, {A4, B4, C4, D4}, {A5, B5, C5, D5}};
         for (int i = 0; i < domande.size(); i++) {
             Question q = domande.get(i);
-
+            Object answer = q.getAnswer();
+            if (answer instanceof String) {
+                correctAnswers.add((String) answer);
+            } else if (answer instanceof Integer) {
+                correctAnswers.add(String.valueOf((Integer) answer));
+            }
             questionLabels[i].setText(q.getQuestionText());
             System.out.println(q.getOptions());
 
@@ -143,6 +161,7 @@ public class QuestionController implements Initializable {
                 answerLabels[i][j].setText(q.getOptions().get(j).toString());
             }
         }
+        System.out.println(correctAnswers);
 
     }
 
@@ -162,74 +181,31 @@ public class QuestionController implements Initializable {
     @FXML
     private void confirmButtonClick(ActionEvent event) throws Exception {
         List<String> selectedAnswers = new ArrayList<>();
-        List<String> correctAnswers = new ArrayList<>();
-        StringBuilder resultMessage = new StringBuilder();
-        int totalScore = 0;
+        Label[] answerLabels = {answer1, answer2, answer3, answer4, answer5};
 
         selectedAnswers.add(getSelectedAnswer(group1));
         selectedAnswers.add(getSelectedAnswer(group2));
         selectedAnswers.add(getSelectedAnswer(group3));
         selectedAnswers.add(getSelectedAnswer(group4));
         selectedAnswers.add(getSelectedAnswer(group5));
+        quiz.setPoints(selectedAnswers);
+        int score = quiz.getPoints();
 
-        for (int i = 0; i < quiz.getDomande().size(); i++) {
-            Question q = quiz.getDomande().get(i);
-            correctAnswers.add(q.getAnswer().toString());
-        }
-
-        for (int i = 0; i < selectedAnswers.size(); i++) {
-            String selectedAnswer = selectedAnswers.get(i);
-            String correctAnswer = correctAnswers.get(i);
-
-            int questionScore = 0;
-
-            if (selectedAnswer != null && selectedAnswer.equals(correctAnswer)) {
-                questionScore = 10;
-                totalScore = totalScore + 10;
-            } else if (selectedAnswer != null) {
-                questionScore = -3;
-                totalScore -= 3;
+        if (flag) {
+            String message = String.format("Hai completato il quiz con un punteggio di: %d", score);
+            ButtonType response = alertManager.showAlert("Successo", message, "INFORMATION");
+            daoGame.inserisci(difficulty, quiz.getPoints(), username);
+            for (int i = 0; i < correctAnswers.size(); i++) {
+                answerLabels[i].setVisible(true);
+                answerLabels[i].setManaged(true);
+                answerLabels[i].setText("La risposta corretta è : " + correctAnswers.get(i));
             }
-
-            if (selectedAnswer.equals(correctAnswer)) {
-
-                resultMessage.append("Domanda ").append(i + 1).append(": ")
-                        .append(quiz.getDomande().get(i).getQuestionText()).append("\n")
-                        .append("Risposta corretta: ").append(correctAnswer).append("\n")
-                        .append("Risposta data: ").append(selectedAnswer).append("  ✓").append("\n")
-                        .append("Punteggio per questa domanda: ").append(questionScore).append("\n\n");
-            } else {
-                resultMessage.append("Domanda ").append(i + 1).append(": ")
-                        .append(quiz.getDomande().get(i).getQuestionText()).append("\n")
-                        .append("Risposta corretta: ").append(correctAnswer).append("\n")
-                        .append("Risposta data: ").append(selectedAnswer).append("  x").append("\n")
-                        .append("Punteggio per questa domanda: ").append(questionScore).append("\n\n");
-            }
+            flag = false;
+        } else {
+            controller.goHome(username);
+            flag = true;
         }
 
-        resultMessage.append("Hai completato il quiz con un punteggio totale di: ").append(totalScore).append("\n");
-
-        ButtonType response = alertManager.showAlert("Risultato del quiz", resultMessage.toString(), "INFORMATION");
-
-        daoGame.inserisci(difficulty, totalScore, username);
-
-        controller.goHome(username);
-    }
-
-    /**
-     * @brief Restituisce la risposta selezionata da un toggle group
-     *
-     *
-     * @param group rappresenta il ToggleGroup contenente le risposte
-     * @return la risposta selezionata sotto forma di stringa, o null nel caso
-     * in cui non sia stata selezionata nessuna opzione
-     */
-    private String getSelectedAnswer(ToggleGroup group) {
-        RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
-        if (selectedRadioButton != null) {
-            return selectedRadioButton.getText();
-        }
-        return null;
     }
 
     /**
@@ -248,6 +224,23 @@ public class QuestionController implements Initializable {
             controller.goHome(username);
         }
 
+    }
+
+    /**
+     * @brief Restituisce la risposta selezionata da un toggle group
+     *
+     *
+     * @param group rappresenta il ToggleGroup contenente le risposte
+     * @return la risposta selezionata sotto forma di stringa, o null nel caso
+     * in cui non sia stata selezionata nessuna opzione
+     */
+    private String getSelectedAnswer(ToggleGroup group) {
+        RadioButton selectedRadioButton = (RadioButton) group.getSelectedToggle();
+
+        if (selectedRadioButton != null) {
+            return selectedRadioButton.getText();
+        }
+        return "";
     }
 
 }

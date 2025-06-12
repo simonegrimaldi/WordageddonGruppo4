@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QuestionController">
    <children>
@@ -52,6 +53,11 @@
                                     </VBox>
                                  </children>
                               </HBox>
+                              <Label fx:id="answer1" prefHeight="17.0" prefWidth="651.0" text="The correct answer is : " textFill="#00000079" visible="false" managed="false">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
                            </children>
                            <VBox.margin>
                               <Insets bottom="20.0" />
@@ -86,6 +92,11 @@
                                     </VBox>
                                  </children>
                               </HBox>
+                               <Label fx:id="answer2" prefHeight="17.0" prefWidth="651.0" text="The correct answer is : " textFill="#00000079" visible="false" managed="false">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
                            </children>
                            <VBox.margin>
                               <Insets bottom="20.0" />
@@ -120,6 +131,11 @@
                                     </VBox>
                                  </children>
                               </HBox>
+                               <Label fx:id="answer3" prefHeight="17.0" prefWidth="651.0" text="The correct answer is : " textFill="#00000079" visible="false" managed="false" >
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
                            </children>
                            <VBox.margin>
                               <Insets bottom="20.0" />
@@ -154,6 +170,11 @@
                                     </VBox>
                                  </children>
                               </HBox>
+                              <Label fx:id="answer4" prefHeight="17.0" prefWidth="651.0" text="The correct answer is : " textFill="#00000079" visible="false" managed="false">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
                            </children>
                            <VBox.margin>
                               <Insets bottom="20.0" />
@@ -188,6 +209,11 @@
                                     </VBox>
                                  </children>
                               </HBox>
+                               <Label fx:id="answer5" prefHeight="17.0" prefWidth="651.0" text="The correct answer is : " textFill="#00000079" visible="false" managed="false">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
                            </children>
                            <VBox.margin>
                               <Insets bottom="20.0" />
