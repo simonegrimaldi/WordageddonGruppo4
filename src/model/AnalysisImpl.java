@@ -162,7 +162,7 @@ public class AnalysisImpl implements Serializable, Analysis {
      * @param stopwords Lista di parole da ignorare durante l'analisi (es.
      * articoli, congiunzioni, punteggiatura).
      *
-     * @return il numero di parole significative presenti all'interno del testo
+     * @return il numero di parole presenti all'interno del testo
      */
     public int analyzeText(File file, Set<String> stopwords) {
         this.wordCounter = 0;
@@ -179,8 +179,8 @@ public class AnalysisImpl implements Serializable, Analysis {
             for (String word : words) {
                 if (!word.isEmpty() && !stopwords.contains(word.toLowerCase())) {
                     analysis.merge(word.toLowerCase(), 1, Integer::sum);
-                    wordCounter++;
                 }
+                wordCounter++;
             }
         }
         return this.wordCounter;

@@ -226,7 +226,7 @@ public class AdminPanelController implements Initializable {
 
         boolean flag = ioFile.saveFile(new File(destDir, selectedFile.getName()), selectedFile);
         if (flag) {
-            alertManager.showAlert("File caricato con successo", "Il file \"" + selectedFile.getName() + "\" è stato salvato nella cartella: \"" + difficulty, "CONFIRMATION");
+            alertManager.showAlert("File caricato con successo", "Il file \"" + selectedFile.getName() + "\" è stato salvato nella cartella: \"" + difficulty + " \"", "CONFIRMATION");
             ioa.saveAnalysis(analysis, "testi/" + difficulty + "/" + this.selectedFile.getName().replace(".txt", "Analysis.bin"));
         } else {
             alertManager.showAlert("Errore salvataggio", "Impossibile copiare il file nella cartella " + difficulty, "ERROR");
