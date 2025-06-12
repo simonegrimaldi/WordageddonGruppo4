@@ -117,9 +117,9 @@ public class ChangeViewController implements ChangeView {
             e.printStackTrace();
         }
     }
-    
+
     @Override
-    public void goEntry(){
+    public void goEntry() {
         try {
             show("Entry");
         } catch (IOException e) {
@@ -148,13 +148,12 @@ public class ChangeViewController implements ChangeView {
         Parent root = loader.load();
 
         switch (fxml) {
-            
+
             case "Entry":
-                EntryController entryController =loader.getController();
-                        entryController.setChangeViewController(this);               
+                EntryController entryController = loader.getController();
+                entryController.setChangeViewController(this);
                 break;
-                
-                
+
             case "Home":
                 HomeController homeController = loader.getController();
                  {
