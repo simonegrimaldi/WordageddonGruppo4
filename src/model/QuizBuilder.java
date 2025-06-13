@@ -95,7 +95,12 @@ public class QuizBuilder {
             if (analisi.size() == 1) {
                 domande.add(new FrequencyQuestion(analisi));
                 domande.add(new FrequencyQuestion(analisi));
-            } else {
+            }
+            if(analisi.size() == 2) {
+                domande.add(new FrequencyQuestion(analisi));
+                domande.add(new DocumentQuestion(analisi));
+            }
+            if(analisi.size() == 3) {
                 domande.add(new DocumentQuestion(analisi));
                 domande.add(new DocumentQuestion(analisi));
             }
