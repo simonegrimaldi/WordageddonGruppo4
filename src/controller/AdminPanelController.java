@@ -6,7 +6,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -217,8 +220,10 @@ public class AdminPanelController implements Initializable {
         if (difficulty == null) {
             return;
         }
-
-        File destDir = new File("testi/" + difficulty);
+        
+        
+        String path = Paths.get(System.getProperty("user.dir"), "testi", difficulty.toLowerCase()).toString();
+        File destDir = new File(path);
         if (!destDir.exists()) {
             destDir.mkdirs();
         }
@@ -254,7 +259,8 @@ public class AdminPanelController implements Initializable {
 
         String text = textArea.getText().trim();
 
-        try (Scanner s = new Scanner(new BufferedReader(new FileReader("./analyticsFile/stopWordsList.txt")))) {
+        try (InputStream inputStream = getClass().getResourceAsStream("/analyticsFile/stopWordsList.txt")) {
+            Scanner s = new Scanner(new InputStreamReader(inputStream));
             String str = null;
             s.useDelimiter(",");
             s.useLocale(Locale.US);
