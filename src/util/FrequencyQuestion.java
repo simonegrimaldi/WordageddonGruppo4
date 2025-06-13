@@ -34,7 +34,7 @@ public class FrequencyQuestion extends Question<Integer> {
         int numero = new Random().nextInt(analyses.size());
         AnalysisImpl selected = analyses.get(numero);
         String p = analyses.get(numero).getRandom();
-        super.question = "Quante volte compare la parola \"" + p + "\" nel testo numero " + (numero + 1) + "?";
+        super.question = "Quante volte compare la parola \"" + p + "\" nel testo " + (numero + 1) + "?";
         super.answer = selected.frequency(p);
         super.options = generateOptions(answer);
     }

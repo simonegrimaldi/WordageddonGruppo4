@@ -91,14 +91,15 @@ public class QuizBuilder {
         if (!analisi.isEmpty()) {
             domande.add(new FrequencyQuestion(analisi));
             domande.add(new FrequencyQuestion(analisi));
-            domande.add(new RelativeFrequencyQuestion(analisi));
-            domande.add(new RelativeFrequencyQuestion(analisi));
-        }
 
-        if (analisi.size() == 1) {
+            if (analisi.size() == 1) {
+                domande.add(new FrequencyQuestion(analisi));
+                domande.add(new FrequencyQuestion(analisi));
+            } else {
+                domande.add(new DocumentQuestion(analisi));
+                domande.add(new DocumentQuestion(analisi));
+            }
             domande.add(new RelativeFrequencyQuestion(analisi));
-        } else {
-            domande.add(new DocumentQuestion(analisi));
         }
         return domande;
     }

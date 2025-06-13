@@ -206,7 +206,7 @@ public class HomeController implements Initializable {
      * delle informazioni dal database
      */
     private void setRankingTable() throws Exception {
-        LinkedHashMap<String, Integer> topThree = daoGame.getTopThree();
+        LinkedHashMap<String, Integer> topThree = daoGame.getRanking();
         int position = 1;
         for (Map.Entry<String, Integer> entry : topThree.entrySet()) {
             String usr = entry.getKey();
@@ -256,7 +256,7 @@ public class HomeController implements Initializable {
         if (pointsLastGame == -1) {
             sb.append("Last Game Played : -\n");
         } else {
-            sb.append("Last Game Played : ").append(pointsLastGame).append("/100\n");
+            sb.append("Last Game Played : ").append(pointsLastGame).append("/50\n");
         }
 
         statisticsLabel.setText(sb.toString());

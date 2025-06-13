@@ -51,7 +51,7 @@ public interface DaoGame {
      * @throws Exception, nel caso in cui si verifica un errore durante la
      * lettura dei dati dal database
      */
-    public LinkedHashMap<String, Integer> getTopThree() throws Exception;
+    public LinkedHashMap<String, Integer> getRanking() throws Exception;
 
     /**
      * @brief Recupera il numero di partite giocate da un utente.

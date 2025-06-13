@@ -109,7 +109,7 @@ public class DaoGameImpl implements DaoGame {
      * lettura dei dati dal database
      */
     @Override
-    public LinkedHashMap<String, Integer> getTopThree() throws Exception {
+    public LinkedHashMap<String, Integer> getRanking() throws Exception {
         LinkedHashMap<String, Integer> topThree = new LinkedHashMap<>();
         String sql = "SELECT utente, MAX(punteggio) AS max_punteggio "
                 + "FROM public.partita "

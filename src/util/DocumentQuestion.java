@@ -42,7 +42,7 @@ public class DocumentQuestion extends Question<String> {
         int numero = new Random().nextInt(analysis.size());
         AnalysisImpl selected = analysis.get(numero);
 
-        this.question = "Qual è la parola più frequente nel documento numero " + (numero + 1) + " ?";
+        this.question = "Qual è la parola più frequente nel testo " + (numero + 1) + " ?";
 
         this.answer = selected.mostFrequent();
 
