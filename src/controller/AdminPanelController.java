@@ -259,8 +259,7 @@ public class AdminPanelController implements Initializable {
 
         String text = textArea.getText().trim();
 
-        try (InputStream inputStream = getClass().getResourceAsStream("/analyticsFile/stopWordsList.txt")) {
-            Scanner s = new Scanner(new InputStreamReader(inputStream));
+        try (Scanner s = new Scanner("../analyticsFile/stopWordsList.txt")){
             String str = null;
             s.useDelimiter(",");
             s.useLocale(Locale.US);
@@ -269,8 +268,6 @@ public class AdminPanelController implements Initializable {
                     stopwords.add(str.toLowerCase());
                 }
             }
-        } catch (IOException ex) {
-            return null;
         }
 
         if (!text.isEmpty()) {
