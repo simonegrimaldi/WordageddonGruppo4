@@ -8,6 +8,7 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QuestionController">
@@ -23,9 +24,10 @@
                <content>
                   <VBox prefHeight="166.0" prefWidth="640.0" spacing="20.0" styleClass="questionContainer">
                      <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
+                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 15;">
                            <children>
                               <Label fx:id="question1" styleClass="questionLabel" text="Question 1" />
+                              <StackPane prefHeight="150.0" prefWidth="200.0" />
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <padding>
                                     <Insets top="10.0" />
@@ -59,10 +61,13 @@
                               </Label>
                            </children>
                            <VBox.margin>
-                              <Insets bottom="20.0" />
+                              <Insets bottom="20.0" left="10.0" right="20.0" />
                            </VBox.margin>
+                           <padding>
+                              <Insets bottom="25.0" left="20.0" top="10.0" />
+                           </padding>
                         </VBox>
-                        <VBox layoutX="31.0" layoutY="31.0" prefHeight="200.0" prefWidth="100.0">
+                        <VBox layoutX="31.0" layoutY="31.0" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 15;">
                            <children>
                               <Label fx:id="question2" styleClass="questionLabel" text="Question 2" />
                               <HBox prefHeight="100.0" prefWidth="200.0">
@@ -98,10 +103,13 @@
                               </Label>
                            </children>
                            <VBox.margin>
-                              <Insets bottom="20.0" />
+                              <Insets bottom="20.0" left="10.0" right="20.0" />
                            </VBox.margin>
+                           <padding>
+                              <Insets bottom="25.0" left="20.0" top="10.0" />
+                           </padding>
                         </VBox>
-                        <VBox layoutX="31.0" layoutY="132.0" prefHeight="200.0" prefWidth="100.0">
+                        <VBox layoutX="31.0" layoutY="132.0" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 15;">
                            <children>
                               <Label fx:id="question3" styleClass="questionLabel" text="Question 3" />
                               <HBox prefHeight="100.0" prefWidth="200.0">
@@ -137,10 +145,13 @@
                               </Label>
                            </children>
                            <VBox.margin>
-                              <Insets bottom="20.0" />
+                              <Insets bottom="20.0" left="10.0" right="20.0" />
                            </VBox.margin>
+                           <padding>
+                              <Insets bottom="25.0" left="20.0" top="10.0" />
+                           </padding>
                         </VBox>
-                        <VBox layoutX="31.0" layoutY="233.0" prefHeight="200.0" prefWidth="100.0">
+                        <VBox layoutX="31.0" layoutY="233.0" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 15;">
                            <children>
                               <Label fx:id="question4" styleClass="questionLabel" text="Question 4" />
                               <HBox prefHeight="100.0" prefWidth="200.0">
@@ -176,10 +187,13 @@
                               </Label>
                            </children>
                            <VBox.margin>
-                              <Insets bottom="20.0" />
+                              <Insets bottom="20.0" left="10.0" right="20.0" />
                            </VBox.margin>
+                           <padding>
+                              <Insets bottom="25.0" left="20.0" top="10.0" />
+                           </padding>
                         </VBox>
-                        <VBox layoutX="31.0" layoutY="334.0" prefHeight="200.0" prefWidth="100.0">
+                        <VBox layoutX="31.0" layoutY="334.0" prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 15;">
                            <children>
                               <Label fx:id="question5" styleClass="questionLabel" text="Question 5" />
                               <HBox prefHeight="100.0" prefWidth="200.0">
@@ -215,8 +229,11 @@
                               </Label>
                            </children>
                            <VBox.margin>
-                              <Insets bottom="20.0" />
+                              <Insets bottom="20.0" left="10.0" right="20.0" />
                            </VBox.margin>
+                           <padding>
+                              <Insets bottom="25.0" left="20.0" top="10.0" />
+                           </padding>
                         </VBox>
                      </children>
                   </VBox>
