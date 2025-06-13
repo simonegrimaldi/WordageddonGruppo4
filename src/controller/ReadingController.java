@@ -170,7 +170,6 @@ public class ReadingController implements Initializable {
         if (timeline != null) {
             timeline.stop();
         }
-        timerLabel.setStyle("-fx-text-fill: balck;");
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             if (timer >= 0) {
                 timerLabel.setText(formatTime(timer));

@@ -221,7 +221,6 @@
 .timerLabel {
     -fx-font-size: 36px;
     -fx-font-weight: bold;
-    -fx-text-fill: #222;
 }
 
 /* ProgressBar rossa */

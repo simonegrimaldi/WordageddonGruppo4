@@ -33,7 +33,8 @@ public class DbConnection {
      * @throws SQLException se si verifica un errore durante la creazione o
      * l'accesso alla connessione
      */
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
+        Class.forName("org.postgresql.Driver");
         if (c == null || c.isClosed()) {
             c = DriverManager.getConnection(URL, USER, PASS);
         }

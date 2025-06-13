@@ -55,14 +55,13 @@ public class DaoUserImpl implements DaoUser {
                 tipo = rs.getString("tipo");
                 password_ricevuta = rs.getString("password");
             }
-        } catch (SQLException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DaoUserImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         if (checkPassword(password, password_ricevuta)) {
             return tipo;
         } else {
-            System.out.println(password + username);
             return null;
         }
     }
@@ -98,7 +97,7 @@ public class DaoUserImpl implements DaoUser {
             if (rs.next()) {
                 Username_ricevuto = rs.getString("username").toLowerCase();
             }
-        } catch (SQLException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(DaoUserImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (username.toLowerCase().equals(Username_ricevuto)) {
@@ -111,7 +110,7 @@ public class DaoUserImpl implements DaoUser {
                 ps.setString(2, password_criptata);
                 ps.setString(3, "User");
                 ps.executeUpdate();
-            } catch (SQLException ex) {
+            } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(DaoUserImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
