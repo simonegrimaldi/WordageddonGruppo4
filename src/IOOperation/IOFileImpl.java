@@ -40,7 +40,7 @@ public class IOFileImpl implements IOFile {
 
         for (int i = 0; i < filePaths.size(); i++) {
             File file = new File(filePaths.get(i));
-            contenutoComplessivo.append("Testo ").append(i + 1).append(": ").append(file.getName()).append("\n");
+            contenutoComplessivo.append("Testo ").append(i + 1).append(": ").append(file.getName().replace(".txt"," ")).append("\n");
 
             try (Scanner scanner = new Scanner(file)) {
                 while (scanner.hasNextLine()) {
