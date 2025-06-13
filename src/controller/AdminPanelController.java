@@ -212,7 +212,6 @@ public class AdminPanelController implements Initializable {
         Set<String> stopwords = new HashSet<>();
         stopwords = createStopWordsSet(stopwords);
         int wordCount = analysis.analyzeText(selectedFile, stopwords); // Questa riga fa tutto
-        System.out.println("Parole considerate :" + analysis.keySet().toString());
         String difficulty = analysis.difficulty();
 
         if (difficulty == null) {
