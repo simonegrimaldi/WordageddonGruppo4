@@ -274,8 +274,6 @@ public class AdminPanelController implements Initializable {
             System.out.println("File non trovato.");
         }
 
-        System.out.println(stopwords);
-
         if (!text.isEmpty()) {
             String[] components = text.split(",");
             for (String parola : components) {
