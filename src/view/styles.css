@@ -335,3 +335,7 @@
     -fx-border-color: #c6d9ec;
     -fx-border-radius: 10;
 }
+
+.table-view .table-cell {
+    -fx-alignment: CENTER;
+}

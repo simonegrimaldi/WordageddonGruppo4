@@ -88,17 +88,17 @@
                     <children>
                         <HBox alignment="TOP_CENTER" prefHeight="394.0" prefWidth="700.0" spacing="40.0">
                             <children>
-                                <VBox alignment="TOP_CENTER" prefHeight="195.0" prefWidth="269.0">
+                                <VBox alignment="TOP_CENTER" prefHeight="378.0" prefWidth="289.0">
                                     <children>
                                         <Label fx:id="ranking" alignment="TOP_CENTER" prefHeight="20.0" prefWidth="144.0" styleClass="rankingClass" text="GLOBAL RANKING">
                                             <VBox.margin>
                                                 <Insets bottom="10.0" top="5.0" />
                                             </VBox.margin>
                                         </Label>
-                                        <TableView fx:id="rankingTable" maxHeight="-Infinity" mouseTransparent="true" pickOnBounds="false" prefHeight="334.0" prefWidth="243.0" styleClass="tableClass">
+                                        <TableView fx:id="rankingTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" pickOnBounds="false" prefHeight="334.0" prefWidth="250.0" styleClass="tableClass">
                                             <columns>
                                                 <TableColumn fx:id="positionColumn" editable="false" prefWidth="65.0" resizable="false" sortable="false" text="Pos" />
-                                                <TableColumn fx:id="usernameColumn" editable="false" prefWidth="100.0" resizable="false" sortable="false" text="Username" />
+                                                <TableColumn fx:id="usernameColumn" editable="false" resizable="false" sortable="false" text="Username" />
                                                 <TableColumn fx:id="pointsColumn" editable="false" prefWidth="90.0" resizable="false" sortType="DESCENDING" sortable="false" text="Points" />
                                             </columns>
                                  <columnResizePolicy>
