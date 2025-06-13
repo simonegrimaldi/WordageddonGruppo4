@@ -105,8 +105,8 @@ public class LogInController implements Initializable {
      */
     @FXML
     private void LoginInButtonClick(ActionEvent event) {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
+        String username = usernameField.getText().trim();
+        String password = passwordField.getText().trim();
 
         if (username.isEmpty() || password.isEmpty()) {
             ButtonType response = alertManager.showAlert("ERRORE", "entrambi i campi Username e Password devono essere compilati", "error");

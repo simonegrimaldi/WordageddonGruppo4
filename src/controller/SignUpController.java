@@ -95,8 +95,8 @@ public class SignUpController implements Initializable {
      */
     @FXML
     private void SignUpButtonClick(ActionEvent event) {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
+        String username = usernameField.getText().trim();
+        String password = passwordField.getText().trim();
         if (username.isEmpty() || password.isEmpty()) {
             ButtonType response = alert.showAlert("Errore", "Tutti i campi sono obbligatori", "ERROR");
         } else {

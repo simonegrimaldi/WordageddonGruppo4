@@ -44,6 +44,8 @@ public class QuestionController implements Initializable {
     @FXML
     private Button cancelButton;
     @FXML
+    private Button goHomeButton;
+    @FXML
     private Label question1;
     @FXML
     private RadioButton A1;
@@ -122,6 +124,7 @@ public class QuestionController implements Initializable {
     private AlertManager alertManager = new AlertManager();
     private List<String> correctAnswers = new ArrayList<>();
     private ChangeView controller;
+    private RadioButton[][] radioButton;
 
     /**
      * @brief Imposta il controller di navigazione, il quiz, il nome utente e la
@@ -143,7 +146,6 @@ public class QuestionController implements Initializable {
         List<Question> domande = quiz.getDomande();
 
         Label[] questionLabels = {question1, question2, question3, question4, question5};
-        RadioButton[][] answerLabels = {{A1, B1, C1, D1}, {A2, B2, C2, D2}, {A3, B3, C3, D3}, {A4, B4, C4, D4}, {A5, B5, C5, D5}};
         for (int i = 0; i < domande.size(); i++) {
             Question q = domande.get(i);
             Object answer = q.getAnswer();
@@ -155,7 +157,7 @@ public class QuestionController implements Initializable {
             questionLabels[i].setText(q.getQuestionText());
 
             for (int j = 0; j < q.getOptions().size(); j++) {
-                answerLabels[i][j].setText(q.getOptions().get(j).toString());
+                radioButton[i][j].setText(q.getOptions().get(j).toString());
             }
         }
 
@@ -164,6 +166,13 @@ public class QuestionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        radioButton = new RadioButton[][]{
+            {A1, B1, C1, D1},
+            {A2, B2, C2, D2},
+            {A3, B3, C3, D3},
+            {A4, B4, C4, D4},
+            {A5, B5, C5, D5}
+        };
     }
 
     /**
@@ -197,6 +206,13 @@ public class QuestionController implements Initializable {
                 answerLabels[i].setText("La risposta corretta è : " + correctAnswers.get(i));
             }
             cancelButton.setVisible(false);
+            confirmButton.setVisible(false);
+            goHomeButton.setVisible(true);
+            for (RadioButton[] group : radioButton) {
+                for (RadioButton rb : group) {
+                    rb.setDisable(true);
+                }
+            }
             flag = false;
         } else {
             controller.goHome(username);
