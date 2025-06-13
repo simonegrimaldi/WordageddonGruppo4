@@ -220,8 +220,7 @@ public class AdminPanelController implements Initializable {
         if (difficulty == null) {
             return;
         }
-        
-        
+
         String path = Paths.get(System.getProperty("user.dir"), "testi", difficulty.toLowerCase()).toString();
         File destDir = new File(path);
         if (!destDir.exists()) {
@@ -259,16 +258,23 @@ public class AdminPanelController implements Initializable {
 
         String text = textArea.getText().trim();
 
-        try (Scanner s = new Scanner("../analyticsFile/stopWordsList.txt")){
-            String str = null;
-            s.useDelimiter(",");
-            s.useLocale(Locale.US);
-            while (s.hasNext()) {
-                if ((str = s.next().trim()) != null) {
-                    stopwords.add(str.toLowerCase());
+        InputStream inputStream = getClass().getResourceAsStream("/analyticsFile/stopWordsList.txt");
+        if (inputStream != null) {
+            try (Scanner s = new Scanner(inputStream)) {
+                String str = null;
+                s.useDelimiter(",");
+                s.useLocale(Locale.US);
+                while (s.hasNext()) {
+                    if ((str = s.next().trim()) != null) {
+                        stopwords.add(str.toLowerCase());
+                    }
                 }
             }
+        } else {
+            System.out.println("File non trovato.");
         }
+
+        System.out.println(stopwords);
 
         if (!text.isEmpty()) {
             String[] components = text.split(",");
