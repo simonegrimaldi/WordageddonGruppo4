@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['dao_3a_3aconnection_0',['connection',['../namespacedao_1_1connection.html',1,'dao']]],
+  ['dao_3a_3aimplementation_1',['implementation',['../namespacedao_1_1implementation.html',1,'dao']]],
+  ['dao_3a_3ainterfaces_2',['interfaces',['../namespacedao_1_1interfaces.html',1,'dao']]],
+  ['daogame_3',['DaoGame',['../interfacedao_1_1interfaces_1_1_dao_game.html',1,'dao::interfaces']]],
+  ['daogame_2ejava_4',['DaoGame.java',['../_dao_game_8java.html',1,'']]],
+  ['daogameimpl_5',['DaoGameImpl',['../classdao_1_1implementation_1_1_dao_game_impl.html',1,'dao::implementation']]],
+  ['daogameimpl_2ejava_6',['DaoGameImpl.java',['../_dao_game_impl_8java.html',1,'']]],
+  ['daouser_7',['DaoUser',['../interfacedao_1_1interfaces_1_1_dao_user.html',1,'dao::interfaces']]],
+  ['daouser_2ejava_8',['DaoUser.java',['../_dao_user_8java.html',1,'']]],
+  ['daouserimpl_9',['DaoUserImpl',['../classdao_1_1implementation_1_1_dao_user_impl.html',1,'dao::implementation']]],
+  ['daouserimpl_2ejava_10',['DaoUserImpl.java',['../_dao_user_impl_8java.html',1,'']]],
+  ['dbconnection_11',['DbConnection',['../classdao_1_1connection_1_1_db_connection.html',1,'dao::connection']]],
+  ['dbconnection_2ejava_12',['DbConnection.java',['../_db_connection_8java.html',1,'']]],
+  ['difficulty_13',['difficulty',['../interfacemodel_1_1_analysis.html#ad1b2bfcf34ea21dd2d755089ca2931c1',1,'model.Analysis.difficulty()'],['../classmodel_1_1_analysis_impl.html#add0ce29b4902924312ffa8b306188ad2',1,'model.AnalysisImpl.difficulty()']]],
+  ['documentquestion_14',['DocumentQuestion',['../classutil_1_1_document_question.html',1,'util.DocumentQuestion'],['../classutil_1_1_document_question.html#ab364660c1d0cd75fd70541c6069b6cf8',1,'util.DocumentQuestion.DocumentQuestion()']]],
+  ['documentquestion_2ejava_15',['DocumentQuestion.java',['../_document_question_8java.html',1,'']]]
+];

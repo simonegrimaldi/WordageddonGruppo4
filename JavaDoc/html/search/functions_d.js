@@ -1,0 +1,12 @@
+var searchData=
+[
+  ['saveanalysis_0',['saveAnalysis',['../interface_i_o_operation_1_1_i_o_analysis.html#ab1613e5dd68e87bea41fdbe64fe48a80',1,'IOOperation.IOAnalysis.saveAnalysis()'],['../class_i_o_operation_1_1_i_o_analysis_impl.html#a821dd10cd88cc0ad87a721385c66d2ec',1,'IOOperation.IOAnalysisImpl.saveAnalysis()']]],
+  ['savefile_1',['saveFile',['../interface_i_o_operation_1_1_i_o_file.html#a9e88ad98ef249734e366031a8a115a26',1,'IOOperation.IOFile.saveFile()'],['../class_i_o_operation_1_1_i_o_file_impl.html#ae6e51ea86fea30403ddfc721f4d39b42',1,'IOOperation.IOFileImpl.saveFile()']]],
+  ['setchangeviewcontroller_2',['setChangeViewController',['../classcontroller_1_1_admin_panel_controller.html#a37694472c7711fbf0d46ae41d58e895b',1,'controller.AdminPanelController.setChangeViewController()'],['../classcontroller_1_1_entry_controller.html#a2123957f597b7d806ce1c23654cc65ab',1,'controller.EntryController.setChangeViewController()'],['../classcontroller_1_1_home_controller.html#a15feb5fc91d58be42d12726f9b458cf7',1,'controller.HomeController.setChangeViewController()'],['../classcontroller_1_1_log_in_controller.html#ae5b2548dd247ad143a3c40d7db296170',1,'controller.LogInController.setChangeViewController()'],['../classcontroller_1_1_question_controller.html#a862f585705d99fa7cf83dcb83cdc1b31',1,'controller.QuestionController.setChangeViewController()'],['../classcontroller_1_1_reading_controller.html#a61ae9b0f4970c90eb6214e7cfa9122d9',1,'controller.ReadingController.setChangeViewController()'],['../classcontroller_1_1_sign_up_controller.html#aabab6aa29e43907d88165b1955f0166f',1,'controller.SignUpController.setChangeViewController()']]],
+  ['setpoints_3',['setPoints',['../classmodel_1_1_quiz.html#a2cf288b5018e0564c789aaf462ed65d9',1,'model::Quiz']]],
+  ['setstatistics_4',['setStatistics',['../classcontroller_1_1_home_controller.html#ac3de607b0e6672c91969a19ac68bad58',1,'controller::HomeController']]],
+  ['showalert_5',['showAlert',['../classutil_1_1_alert_manager.html#a2159001fcadc792ed109931ee8b0b307',1,'util::AlertManager']]],
+  ['size_6',['size',['../interfacemodel_1_1_analysis.html#ab6829a0f0e8dcc381e9a3d9638edd267',1,'model.Analysis.size()'],['../classmodel_1_1_analysis_impl.html#aa35d542a3b7b09756a8327ae70ebb2b8',1,'model.AnalysisImpl.size()']]],
+  ['start_7',['start',['../classmain_1_1_main.html#af1e79e61f60914013fe3cd2af150cbf3',1,'main::Main']]],
+  ['starttimer_8',['startTimer',['../classcontroller_1_1_reading_controller.html#aef41333b432047dc0505f908883f9e05',1,'controller::ReadingController']]]
+];
